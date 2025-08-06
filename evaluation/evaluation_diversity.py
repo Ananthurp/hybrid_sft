@@ -8,17 +8,17 @@ from pprint import pprint
 
 import torch
 import numpy as np
-import sentence_transformers
+import sentence_transformers # type: ignore
 from tqdm import tqdm
 
 # from sklearn.metrics.pairwise import cosine_similarity
 from transformers import set_seed, HfArgumentParser, AutoTokenizer
 
-from nltk.util import ngrams
-from nltk import word_tokenize
+from nltk.util import ngrams # type: ignore
+from nltk import word_tokenize # type: ignore
 from collections import Counter
 
-import sacrebleu
+import sacrebleu # type: ignore
 
 @dataclass
 class AllArguments:

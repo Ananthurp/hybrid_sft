@@ -1,5 +1,5 @@
 import re
-from fraction import Fraction
+from fraction import Fraction # type: ignore
 import numpy as np
 
 
