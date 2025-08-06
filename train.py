@@ -1089,7 +1089,7 @@ import logging
 import os
 
 # Import our custom trainers
-from sparsemax_trainer import SparsemaxSFTTrainer
+# from sparsemax_trainer import SparsemaxSFTTrainer
 from hybrid_trainer import HybridSFTTrainer
 
 os.environ["TOKENIZERS_PARALLELISM"] = "true"
@@ -1321,19 +1321,7 @@ def main():
         test_dataset = None
 
     # Conditional Trainer Initialization
-    if training_args.loss == "sparsemax":
-        logger.info("Using SparsemaxSFTTrainer for Fenchel-Young loss.")
-        trainer = SparsemaxSFTTrainer(
-            model=model,
-            args=training_args,
-            train_dataset=train_dataset,
-            eval_dataset=test_dataset,
-            tokenizer=tokenizer,
-            data_collator=DataCollatorForSeq2Seq(
-                tokenizer=tokenizer, model=model, padding="longest"
-            ),
-        )
-    elif training_args.loss == "hybrid":
+    if training_args.loss == "hybrid":
         logger.info("Using HybridSFTTrainer for Fenchel-Young + Negative Sampling loss.")
         trainer = HybridSFTTrainer(
             model=model,

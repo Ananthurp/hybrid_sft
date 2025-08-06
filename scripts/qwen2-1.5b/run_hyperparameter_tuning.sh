@@ -57,7 +57,7 @@ for alpha in "${ALPHAS[@]}"; do
       echo "--- LAUNCHING: ${EXPERIMENT_NAME} ---"
       mkdir -p $OUTPUT_DIR
 
-      deepspeed --include localhost:0,3 ${TRAIN_SCRIPT_PATH} \
+      deepspeed --include localhost:2,3 ${TRAIN_SCRIPT_PATH} \
         --deepspeed ${DEEPSPEED_CONFIG_PATH} \
         --model_name_or_path ${BASE_MODEL_PATH} \
         --train_tokenized_file "${TOKENIZED_DATA_DIR}/train.jsonl" \
