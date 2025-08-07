@@ -1089,13 +1089,12 @@ import logging
 import os
 
 # Import our custom trainers
-# from sparsemax_trainer import SparsemaxSFTTrainer
+# We only need the hybrid trainer now
 from hybrid_trainer import HybridSFTTrainer
 
 os.environ["TOKENIZERS_PARALLELISM"] = "true"
 import sys
 from typing import Optional
-from functools import partial
 import datasets
 import torch
 import torch.distributed as dist
@@ -1104,6 +1103,7 @@ from datasets import load_dataset
 from torch.utils.data import Dataset
 from dataclasses import dataclass, field
 from typing import Optional, List, Union
+from typing import Literal 
 
 import transformers
 from transformers import (
@@ -1124,8 +1124,9 @@ logger = logging.getLogger(__name__)
 # @dataclass
 # class TrainingArguments(transformers.TrainingArguments):
 #     adam_beta2: float = field(default=0.95, metadata={"help": "Beta2 for AdamW"})
+#     # --- Simplified loss choices ---
 #     loss: str = field(
-#         default="gem", metadata={"help": "Loss name", "choices": ["gem", "ce", "gem_triton", "sparsemax", "hybrid"]}
+#         default="gem", metadata={"help": "Loss name", "choices": ["gem", "ce", "hybrid"]}
 #     )
 #     gem_beta: float = field(default=0.7, metadata={"help": "Hyper-parameter in GEM."})
 #     gem_h: str = field(
@@ -1135,19 +1136,20 @@ logger = logging.getLogger(__name__)
 #         default=False, metadata={"help": "Print entropy during training"}
 #     )
     
-#     # --- New Arguments for Hybrid Loss and Hyperparameter Tuning ---
-#     ns_alpha: float = field(default=0.5, metadata={"help": "Weight for the Negative Sampling loss component."})
+#     # --- Arguments for Hybrid Loss ---
+#     ns_alpha: float = field(default=0.5, metadata={"help": "Weight for the Negative Sampling loss."})
 #     ns_type: str = field(
 #         default="top_k", metadata={"help": "Type of negative sampling.", "choices": ["top_k", "bottom_p"]}
 #     )
 #     ns_top_k: int = field(default=10, metadata={"help": "K for top-k negative sampling."})
 #     ns_bottom_p: float = field(default=0.9, metadata={"help": "Percentage for bottom-p negative sampling."})
 
+
 @dataclass
 class TrainingArguments(transformers.TrainingArguments):
     adam_beta2: float = field(default=0.95, metadata={"help": "Beta2 for AdamW"})
     loss: str = field(
-        default="gem", metadata={"help": "Loss name", "choices": ["gem", "ce", "sparsemax", "hybrid"]}
+        default="gem", metadata={"help": "Loss name", "choices": ["gem", "ce", "hybrid"]}
     )
     gem_beta: float = field(default=0.7, metadata={"help": "Hyper-parameter in GEM."})
     gem_h: str = field(
@@ -1157,7 +1159,7 @@ class TrainingArguments(transformers.TrainingArguments):
         default=False, metadata={"help": "Print entropy during training"}
     )
     
-    # --- New Arguments for Hybrid Loss and Hyperparameter Tuning ---
+    # --- Arguments for Hybrid Loss ---
     ns_alpha: float = field(default=0.5, metadata={"help": "Weight for the Negative Sampling loss."})
     ns_type: str = field(
         default="top_k", metadata={"help": "Type of negative sampling.", "choices": ["top_k", "bottom_p"]}
@@ -1165,6 +1167,11 @@ class TrainingArguments(transformers.TrainingArguments):
     ns_top_k: int = field(default=10, metadata={"help": "K for top-k negative sampling."})
     ns_bottom_p: float = field(default=0.9, metadata={"help": "Percentage for bottom-p negative sampling."})
 
+    # --- ADD THESE TWO LINES FOR EVALUATION ---
+    evaluation_strategy: Literal["no", "steps", "epoch"] = field(default="no")
+    eval_steps: Optional[int] = field(default=None)
+
+    
 @dataclass
 class ModelArguments:
     model_name_or_path: str = field(
@@ -1320,7 +1327,7 @@ def main():
     else:
         test_dataset = None
 
-    # Conditional Trainer Initialization
+    # --- Simplified Trainer Initialization ---
     if training_args.loss == "hybrid":
         logger.info("Using HybridSFTTrainer for Fenchel-Young + Negative Sampling loss.")
         trainer = HybridSFTTrainer(
