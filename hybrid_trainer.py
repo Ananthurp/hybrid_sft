@@ -112,6 +112,116 @@
 #         return (total_loss, outputs) if return_outputs else total_loss
 
 
+
+
+
+
+
+
+# import torch
+# import torch.nn.functional as F
+# from transformers import Trainer
+# from entmax import sparsemax, sparsemax_loss
+# import torch.distributed as dist
+
+# class HybridSFTTrainer(Trainer):
+#     """
+#     An advanced SFT Trainer for a hybrid loss function, adapted from the reference repository.
+#     Combines Fenchel-Young (sparsemax) loss with Negative Sampling.
+#     """
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         self.recorded = {} # For logging detailed metrics
+
+#     def compute_loss(self, model, inputs, return_outputs=False, num_items_in_batch=None):
+#         labels = inputs.pop("labels")
+#         outputs = model(**inputs)
+#         logits = outputs.get("logits")
+
+#         # Route to the correct loss calculation based on the ns_type argument
+#         if self.args.ns_type == "top_k":
+#             loss = self.hybrid_loss_topk(logits, labels, num_items_in_batch=num_items_in_batch)
+#         elif self.args.ns_type == "bottom_p":
+#             loss = self.hybrid_loss_bottom_p(logits, labels, num_items_in_batch=num_items_in_batch)
+#         else:
+#             raise ValueError(f"Unsupported ns_type: {self.args.ns_type}")
+
+#         return (loss, outputs) if return_outputs else loss
+
+#     def hybrid_loss_topk(self, logits, labels, num_items_in_batch=None):
+#         """Calculates hybrid loss, suppressing all tokens NOT in the top-k."""
+#         shift_logits = logits[..., :-1, :].contiguous()
+#         shift_labels = labels[..., 1:].contiguous()
+#         mask = shift_labels != -100
+#         shift_logits, shift_labels = shift_logits[mask], shift_labels[mask]
+
+#         s_loss = sparsemax_loss(shift_logits, shift_labels)
+
+#         with torch.no_grad():
+#             softmax_probs = F.softmax(shift_logits, dim=-1)
+#             topk_values, topk_indices = torch.topk(softmax_probs, k=self.args.ns_top_k, dim=-1)
+            
+#             topk_mask = torch.zeros_like(softmax_probs, dtype=torch.bool).scatter_(1, topk_indices, True)
+#             one_hot_labels = F.one_hot(shift_labels, num_classes=softmax_probs.size(-1)).bool()
+            
+#             neg_mask = ~topk_mask & ~one_hot_labels
+
+#         suppressed_mass = (softmax_probs * neg_mask.float()).sum(dim=-1)
+#         suppressed_mass = torch.clamp(suppressed_mass, max=0.999)
+        
+#         ns_loss = -torch.log(1.0 - suppressed_mass)
+        
+#         loss = s_loss + self.args.ns_alpha * ns_loss
+
+#         if num_items_in_batch is not None:
+#             loss = loss.sum() / num_items_in_batch
+#         else:
+#             loss = loss.mean()
+            
+#         return loss
+
+#     def hybrid_loss_bottom_p(self, logits, labels, num_items_in_batch=None):
+#         """Calculates hybrid loss, suppressing the bottom p% of probability mass."""
+#         shift_logits = logits[..., :-1, :].contiguous()
+#         shift_labels = labels[..., 1:].contiguous()
+#         mask = shift_labels != -100
+#         shift_logits, shift_labels = shift_logits[mask], shift_labels[mask]
+
+#         s_loss = sparsemax_loss(shift_logits, shift_labels)
+
+#         with torch.no_grad():
+#             softmax_probs = F.softmax(shift_logits, dim=-1)
+            
+#             # This logic is adapted from your colleague's sft_trainer_v2.py
+#             # It uses ranking to determine the threshold for negative sampling
+#             ranks = torch.argsort(torch.argsort(softmax_probs, dim=-1, descending=True), dim=-1) + 1
+#             one_hot_labels = F.one_hot(shift_labels, num_classes=softmax_probs.size(-1)).bool()
+            
+#             # The threshold tau is now interpreted as a percentage of the vocabulary size
+#             vocab_size = softmax_probs.size(-1)
+#             rank_threshold = int(vocab_size * self.args.ns_bottom_p)
+            
+#             neg_mask = (ranks > rank_threshold) & (~one_hot_labels)
+
+#         suppressed_mass = (softmax_probs * neg_mask.float()).sum(dim=-1)
+#         suppressed_mass = torch.clamp(suppressed_mass, max=0.999)
+        
+#         ns_loss = -torch.log(1.0 - suppressed_mass)
+
+#         loss = s_loss + self.args.ns_alpha * ns_loss
+
+#         if num_items_in_batch is not None:
+#             loss = loss.sum() / num_items_in_batch
+#         else:
+#             loss = loss.mean()
+
+#         return loss
+
+
+
+
+
+
 import torch
 import torch.nn.functional as F
 from transformers import Trainer
@@ -120,8 +230,8 @@ import torch.distributed as dist
 
 class HybridSFTTrainer(Trainer):
     """
-    An advanced SFT Trainer for a hybrid loss function, adapted from the reference repository.
-    Combines Fenchel-Young (sparsemax) loss with Negative Sampling.
+    An advanced SFT Trainer for a hybrid loss function.
+    Supports multiple modes for Negative Sampling.
     """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -134,68 +244,114 @@ class HybridSFTTrainer(Trainer):
 
         # Route to the correct loss calculation based on the ns_type argument
         if self.args.ns_type == "top_k":
-            loss = self.hybrid_loss_topk(logits, labels, num_items_in_batch=num_items_in_batch)
+            loss = self.hybrid_loss_topk(logits, labels, num_items_in_batch)
         elif self.args.ns_type == "bottom_p":
-            loss = self.hybrid_loss_bottom_p(logits, labels, num_items_in_batch=num_items_in_batch)
+            loss = self.hybrid_loss_bottom_p(logits, labels, num_items_in_batch)
+        elif self.args.ns_type == "support_set":
+            loss = self.hybrid_loss_support_set(logits, labels, num_items_in_batch)
         else:
             raise ValueError(f"Unsupported ns_type: {self.args.ns_type}")
 
         return (loss, outputs) if return_outputs else loss
 
-    def hybrid_loss_topk(self, logits, labels, num_items_in_batch=None):
-        """Calculates hybrid loss, suppressing all tokens NOT in the top-k."""
+    def hybrid_loss_support_set(self, logits, labels, num_items_in_batch=None):
+        """
+        Calculates hybrid loss, suppressing all tokens OUTSIDE the sparsemax support set.
+        """
         shift_logits = logits[..., :-1, :].contiguous()
         shift_labels = labels[..., 1:].contiguous()
         mask = shift_labels != -100
         shift_logits, shift_labels = shift_logits[mask], shift_labels[mask]
 
+        # 1. Fenchel-Young (Sparsemax) Loss
         s_loss = sparsemax_loss(shift_logits, shift_labels)
 
+        # 2. Negative Sampling Loss (Support Set variant)
         with torch.no_grad():
-            softmax_probs = F.softmax(shift_logits, dim=-1)
-            topk_values, topk_indices = torch.topk(softmax_probs, k=self.args.ns_top_k, dim=-1)
-            
-            topk_mask = torch.zeros_like(softmax_probs, dtype=torch.bool).scatter_(1, topk_indices, True)
-            one_hot_labels = F.one_hot(shift_labels, num_classes=softmax_probs.size(-1)).bool()
-            
-            neg_mask = ~topk_mask & ~one_hot_labels
+            # First, get the sparsemax probabilities to identify the support set
+            sparsemax_probs = sparsemax(shift_logits, dim=-1)
 
-        suppressed_mass = (softmax_probs * neg_mask.float()).sum(dim=-1)
-        suppressed_mass = torch.clamp(suppressed_mass, max=0.999)
-        
+            # The negative mask is all tokens where sparsemax probability is zero
+            # (i.e., they are outside the support set)
+            support_set_mask = (sparsemax_probs > 0)
+
+            # The ground truth label should never be suppressed
+            one_hot_labels = F.one_hot(shift_labels, num_classes=shift_logits.size(-1)).bool()
+
+            # The final negative mask is everything outside the support set AND not the true label
+            neg_mask = ~support_set_mask & ~one_hot_labels
+
+            # We use standard softmax for the NS loss calculation
+            softmax_probs = F.softmax(shift_logits, dim=-1)
+            suppressed_mass = (softmax_probs * neg_mask.float()).sum(dim=-1)
+            suppressed_mass = torch.clamp(suppressed_mass, max=0.999)
+
         ns_loss = -torch.log(1.0 - suppressed_mass)
-        
+
+        # 3. Combine losses
         loss = s_loss + self.args.ns_alpha * ns_loss
 
         if num_items_in_batch is not None:
             loss = loss.sum() / num_items_in_batch
         else:
             loss = loss.mean()
-            
+
+        return loss
+
+    def hybrid_loss_topk(self, logits, labels, num_items_in_batch=None):
+        # ... (this function remains unchanged)
+        shift_logits = logits[..., :-1, :].contiguous()
+        shift_labels = labels[..., 1:].contiguous()
+        mask = shift_labels != -100
+        shift_logits, shift_labels = shift_logits[mask], shift_labels[mask]
+        s_loss = sparsemax_loss(shift_logits, shift_labels)
+        with torch.no_grad():
+            softmax_probs = F.softmax(shift_logits, dim=-1)
+            _, topk_indices = torch.topk(softmax_probs, k=self.args.ns_top_k, dim=-1)
+            topk_mask = torch.zeros_like(softmax_probs, dtype=torch.bool).scatter_(1, topk_indices, True)
+            one_hot_labels = F.one_hot(shift_labels, num_classes=softmax_probs.size(-1)).bool()
+            neg_mask = ~topk_mask & ~one_hot_labels
+        suppressed_mass = (softmax_probs * neg_mask.float()).sum(dim=-1)
+        suppressed_mass = torch.clamp(suppressed_mass, max=0.999)
+        ns_loss = -torch.log(1.0 - suppressed_mass)
+        loss = s_loss + self.args.ns_alpha * ns_loss
+        if num_items_in_batch is not None:
+            loss = loss.sum() / num_items_in_batch
+        else:
+            loss = loss.mean()
         return loss
 
     def hybrid_loss_bottom_p(self, logits, labels, num_items_in_batch=None):
-        """Calculates hybrid loss, suppressing the bottom p% of probability mass."""
+        """
+        Calculates hybrid loss, suppressing the bottom p% of tokens by count.
+        """
         shift_logits = logits[..., :-1, :].contiguous()
         shift_labels = labels[..., 1:].contiguous()
         mask = shift_labels != -100
         shift_logits, shift_labels = shift_logits[mask], shift_labels[mask]
 
+        # 1. Fenchel-Young (Sparsemax) Loss
         s_loss = sparsemax_loss(shift_logits, shift_labels)
 
+        # 2. Negative Sampling Loss (Bottom-P by count variant)
         with torch.no_grad():
             softmax_probs = F.softmax(shift_logits, dim=-1)
-            
-            # This logic is adapted from your colleague's sft_trainer_v2.py
-            # It uses ranking to determine the threshold for negative sampling
-            ranks = torch.argsort(torch.argsort(softmax_probs, dim=-1, descending=True), dim=-1) + 1
-            one_hot_labels = F.one_hot(shift_labels, num_classes=softmax_probs.size(-1)).bool()
-            
-            # The threshold tau is now interpreted as a percentage of the vocabulary size
             vocab_size = softmax_probs.size(-1)
-            rank_threshold = int(vocab_size * self.args.ns_bottom_p)
             
-            neg_mask = (ranks > rank_threshold) & (~one_hot_labels)
+            # Calculate the number of tokens to suppress
+            num_to_suppress = int(vocab_size * self.args.ns_bottom_p)
+            
+            # Find the indices of the tokens with the lowest probabilities
+            _, bottom_indices = torch.topk(softmax_probs, k=num_to_suppress, dim=-1, largest=False)
+
+            # Create a mask that is True for all bottom tokens
+            bottom_mask = torch.zeros_like(softmax_probs, dtype=torch.bool).scatter_(1, bottom_indices, True)
+            
+            # The ground truth label should never be suppressed
+            one_hot_labels = F.one_hot(shift_labels, num_classes=vocab_size).bool()
+            
+            # The final negative mask is the bottom tokens, excluding the true label
+            neg_mask = bottom_mask & ~one_hot_labels
 
         suppressed_mass = (softmax_probs * neg_mask.float()).sum(dim=-1)
         suppressed_mass = torch.clamp(suppressed_mass, max=0.999)
@@ -210,3 +366,4 @@ class HybridSFTTrainer(Trainer):
             loss = loss.mean()
 
         return loss
+

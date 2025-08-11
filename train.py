@@ -1162,7 +1162,7 @@ class TrainingArguments(transformers.TrainingArguments):
     # --- Arguments for Hybrid Loss ---
     ns_alpha: float = field(default=0.5, metadata={"help": "Weight for the Negative Sampling loss."})
     ns_type: str = field(
-        default="top_k", metadata={"help": "Type of negative sampling.", "choices": ["top_k", "bottom_p"]}
+        default="top_k", metadata={"help": "Type of negative sampling.", "choices": ["top_k", "bottom_p" ,"support_set"]}
     )
     ns_top_k: int = field(default=10, metadata={"help": "K for top-k negative sampling."})
     ns_bottom_p: float = field(default=0.9, metadata={"help": "Percentage for bottom-p negative sampling."})
