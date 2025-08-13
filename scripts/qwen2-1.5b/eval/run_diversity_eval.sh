@@ -46,7 +46,7 @@ set -e; set -x;
 MODEL_CHECKPOINT_PATH=$1
 
 # --- Configuration ---
-export CUDA_VISIBLE_DEVICES="0"
+export CUDA_VISIBLE_DEVICES="2"
 TOKENIZER_PATH="/data/ananthu/gem_project/models/Qwen2-1.5B-Instruct"
 SAVE_DIR="${MODEL_CHECKPOINT_PATH}/evaluation_diversity_alpaca"
 RESPONSE_FILE_PATH="${MODEL_CHECKPOINT_PATH}/evaluation_chat_alpaca/generated_responses.json"

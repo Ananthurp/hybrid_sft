@@ -43,22 +43,77 @@
 
 
 #!/bin/sh
+# set -e; set -x;
+
+# # This is a template script. It expects the model path as the first argument.
+# MODEL_CHECKPOINT_PATH=$1
+
+# # --- Configuration ---
+# export CUDA_VISIBLE_DEVICES="0" # Use a single free GPU
+# TOKENIZER_PATH="/data/ananthu/gem_project/models/Qwen2-1.5B-Instruct"
+# SAVE_DIR="${MODEL_CHECKPOINT_PATH}/evaluation_chat_alpaca"
+# mkdir -p $SAVE_DIR
+
+# echo "--- Generating responses for AlpacaEval using model: ${MODEL_CHECKPOINT_PATH} ---"
+
+# python evaluation/generate_response.py \
+#     --model_name_or_path $MODEL_CHECKPOINT_PATH \
+#     --tokenizer_path $TOKENIZER_PATH \
+#     --dataset_path "tatsu-lab/alpaca_eval" \
+#     --split "eval" \
+#     --column_name "instruction" \
+#     --max_size 200 \
+#     --n 32 \
+#     --temperature 0.6 \
+#     --use_vllm True \
+#     --vllm_gpu_memory_utilization 0.7 \
+#     --save_path "${SAVE_DIR}/generated_responses.json"
+
+
+
+# #!/bin/sh
+# set -e; set -x;
+
+# MODEL_CHECKPOINT_PATH=$1
+
+# export CUDA_VISIBLE_DEVICES="2"
+# TOKENIZER_PATH="/data/ananthu/gem_project/models/Qwen2-1.5B-Instruct"
+# SAVE_DIR="${MODEL_CHECKPOINT_PATH}/evaluation_chat_alpaca"
+# mkdir -p "$SAVE_DIR"
+
+# echo "--- Generating responses for AlpacaEval using model: ${MODEL_CHECKPOINT_PATH} ---"
+
+# python evaluation/generate_response.py \
+#   --model_name_or_path "$MODEL_CHECKPOINT_PATH" \
+#   --tokenizer_path "$TOKENIZER_PATH" \
+#   --dataset_path "tatsu-lab/alpaca_eval" \
+#   --dataset_split "eval" \
+#   --prompt_key "instruction" \
+#   --max_size 200 \
+#   --n 32 \
+#   --temperature 0.6 \
+#   --use_vllm True \
+#   --vllm_gpu_memory_utilization 0.7 \
+#   --save_path "${SAVE_DIR}/generated_responses.json"
+
+
+#!/bin/sh
 set -e; set -x;
 
 # This is a template script. It expects the model path as the first argument.
 MODEL_CHECKPOINT_PATH=$1
 
 # --- Configuration ---
-export CUDA_VISIBLE_DEVICES="0" # Use a single free GPU
+# Do NOT set CUDA_VISIBLE_DEVICES here; respect the parent env
 TOKENIZER_PATH="/data/ananthu/gem_project/models/Qwen2-1.5B-Instruct"
 SAVE_DIR="${MODEL_CHECKPOINT_PATH}/evaluation_chat_alpaca"
-mkdir -p $SAVE_DIR
+mkdir -p "$SAVE_DIR"
 
 echo "--- Generating responses for AlpacaEval using model: ${MODEL_CHECKPOINT_PATH} ---"
 
 python evaluation/generate_response.py \
-    --model_name_or_path $MODEL_CHECKPOINT_PATH \
-    --tokenizer_path $TOKENIZER_PATH \
+    --model_name_or_path "$MODEL_CHECKPOINT_PATH" \
+    --tokenizer_path "$TOKENIZER_PATH" \
     --dataset_path "tatsu-lab/alpaca_eval" \
     --split "eval" \
     --column_name "instruction" \

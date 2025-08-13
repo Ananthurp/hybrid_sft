@@ -37,7 +37,7 @@ set -e; set -x;
 MODEL_CHECKPOINT_PATH=$1
 
 # --- Configuration ---
-export CUDA_VISIBLE_DEVICES="0"
+export CUDA_VISIBLE_DEVICES="2"
 TOKENIZER_PATH="/data/ananthu/gem_project/models/Qwen2-1.5B-Instruct"
 REWARD_MODEL_PATH="sfairXC/FsfairX-LLaMA3-RM-v0.1"
 SAVE_DIR="${MODEL_CHECKPOINT_PATH}/evaluation_chat_alpaca"

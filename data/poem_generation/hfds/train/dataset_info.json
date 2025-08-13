@@ -1,0 +1,38 @@
+{
+  "builder_name": "json",
+  "citation": "",
+  "config_name": "default",
+  "dataset_name": "json",
+  "dataset_size": 47765,
+  "description": "",
+  "download_checksums": {
+    "/data/ananthu/gem_project/code/GEM/data/poem_generation/test.jsonl": {
+      "num_bytes": 56947,
+      "checksum": null
+    }
+  },
+  "download_size": 56947,
+  "features": {
+    "instruction": {
+      "dtype": "string",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 104712,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 47765,
+      "num_examples": 573,
+      "dataset_name": "json"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}

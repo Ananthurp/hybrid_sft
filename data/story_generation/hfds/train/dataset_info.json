@@ -1,0 +1,38 @@
+{
+  "builder_name": "json",
+  "citation": "",
+  "config_name": "default",
+  "dataset_name": "json",
+  "dataset_size": 3583066,
+  "description": "",
+  "download_checksums": {
+    "/data/ananthu/gem_project/code/GEM/data/story_generation/test.jsonl": {
+      "num_bytes": 4425723,
+      "checksum": null
+    }
+  },
+  "download_size": 4425723,
+  "features": {
+    "instruction": {
+      "dtype": "string",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 8008789,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 3583066,
+      "num_examples": 52665,
+      "dataset_name": "json"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}
