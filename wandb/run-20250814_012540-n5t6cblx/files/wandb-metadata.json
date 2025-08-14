@@ -1,0 +1,122 @@
+{
+  "os":  "Linux-6.8.0-60-generic-x86_64-with-glibc2.35",
+  "python":  "CPython 3.10.18",
+  "startedAt":  "2025-08-13T17:25:40.201883Z",
+  "args":  [
+    "--local_rank=0",
+    "--deepspeed",
+    "/data/ananthu/gem_project/code/GEM/scripts/deepspeed_config_qwen.json",
+    "--seed",
+    "1234",
+    "--model_name_or_path",
+    "/data/ananthu/gem_project/models/Qwen2-1.5B-Instruct",
+    "--train_tokenized_file",
+    "/data/ananthu/gem_project/datasets/ultrafeedback_tokenized_qwen2-1.5b/train.jsonl",
+    "--test_tokenized_file",
+    "/data/ananthu/gem_project/datasets/ultrafeedback_tokenized_qwen2-1.5b/test.jsonl",
+    "--output_dir",
+    "/data/ananthu/gem_project/results/sparsemax_only_epochs3",
+    "--loss",
+    "sparsemax",
+    "--ns_type",
+    "support_set",
+    "--num_train_epochs",
+    "3",
+    "--per_device_train_batch_size",
+    "4",
+    "--gradient_accumulation_steps",
+    "8",
+    "--save_strategy",
+    "steps",
+    "--save_steps",
+    "100",
+    "--learning_rate",
+    "2e-6",
+    "--max_grad_norm",
+    "0.5",
+    "--lr_scheduler_type",
+    "cosine",
+    "--warmup_ratio",
+    "0.03",
+    "--logging_steps",
+    "10",
+    "--gradient_checkpointing",
+    "True",
+    "--evaluation_strategy",
+    "steps",
+    "--eval_steps",
+    "100",
+    "--per_device_eval_batch_size",
+    "2",
+    "--prediction_loss_only",
+    "True",
+    "--eval_accumulation_steps",
+    "4",
+    "--bf16",
+    "True",
+    "--use_flash_attn",
+    "True",
+    "--save_total_limit",
+    "2",
+    "--report_to",
+    "wandb",
+    "--run_name",
+    "sparsemax_only_epochs3"
+  ],
+  "program":  "/data/ananthu/gem_project/code/GEM/train.py",
+  "codePath":  "train.py",
+  "codePathLocal":  "train.py",
+  "git":  {
+    "remote":  "https://github.com/Ananthurp/sft-hybrid-loss-research.git",
+    "commit":  "7a3420fdff09ce2c1d5483785ce7ceba0eab2d13"
+  },
+  "email":  "ananthurpillai547@gmail.com",
+  "root":  "/data/ananthu/gem_project/code/GEM",
+  "host":  "IHP-SPD-2814736",
+  "executable":  "/home/ananthu/miniconda3/envs/gem_new/bin/python3.10",
+  "cpu_count":  24,
+  "cpu_count_logical":  48,
+  "gpu":  "NVIDIA RTX 6000 Ada Generation",
+  "gpu_count":  4,
+  "disk":  {
+    "/":  {
+      "total":  "943412031488",
+      "used":  "563277787136"
+    }
+  },
+  "memory":  {
+    "total":  "134873432064"
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA RTX 6000 Ada Generation",
+      "memoryTotal":  "51527024640",
+      "cudaCores":  18176,
+      "architecture":  "Ada",
+      "uuid":  "GPU-6faf3e85-70a4-3e0b-461a-97b354e13340"
+    },
+    {
+      "name":  "NVIDIA RTX 6000 Ada Generation",
+      "memoryTotal":  "51527024640",
+      "cudaCores":  18176,
+      "architecture":  "Ada",
+      "uuid":  "GPU-979efa50-adc1-b44c-aa59-aebb48dfd081"
+    },
+    {
+      "name":  "NVIDIA RTX 6000 Ada Generation",
+      "memoryTotal":  "51527024640",
+      "cudaCores":  18176,
+      "architecture":  "Ada",
+      "uuid":  "GPU-f25c727b-6221-4fe9-24f0-5968ee6edb8d"
+    },
+    {
+      "name":  "NVIDIA RTX 6000 Ada Generation",
+      "memoryTotal":  "51527024640",
+      "cudaCores":  18176,
+      "architecture":  "Ada",
+      "uuid":  "GPU-f7b302db-1e20-e3cc-4825-b399078310cc"
+    }
+  ],
+  "cudaVersion":  "12.8",
+  "writerId":  "n3t2r8phqpxqwcq0ce09d9b6rzuxrpyh"
+}

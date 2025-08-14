@@ -705,17 +705,51 @@ bt_winrate_vs_gpt4 () {
     --out_file "${OUTFILE}"
 }
 
+# creative_diversity () {
+#   local MODEL_DIR="$1"
+#   local DATA_PATH="$2"   # hfds dir for poem/story
+#   local TAG="$3"         # "poem" | "story"
+#   local N_SAMPLES="$4"   # 16
+#   local TEMP="$5"        # 1.0
+
+#   local SAVE_DIR="${MODEL_DIR}/evaluation_${TAG}"
+#   mkdir -p "${SAVE_DIR}"
+#   rm -f "${SAVE_DIR}/generated_responses.json" "${SAVE_DIR}/diversity_metrics.log"
+
+#   python evaluation/generate_response.py \
+#     --model_name_or_path "${MODEL_DIR}" \
+#     --tokenizer_path "${BASE_MODEL_PATH}" \
+#     --dataset_path "${DATA_PATH}" \
+#     --load_from_disk True \
+#     --split "train" \
+#     --column_name "instruction" \
+#     --max_size ${MAX_SIZE} \
+#     --n ${N_SAMPLES} \
+#     --temperature ${TEMP} \
+#     --use_vllm True \
+#     --vllm_gpu_memory_utilization ${VLLM_UTIL} \
+#     --save_path "${SAVE_DIR}/generated_responses.json"
+
+#   python evaluation/evaluation_diversity.py \
+#     --tokenizer_path "${BASE_MODEL_PATH}" \
+#     --detokenizer_path "${BASE_MODEL_PATH}" \
+#     --response_path "${SAVE_DIR}/generated_responses.json" \
+#     2>&1 | tee "${SAVE_DIR}/diversity_metrics.log"
+# }
+
 creative_diversity () {
   local MODEL_DIR="$1"
   local DATA_PATH="$2"   # hfds dir for poem/story
   local TAG="$3"         # "poem" | "story"
-  local N_SAMPLES="$4"   # 16
-  local TEMP="$5"        # 1.0
+  local N_SAMPLES="$4"   # default 16
+  local TEMP="$5"        # default 1.0
 
   local SAVE_DIR="${MODEL_DIR}/evaluation_${TAG}"
   mkdir -p "${SAVE_DIR}"
   rm -f "${SAVE_DIR}/generated_responses.json" "${SAVE_DIR}/diversity_metrics.log"
 
+  # Try 1: original settings
+  CUDA_VISIBLE_DEVICES="${CUDA_VISIBLE_DEVICES:-0}" 
   python evaluation/generate_response.py \
     --model_name_or_path "${MODEL_DIR}" \
     --tokenizer_path "${BASE_MODEL_PATH}" \
@@ -728,14 +762,49 @@ creative_diversity () {
     --temperature ${TEMP} \
     --use_vllm True \
     --vllm_gpu_memory_utilization ${VLLM_UTIL} \
-    --save_path "${SAVE_DIR}/generated_responses.json"
+    --save_path "${SAVE_DIR}/generated_responses.json" || {
 
+    echo ">>> Retry 1: reducing candidates + VRAM util" >&2
+    CUDA_VISIBLE_DEVICES="${CUDA_VISIBLE_DEVICES:-0}" \
+    python evaluation/generate_response.py \
+      --model_name_or_path "${MODEL_DIR}" \
+      --tokenizer_path "${BASE_MODEL_PATH}" \
+      --dataset_path "${DATA_PATH}" \
+      --load_from_disk True \
+      --split "train" \
+      --column_name "instruction" \
+      --max_size ${MAX_SIZE} \
+      --n 8 \
+      --temperature ${TEMP} \
+      --use_vllm True \
+      --vllm_gpu_memory_utilization 0.5 \
+      --save_path "${SAVE_DIR}/generated_responses.json" || {
+
+      echo ">>> Retry 2: disable vLLM (HF generate, low RAM)" >&2
+      CUDA_VISIBLE_DEVICES="${CUDA_VISIBLE_DEVICES:-0}" \
+      python evaluation/generate_response.py \
+        --model_name_or_path "${MODEL_DIR}" \
+        --tokenizer_path "${BASE_MODEL_PATH}" \
+        --dataset_path "${DATA_PATH}" \
+        --load_from_disk True \
+        --split "train" \
+        --column_name "instruction" \
+        --max_size ${MAX_SIZE} \
+        --n 4 \
+        --temperature ${TEMP} \
+        --use_vllm False \
+        --save_path "${SAVE_DIR}/generated_responses.json"
+    }
+  }
+
+  # compute diversity once we have generations
   python evaluation/evaluation_diversity.py \
     --tokenizer_path "${BASE_MODEL_PATH}" \
     --detokenizer_path "${BASE_MODEL_PATH}" \
     --response_path "${SAVE_DIR}/generated_responses.json" \
     2>&1 | tee "${SAVE_DIR}/diversity_metrics.log"
 }
+
 
 # -------- main loop --------
 for RUN in "${RUNS[@]}"; do
