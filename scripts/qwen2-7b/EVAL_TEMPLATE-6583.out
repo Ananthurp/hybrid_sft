@@ -1,0 +1,36 @@
+[preflight] clearing cached JSON datasets under: /scratch/prj0000000224/LLMDiversity_work/cache/huggingface/datasets/json
+INFO 09-06 00:12:55 __init__.py:183] Automatically detected platform cuda.
+{'batch_size': 8,
+ 'column_name': 'instruction',
+ 'dataset_path': 'tatsu-lab/alpaca_eval',
+ 'do_sample': True,
+ 'hf_n_chunk': 4,
+ 'load_from_disk': False,
+ 'max_new_tokens': 1024,
+ 'max_size': None,
+ 'model_name_or_path': '/home/users/astar/cfar/stuananthu/LLMDiversity/results/qwen2-7b/phase5_sparsemax/checkpoint-1434',
+ 'n': 32,
+ 'remove_old': True,
+ 'save_path': '/home/users/astar/cfar/stuananthu/LLMDiversity/evals/qwen2-7b/qwen2_sparsemax_eval_20250906-0009/evaluation_chat_alpaca/responses.json',
+ 'seed': 42,
+ 'split': 'eval',
+ 'standard_format': False,
+ 'temperature': 0.6,
+ 'tokenizer_path': '/home/users/astar/cfar/stuananthu/LLMDiversity/results/qwen2-7b/phase5_sparsemax/checkpoint-1434',
+ 'top_k': 50,
+ 'top_p': 0.9,
+ 'use_vllm': True,
+ 'vllm_gpu_memory_utilization': 0.9}
+/scratch/prj0000000224/LLMDiversity_work/cache/huggingface/datasets/downloads/89721e4f4782aec8020a85e97eee74465d12bbda302c4f66adcbe23232495600
+[warn] --use_vllm True but vllm not importable; falling back to HF.
+[info] Using HF Transformers backend.
+{'add_gen_prompt': True,
+ 'baseline_json': '/home/users/astar/cfar/stuananthu/LLMDiversity/assets/gpt4_alpacaeval_responses.json',
+ 'batch_size': 2,
+ 'data_path': '/home/users/astar/cfar/stuananthu/LLMDiversity/evals/qwen2-7b/qwen2_sparsemax_eval_20250906-0009/evaluation_chat_alpaca/responses.json',
+ 'detokenizer_path': None,
+ 'max_size': None,
+ 'model_name_or_path': 'sfairXC/FsfairX-LLaMA3-RM-v0.1',
+ 'save_path': '/home/users/astar/cfar/stuananthu/LLMDiversity/evals/qwen2-7b/qwen2_sparsemax_eval_20250906-0009/evaluation_chat_alpaca/rewards.json',
+ 'summary_path': '/home/users/astar/cfar/stuananthu/LLMDiversity/evals/qwen2-7b/qwen2_sparsemax_eval_20250906-0009/evaluation_chat_alpaca/reward_summary.json',
+ 'tokenizer_path': 'sfairXC/FsfairX-LLaMA3-RM-v0.1'}

@@ -1,0 +1,145 @@
++ module load miniforge/24.11.3-2
++ unset _mlshdbg
++ '[' 0 = 1 ']'
++ unset _mlre _mlIFS
++ '[' -n x ']'
++ _mlIFS=' 	
+'
++ IFS=' '
++ '[' -n '' ']'
+++ /usr/bin/tclsh /cm/local/apps/environment-modules/4.5.3/libexec/modulecmd.tcl bash load miniforge/24.11.3-2
++ eval 'LOADEDMODULES=slurm/slurm/23.02.8:default-environment:miniforge/24.11.3-2;' export 'LOADEDMODULES;
+_LMFILES_=/cm/local/modulefiles/slurm/slurm/23.02.8:/cm/shared/modulefiles/default-environment:/cm/shared/modulefiles/miniforge/24.11.3-2;' export '_LMFILES_;
+_CE_CONDA=;' export '_CE_CONDA;
+_CE_M=;' export '_CE_M;
+MODULES_LMCONFLICT=miniforge/24.11.3-2\&miniforge;' export 'MODULES_LMCONFLICT;
+MODULES_LMCONFLICT_modshare=miniforge/24.11.3-2\&miniforge:1;' export 'MODULES_LMCONFLICT_modshare;
+CONDA_EXE=/apps/miniforge/24.11.3/bin/conda;' export 'CONDA_EXE;
+CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python;' export 'CONDA_PYTHON_EXE;
+LOADEDMODULES_modshare=miniforge/24.11.3-2:1:slurm/slurm/23.02.8:1:default-environment:1;' export 'LOADEDMODULES_modshare;
+_LMFILES__modshare=/cm/shared/modulefiles/miniforge/24.11.3-2:1:/cm/local/modulefiles/slurm/slurm/23.02.8:1:/cm/shared/modulefiles/default-environment:1;' export '_LMFILES__modshare;
+PATH=/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin;' export 'PATH;
+CONDA_SHLVL=0;' export 'CONDA_SHLVL;
+PATH_modshare=/usr/bin:1:/usr/local/bin:1:/cm/shared/apps/slurm/current/bin:1:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:1:/cm/shared/apps/slurm/current/sbin:1:/bin:1:/snap/bin:1:/sbin:1:/usr/sbin:1:/apps/miniforge/24.11.3/condabin:1:/cm/local/apps/environment-modules/4.5.3/bin:1:/usr/games:1:/usr/local/sbin:1:/usr/local/games:1;' export 'PATH_modshare;
+source' '/apps/miniforge/24.11.3/etc/profile.d/conda.sh;
+test' '0;'
+++ LOADEDMODULES=slurm/slurm/23.02.8:default-environment:miniforge/24.11.3-2
+++ export LOADEDMODULES
+++ _LMFILES_=/cm/local/modulefiles/slurm/slurm/23.02.8:/cm/shared/modulefiles/default-environment:/cm/shared/modulefiles/miniforge/24.11.3-2
+++ export _LMFILES_
+++ _CE_CONDA=
+++ export _CE_CONDA
+++ _CE_M=
+++ export _CE_M
+++ MODULES_LMCONFLICT='miniforge/24.11.3-2&miniforge'
+++ export MODULES_LMCONFLICT
+++ MODULES_LMCONFLICT_modshare='miniforge/24.11.3-2&miniforge:1'
+++ export MODULES_LMCONFLICT_modshare
+++ CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
+++ export CONDA_EXE
+++ CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
+++ export CONDA_PYTHON_EXE
+++ LOADEDMODULES_modshare=miniforge/24.11.3-2:1:slurm/slurm/23.02.8:1:default-environment:1
+++ export LOADEDMODULES_modshare
+++ _LMFILES__modshare=/cm/shared/modulefiles/miniforge/24.11.3-2:1:/cm/local/modulefiles/slurm/slurm/23.02.8:1:/cm/shared/modulefiles/default-environment:1
+++ export _LMFILES__modshare
+++ PATH=/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin
+++ export PATH
+++ CONDA_SHLVL=0
+++ export CONDA_SHLVL
+++ PATH_modshare=/usr/bin:1:/usr/local/bin:1:/cm/shared/apps/slurm/current/bin:1:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:1:/cm/shared/apps/slurm/current/sbin:1:/bin:1:/snap/bin:1:/sbin:1:/usr/sbin:1:/apps/miniforge/24.11.3/condabin:1:/cm/local/apps/environment-modules/4.5.3/bin:1:/usr/games:1:/usr/local/sbin:1:/usr/local/games:1
+++ export PATH_modshare
+++ source /apps/miniforge/24.11.3/etc/profile.d/conda.sh
++++ export CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
++++ CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
++++ export _CE_M=
++++ _CE_M=
++++ export _CE_CONDA=
++++ _CE_CONDA=
++++ export CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
++++ CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
++++ '[' -z x ']'
+++ test 0
++ _mlstatus=0
++ '[' -n x ']'
++ IFS=' 	
+'
++ unset _mlre _mlv _mlrv _mlIFS
++ '[' -n '' ']'
++ unset _mlshdbg
++ return 0
+++ conda info --base
+++ local cmd=info
+++ case "$cmd" in
+++ __conda_exe info --base
+++ /apps/miniforge/24.11.3/bin/conda info --base
++ source /apps/miniforge/24.11.3/etc/profile.d/conda.sh
+++ export CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
+++ CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
+++ export _CE_M=
+++ _CE_M=
+++ export _CE_CONDA=
+++ _CE_CONDA=
+++ export CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
+++ CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
+++ '[' -z x ']'
++ conda activate hybrid_loss
++ local cmd=activate
++ case "$cmd" in
++ __conda_activate activate hybrid_loss
++ '[' -n '' ']'
++ local ask_conda
+++ PS1=
+++ __conda_exe shell.posix activate hybrid_loss
+++ /apps/miniforge/24.11.3/bin/conda shell.posix activate hybrid_loss
++ ask_conda='PS1='\''(hybrid_loss) '\''
+export PATH='\''/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/bin:/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin'\''
+export CONDA_PREFIX='\''/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''hybrid_loss'\''
+export CONDA_PROMPT_MODIFIER='\''(hybrid_loss) '\''
+export CONDA_EXE='\''/apps/miniforge/24.11.3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/apps/miniforge/24.11.3/bin/python'\'''
++ eval 'PS1='\''(hybrid_loss) '\''
+export PATH='\''/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/bin:/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin'\''
+export CONDA_PREFIX='\''/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''hybrid_loss'\''
+export CONDA_PROMPT_MODIFIER='\''(hybrid_loss) '\''
+export CONDA_EXE='\''/apps/miniforge/24.11.3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/apps/miniforge/24.11.3/bin/python'\'''
+++ PS1='(hybrid_loss) '
+++ export PATH=/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/bin:/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin
+++ PATH=/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/bin:/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin
+++ export CONDA_PREFIX=/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss
+++ CONDA_PREFIX=/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss
+++ export CONDA_SHLVL=1
+++ CONDA_SHLVL=1
+++ export CONDA_DEFAULT_ENV=hybrid_loss
+++ CONDA_DEFAULT_ENV=hybrid_loss
+++ export 'CONDA_PROMPT_MODIFIER=(hybrid_loss) '
+++ CONDA_PROMPT_MODIFIER='(hybrid_loss) '
+++ export CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
+++ CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
+++ export _CE_M=
+++ _CE_M=
+++ export _CE_CONDA=
+++ _CE_CONDA=
+++ export CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
+++ CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
++ __conda_hashr
++ '[' -n '' ']'
++ '[' -n '' ']'
++ hash -r
++ python /home/users/astar/cfar/stuananthu/LLMDiversity/results/qwen2-7b/phase1_ce/checkpoint-1434/zero_to_fp32.py /home/users/astar/cfar/stuananthu/LLMDiversity/results/qwen2-7b/phase1_ce/checkpoint-1434 /home/users/astar/cfar/stuananthu/LLMDiversity/results/qwen2-7b/phase1_ce/merged_zero3 --safe_serialization --max_shard_size 5GB -t global_step1434
+/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/torch/cuda/__init__.py:716: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/torch/cuda/__init__.py:716: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00, 266.22it/s]
+Gathering sharded weights:   0%|          | 0/339 [00:00<?, ?it/s]Gathering sharded weights: 100%|██████████| 339/339 [00:00<00:00, 595672.00it/s]
+Saving checkpoint shards:   0%|          | 0/7 [00:00<?, ?it/s]Saving checkpoint shards:  14%|█▍        | 1/7 [00:11<01:09, 11.64s/it]Saving checkpoint shards:  29%|██▊       | 2/7 [00:24<01:01, 12.28s/it]Saving checkpoint shards:  43%|████▎     | 3/7 [00:36<00:48, 12.24s/it]Saving checkpoint shards:  57%|█████▋    | 4/7 [00:48<00:36, 12.23s/it]Saving checkpoint shards:  71%|███████▏  | 5/7 [01:03<00:26, 13.29s/it]Saving checkpoint shards:  86%|████████▌ | 6/7 [01:15<00:12, 12.76s/it]Saving checkpoint shards: 100%|██████████| 7/7 [01:22<00:00, 10.78s/it]Saving checkpoint shards: 100%|██████████| 7/7 [01:22<00:00, 11.77s/it]

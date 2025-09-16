@@ -1,0 +1,752 @@
++ module load miniforge/24.11.3-2
++ unset _mlshdbg
++ '[' 0 = 1 ']'
++ unset _mlre _mlIFS
++ '[' -n x ']'
++ _mlIFS=' 	
+'
++ IFS=' '
++ '[' -n '' ']'
+++ /usr/bin/tclsh /cm/local/apps/environment-modules/4.5.3/libexec/modulecmd.tcl bash load miniforge/24.11.3-2
++ eval 'LOADEDMODULES=slurm/slurm/23.02.8:default-environment:miniforge/24.11.3-2;' export 'LOADEDMODULES;
+_LMFILES_=/cm/local/modulefiles/slurm/slurm/23.02.8:/cm/shared/modulefiles/default-environment:/cm/shared/modulefiles/miniforge/24.11.3-2;' export '_LMFILES_;
+_CE_CONDA=;' export '_CE_CONDA;
+_CE_M=;' export '_CE_M;
+MODULES_LMCONFLICT=miniforge/24.11.3-2\&miniforge;' export 'MODULES_LMCONFLICT;
+MODULES_LMCONFLICT_modshare=miniforge/24.11.3-2\&miniforge:1;' export 'MODULES_LMCONFLICT_modshare;
+CONDA_EXE=/apps/miniforge/24.11.3/bin/conda;' export 'CONDA_EXE;
+CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python;' export 'CONDA_PYTHON_EXE;
+LOADEDMODULES_modshare=miniforge/24.11.3-2:1:slurm/slurm/23.02.8:1:default-environment:1;' export 'LOADEDMODULES_modshare;
+_LMFILES__modshare=/cm/shared/modulefiles/miniforge/24.11.3-2:1:/cm/local/modulefiles/slurm/slurm/23.02.8:1:/cm/shared/modulefiles/default-environment:1;' export '_LMFILES__modshare;
+PATH=/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin;' export 'PATH;
+CONDA_SHLVL=0;' export 'CONDA_SHLVL;
+PATH_modshare=/usr/bin:1:/usr/local/bin:1:/cm/shared/apps/slurm/current/bin:1:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:1:/cm/shared/apps/slurm/current/sbin:1:/bin:1:/snap/bin:1:/sbin:1:/usr/sbin:1:/apps/miniforge/24.11.3/condabin:1:/cm/local/apps/environment-modules/4.5.3/bin:1:/usr/games:1:/usr/local/sbin:1:/usr/local/games:1;' export 'PATH_modshare;
+source' '/apps/miniforge/24.11.3/etc/profile.d/conda.sh;
+test' '0;'
+++ LOADEDMODULES=slurm/slurm/23.02.8:default-environment:miniforge/24.11.3-2
+++ export LOADEDMODULES
+++ _LMFILES_=/cm/local/modulefiles/slurm/slurm/23.02.8:/cm/shared/modulefiles/default-environment:/cm/shared/modulefiles/miniforge/24.11.3-2
+++ export _LMFILES_
+++ _CE_CONDA=
+++ export _CE_CONDA
+++ _CE_M=
+++ export _CE_M
+++ MODULES_LMCONFLICT='miniforge/24.11.3-2&miniforge'
+++ export MODULES_LMCONFLICT
+++ MODULES_LMCONFLICT_modshare='miniforge/24.11.3-2&miniforge:1'
+++ export MODULES_LMCONFLICT_modshare
+++ CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
+++ export CONDA_EXE
+++ CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
+++ export CONDA_PYTHON_EXE
+++ LOADEDMODULES_modshare=miniforge/24.11.3-2:1:slurm/slurm/23.02.8:1:default-environment:1
+++ export LOADEDMODULES_modshare
+++ _LMFILES__modshare=/cm/shared/modulefiles/miniforge/24.11.3-2:1:/cm/local/modulefiles/slurm/slurm/23.02.8:1:/cm/shared/modulefiles/default-environment:1
+++ export _LMFILES__modshare
+++ PATH=/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin
+++ export PATH
+++ CONDA_SHLVL=0
+++ export CONDA_SHLVL
+++ PATH_modshare=/usr/bin:1:/usr/local/bin:1:/cm/shared/apps/slurm/current/bin:1:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:1:/cm/shared/apps/slurm/current/sbin:1:/bin:1:/snap/bin:1:/sbin:1:/usr/sbin:1:/apps/miniforge/24.11.3/condabin:1:/cm/local/apps/environment-modules/4.5.3/bin:1:/usr/games:1:/usr/local/sbin:1:/usr/local/games:1
+++ export PATH_modshare
+++ source /apps/miniforge/24.11.3/etc/profile.d/conda.sh
++++ export CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
++++ CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
++++ export _CE_M=
++++ _CE_M=
++++ export _CE_CONDA=
++++ _CE_CONDA=
++++ export CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
++++ CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
++++ '[' -z x ']'
+++ test 0
++ _mlstatus=0
++ '[' -n x ']'
++ IFS=' 	
+'
++ unset _mlre _mlv _mlrv _mlIFS
++ '[' -n '' ']'
++ unset _mlshdbg
++ return 0
+++ conda info --base
+++ local cmd=info
+++ case "$cmd" in
+++ __conda_exe info --base
+++ /apps/miniforge/24.11.3/bin/conda info --base
++ source /apps/miniforge/24.11.3/etc/profile.d/conda.sh
+++ export CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
+++ CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
+++ export _CE_M=
+++ _CE_M=
+++ export _CE_CONDA=
+++ _CE_CONDA=
+++ export CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
+++ CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
+++ '[' -z x ']'
++ conda activate hybrid_loss
++ local cmd=activate
++ case "$cmd" in
++ __conda_activate activate hybrid_loss
++ '[' -n '' ']'
++ local ask_conda
+++ PS1=
+++ __conda_exe shell.posix activate hybrid_loss
+++ /apps/miniforge/24.11.3/bin/conda shell.posix activate hybrid_loss
++ ask_conda='PS1='\''(hybrid_loss) '\''
+export PATH='\''/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/bin:/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin'\''
+export CONDA_PREFIX='\''/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''hybrid_loss'\''
+export CONDA_PROMPT_MODIFIER='\''(hybrid_loss) '\''
+export CONDA_EXE='\''/apps/miniforge/24.11.3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/apps/miniforge/24.11.3/bin/python'\'''
++ eval 'PS1='\''(hybrid_loss) '\''
+export PATH='\''/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/bin:/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin'\''
+export CONDA_PREFIX='\''/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''hybrid_loss'\''
+export CONDA_PROMPT_MODIFIER='\''(hybrid_loss) '\''
+export CONDA_EXE='\''/apps/miniforge/24.11.3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/apps/miniforge/24.11.3/bin/python'\'''
+++ PS1='(hybrid_loss) '
+++ export PATH=/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/bin:/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin
+++ PATH=/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/bin:/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin
+++ export CONDA_PREFIX=/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss
+++ CONDA_PREFIX=/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss
+++ export CONDA_SHLVL=1
+++ CONDA_SHLVL=1
+++ export CONDA_DEFAULT_ENV=hybrid_loss
+++ CONDA_DEFAULT_ENV=hybrid_loss
+++ export 'CONDA_PROMPT_MODIFIER=(hybrid_loss) '
+++ CONDA_PROMPT_MODIFIER='(hybrid_loss) '
+++ export CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
+++ CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
+++ export _CE_M=
+++ _CE_M=
+++ export _CE_CONDA=
+++ _CE_CONDA=
+++ export CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
+++ CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
++ __conda_hashr
++ '[' -n '' ']'
++ '[' -n '' ']'
++ hash -r
++ module load cuda/12.4.1
++ unset _mlshdbg
++ '[' 0 = 1 ']'
++ unset _mlre _mlIFS
++ '[' -n x ']'
++ _mlIFS=' 	
+'
++ IFS=' '
++ '[' -n '' ']'
+++ /usr/bin/tclsh /cm/local/apps/environment-modules/4.5.3/libexec/modulecmd.tcl bash load cuda/12.4.1
++ eval 'CPLUS_INCLUDE_PATH_modshare=/apps/cuda/12.4.1/include:1;' export 'CPLUS_INCLUDE_PATH_modshare;
+CPATH=/apps/cuda/12.4.1/include:/cm/shared/apps/slurm/current/include;' export 'CPATH;
+LD_LIBRARY_PATH=/apps/cuda/12.4.1/lib64:/cm/shared/apps/slurm/current/lib64/slurm:/cm/shared/apps/slurm/current/lib64;' export 'LD_LIBRARY_PATH;
+CUDAROOT=/apps/cuda/12.4.1;' export 'CUDAROOT;
+LIBRARY_PATH=/apps/cuda/12.4.1/lib64/stubs:/apps/cuda/12.4.1/lib64:/cm/shared/apps/slurm/current/lib64/slurm:/cm/shared/apps/slurm/current/lib64;' export 'LIBRARY_PATH;
+_LMFILES_=/cm/local/modulefiles/slurm/slurm/23.02.8:/cm/shared/modulefiles/default-environment:/cm/shared/modulefiles/miniforge/24.11.3-2:/cm/shared/modulefiles/cuda/12.4.1;' export '_LMFILES_;
+LOADEDMODULES=slurm/slurm/23.02.8:default-environment:miniforge/24.11.3-2:cuda/12.4.1;' export 'LOADEDMODULES;
+CUDAPATH=/apps/cuda/12.4.1;' export 'CUDAPATH;
+MODULES_LMCONFLICT=miniforge/24.11.3-2\&miniforge:cuda/12.4.1\&cuda;' export 'MODULES_LMCONFLICT;
+LIBRARY_PATH_modshare=/cm/shared/apps/slurm/current/lib64:1:/apps/cuda/12.4.1/lib64/stubs:1:/apps/cuda/12.4.1/lib64:1:/cm/shared/apps/slurm/current/lib64/slurm:1;' export 'LIBRARY_PATH_modshare;
+C_INCLUDE_PATH_modshare=/apps/cuda/12.4.1/include:1;' export 'C_INCLUDE_PATH_modshare;
+MODULES_LMCONFLICT_modshare=cuda/12.4.1\&cuda:1:miniforge/24.11.3-2\&miniforge:1;' export 'MODULES_LMCONFLICT_modshare;
+CPLUS_INCLUDE_PATH=/apps/cuda/12.4.1/include;' export 'CPLUS_INCLUDE_PATH;
+C_INCLUDE_PATH=/apps/cuda/12.4.1/include;' export 'C_INCLUDE_PATH;
+CPATH_modshare=/apps/cuda/12.4.1/include:1:/cm/shared/apps/slurm/current/include:1;' export 'CPATH_modshare;
+LD_LIBRARY_PATH_modshare=/cm/shared/apps/slurm/current/lib64:1:/apps/cuda/12.4.1/lib64:1:/cm/shared/apps/slurm/current/lib64/slurm:1;' export 'LD_LIBRARY_PATH_modshare;
+CUDAVERSION=12.4.1;' export 'CUDAVERSION;
+_LMFILES__modshare=/cm/shared/modulefiles/cuda/12.4.1:1:/cm/shared/modulefiles/miniforge/24.11.3-2:1:/cm/local/modulefiles/slurm/slurm/23.02.8:1:/cm/shared/modulefiles/default-environment:1;' export '_LMFILES__modshare;
+LOADEDMODULES_modshare=cuda/12.4.1:1:miniforge/24.11.3-2:1:slurm/slurm/23.02.8:1:default-environment:1;' export 'LOADEDMODULES_modshare;
+PATH=/apps/cuda/12.4.1/bin:/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/bin:/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin;' export 'PATH;
+PATH_modshare=/usr/bin:1:/apps/cuda/12.4.1/bin:1:/usr/local/bin:1:/cm/shared/apps/slurm/current/bin:1:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:1:/cm/shared/apps/slurm/current/sbin:1:/bin:1:/snap/bin:1:/sbin:1:/usr/sbin:1:/cm/local/apps/environment-modules/4.5.3/bin:1:/apps/miniforge/24.11.3/condabin:1:/usr/games:1:/usr/local/sbin:1:/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/bin:1:/usr/local/games:1;' export 'PATH_modshare;
+test' '0;'
+++ CPLUS_INCLUDE_PATH_modshare=/apps/cuda/12.4.1/include:1
+++ export CPLUS_INCLUDE_PATH_modshare
+++ CPATH=/apps/cuda/12.4.1/include:/cm/shared/apps/slurm/current/include
+++ export CPATH
+++ LD_LIBRARY_PATH=/apps/cuda/12.4.1/lib64:/cm/shared/apps/slurm/current/lib64/slurm:/cm/shared/apps/slurm/current/lib64
+++ export LD_LIBRARY_PATH
+++ CUDAROOT=/apps/cuda/12.4.1
+++ export CUDAROOT
+++ LIBRARY_PATH=/apps/cuda/12.4.1/lib64/stubs:/apps/cuda/12.4.1/lib64:/cm/shared/apps/slurm/current/lib64/slurm:/cm/shared/apps/slurm/current/lib64
+++ export LIBRARY_PATH
+++ _LMFILES_=/cm/local/modulefiles/slurm/slurm/23.02.8:/cm/shared/modulefiles/default-environment:/cm/shared/modulefiles/miniforge/24.11.3-2:/cm/shared/modulefiles/cuda/12.4.1
+++ export _LMFILES_
+++ LOADEDMODULES=slurm/slurm/23.02.8:default-environment:miniforge/24.11.3-2:cuda/12.4.1
+++ export LOADEDMODULES
+++ CUDAPATH=/apps/cuda/12.4.1
+++ export CUDAPATH
+++ MODULES_LMCONFLICT='miniforge/24.11.3-2&miniforge:cuda/12.4.1&cuda'
+++ export MODULES_LMCONFLICT
+++ LIBRARY_PATH_modshare=/cm/shared/apps/slurm/current/lib64:1:/apps/cuda/12.4.1/lib64/stubs:1:/apps/cuda/12.4.1/lib64:1:/cm/shared/apps/slurm/current/lib64/slurm:1
+++ export LIBRARY_PATH_modshare
+++ C_INCLUDE_PATH_modshare=/apps/cuda/12.4.1/include:1
+++ export C_INCLUDE_PATH_modshare
+++ MODULES_LMCONFLICT_modshare='cuda/12.4.1&cuda:1:miniforge/24.11.3-2&miniforge:1'
+++ export MODULES_LMCONFLICT_modshare
+++ CPLUS_INCLUDE_PATH=/apps/cuda/12.4.1/include
+++ export CPLUS_INCLUDE_PATH
+++ C_INCLUDE_PATH=/apps/cuda/12.4.1/include
+++ export C_INCLUDE_PATH
+++ CPATH_modshare=/apps/cuda/12.4.1/include:1:/cm/shared/apps/slurm/current/include:1
+++ export CPATH_modshare
+++ LD_LIBRARY_PATH_modshare=/cm/shared/apps/slurm/current/lib64:1:/apps/cuda/12.4.1/lib64:1:/cm/shared/apps/slurm/current/lib64/slurm:1
+++ export LD_LIBRARY_PATH_modshare
+++ CUDAVERSION=12.4.1
+++ export CUDAVERSION
+++ _LMFILES__modshare=/cm/shared/modulefiles/cuda/12.4.1:1:/cm/shared/modulefiles/miniforge/24.11.3-2:1:/cm/local/modulefiles/slurm/slurm/23.02.8:1:/cm/shared/modulefiles/default-environment:1
+++ export _LMFILES__modshare
+++ LOADEDMODULES_modshare=cuda/12.4.1:1:miniforge/24.11.3-2:1:slurm/slurm/23.02.8:1:default-environment:1
+++ export LOADEDMODULES_modshare
+++ PATH=/apps/cuda/12.4.1/bin:/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/bin:/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin
+++ export PATH
+++ PATH_modshare=/usr/bin:1:/apps/cuda/12.4.1/bin:1:/usr/local/bin:1:/cm/shared/apps/slurm/current/bin:1:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:1:/cm/shared/apps/slurm/current/sbin:1:/bin:1:/snap/bin:1:/sbin:1:/usr/sbin:1:/cm/local/apps/environment-modules/4.5.3/bin:1:/apps/miniforge/24.11.3/condabin:1:/usr/games:1:/usr/local/sbin:1:/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/bin:1:/usr/local/games:1
+++ export PATH_modshare
+++ test 0
++ _mlstatus=0
++ '[' -n x ']'
++ IFS=' 	
+'
++ unset _mlre _mlv _mlrv _mlIFS
++ '[' -n '' ']'
++ unset _mlshdbg
++ return 0
++ export CUDA_HOME=/apps/cuda/12.4.1
++ CUDA_HOME=/apps/cuda/12.4.1
+++ scontrol show hostnames G54Y574
+++ head -n 1
++ export MASTER_ADDR=G54Y574
++ MASTER_ADDR=G54Y574
++ export MASTER_PORT=20062
++ MASTER_PORT=20062
++ ss -ltn
++ awk '{print $4}'
++ grep -q ':20062$'
++ export DS_MASTER_PORT=20062
++ DS_MASTER_PORT=20062
++ echo 'Rendezvous: MASTER_ADDR=G54Y574 MASTER_PORT=20062'
++ export GPUS_PER_NODE=4
++ GPUS_PER_NODE=4
++ export MICRO_BS=8
++ MICRO_BS=8
++ export GA=4
++ GA=4
++ export EPOCHS=3
++ EPOCHS=3
++ export SAVE_STRATEGY=steps
++ SAVE_STRATEGY=steps
++ export SAVE_STEPS=1000
++ SAVE_STEPS=1000
++ export EVAL_STRATEGY=no
++ EVAL_STRATEGY=no
++ export LOGGING_STEPS=10
++ LOGGING_STEPS=10
++ export LR=2e-6
++ LR=2e-6
++ export REPORT_TO=wandb
++ REPORT_TO=wandb
++ export MAX_STEPS=0
++ MAX_STEPS=0
++ export MAX_TRAIN_SAMPLES=0
++ MAX_TRAIN_SAMPLES=0
++ export RUN_CE=0
++ RUN_CE=0
++ export RUN_GEM=0
++ RUN_GEM=0
++ export RUN_HYB75=0
++ RUN_HYB75=0
++ export RUN_HYB50=0
++ RUN_HYB50=0
++ export RUN_SPARSEMAX=0
++ RUN_SPARSEMAX=0
++ export RUN_CE_WD=0
++ RUN_CE_WD=0
++ export RUN_NEFT=1
++ RUN_NEFT=1
++ export RESUME_FROM=last
++ RESUME_FROM=last
++ '[' -z '' ']'
++ '[' -f /home/users/astar/cfar/stuananthu/.secrets/wandb_api_key ']'
+++ cat /home/users/astar/cfar/stuananthu/.secrets/wandb_api_key
++ export WANDB_API_KEY=76e4c5bd68f007eb1945abf4d51594306a1cae25
++ WANDB_API_KEY=76e4c5bd68f007eb1945abf4d51594306a1cae25
++ export WANDB_PROJECT=llm_hybrid_sft
++ WANDB_PROJECT=llm_hybrid_sft
++ export WANDB_RESUME=allow
++ WANDB_RESUME=allow
++ OUT=/home/users/astar/cfar/stuananthu/LLMDiversity/results/qwen2-7b/phase7_neft_alpha5
++ mkdir -p /home/users/astar/cfar/stuananthu/LLMDiversity/results/qwen2-7b/phase7_neft_alpha5
+++ cat '/home/users/astar/cfar/stuananthu/LLMDiversity/results/qwen2-7b/phase7_neft_alpha5/runs/*/wandb/latest-run/id'
+++ true
++ RID=
+++ date +%s
++ export WANDB_RUN_ID=neft-a5-1757934121
++ WANDB_RUN_ID=neft-a5-1757934121
++ bash /home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft/scripts/qwen2-7b/train_qwen2_7b_pipeline.sh
++ PROJ=/home/users/astar/cfar/stuananthu/LLMDiversity
++ REPO=/home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft
++ MODEL_DIR=/home/users/astar/cfar/stuananthu/LLMDiversity/models/Qwen2-7B
++ DATA_DIR=/home/users/astar/cfar/stuananthu/LLMDiversity/datasets/ultrafeedback_tokenized_qwen2-7b
++ OUT_ROOT=/home/users/astar/cfar/stuananthu/LLMDiversity/results/qwen2-7b
++ mkdir -p /home/users/astar/cfar/stuananthu/LLMDiversity/results/qwen2-7b
++ DS_CFG=/home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft/scripts/deepspeed_config_qwen.json
++ '[' -d /home/users/astar/cfar/stuananthu/LLMDiversity/models/Qwen2-7B ']'
++ '[' -f /home/users/astar/cfar/stuananthu/LLMDiversity/datasets/ultrafeedback_tokenized_qwen2-7b/train.jsonl ']'
++ '[' -f /home/users/astar/cfar/stuananthu/LLMDiversity/datasets/ultrafeedback_tokenized_qwen2-7b/test.jsonl ']'
++ export PRJ=prj0000000224
++ PRJ=prj0000000224
++ export SCRATCH=/scratch/prj0000000224
++ SCRATCH=/scratch/prj0000000224
++ export HF_HOME=/scratch/prj0000000224/LLMDiversity_work/cache/huggingface
++ HF_HOME=/scratch/prj0000000224/LLMDiversity_work/cache/huggingface
++ export TRANSFORMERS_CACHE=/scratch/prj0000000224/LLMDiversity_work/cache/huggingface/transformers
++ TRANSFORMERS_CACHE=/scratch/prj0000000224/LLMDiversity_work/cache/huggingface/transformers
++ export HF_DATASETS_CACHE=/scratch/prj0000000224/LLMDiversity_work/cache/huggingface/datasets
++ HF_DATASETS_CACHE=/scratch/prj0000000224/LLMDiversity_work/cache/huggingface/datasets
++ mkdir -p /scratch/prj0000000224/LLMDiversity_work/cache/huggingface/transformers /scratch/prj0000000224/LLMDiversity_work/cache/huggingface/datasets
++ CACHE_ROOT=/scratch/prj0000000224/LLMDiversity_work/cache/huggingface/datasets
++ echo '[preflight] clearing cached JSON datasets under: /scratch/prj0000000224/LLMDiversity_work/cache/huggingface/datasets/json'
++ rm -rf /scratch/prj0000000224/LLMDiversity_work/cache/huggingface/datasets/json
++ export WANDB_PROJECT=llm_hybrid_sft
++ WANDB_PROJECT=llm_hybrid_sft
++ export WANDB_ENTITY=
++ WANDB_ENTITY=
++ export WANDB_DIR=/scratch/prj0000000224/LLMDiversity_work/wandb
++ WANDB_DIR=/scratch/prj0000000224/LLMDiversity_work/wandb
++ mkdir -p /scratch/prj0000000224/LLMDiversity_work/wandb
++ '[' -z 76e4c5bd68f007eb1945abf4d51594306a1cae25 ']'
++ export TOKENIZERS_PARALLELISM=true
++ TOKENIZERS_PARALLELISM=true
++ export OMP_NUM_THREADS=8
++ OMP_NUM_THREADS=8
++ export NCCL_P2P_DISABLE=1
++ NCCL_P2P_DISABLE=1
++ export NCCL_IB_DISABLE=1
++ NCCL_IB_DISABLE=1
++ export NCCL_TIMEOUT=1800
++ NCCL_TIMEOUT=1800
++ export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True,max_split_size_mb:256
++ PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True,max_split_size_mb:256
++ export TORCH_DISTRIBUTED_DEBUG=DETAIL
++ TORCH_DISTRIBUTED_DEBUG=DETAIL
++ : 4
++ : 8
++ : 4
++ : 3
++ : steps
++ : 1000
++ : no
++ : 0
++ : 10
++ : 2e-6
++ : 0
++ : 0
++ : wandb
++ : 0
++ : 0
++ : 0
++ : 0
++ : 0
++ : 0
++ : 1
++ INCLUDE_TOKENS_FLAGS=(--include_tokens_per_second True --include_num_input_tokens_seen True)
++ '[' 0 -eq 1 ']'
++ '[' 0 -eq 1 ']'
++ '[' 0 -eq 1 ']'
++ '[' 0 -eq 1 ']'
++ '[' 0 -eq 1 ']'
++ '[' 0 -eq 1 ']'
++ '[' 1 -eq 1 ']'
++ OUT_NEFT=/home/users/astar/cfar/stuananthu/LLMDiversity/results/qwen2-7b/phase7_neft_alpha5
++ mkdir -p /home/users/astar/cfar/stuananthu/LLMDiversity/results/qwen2-7b/phase7_neft_alpha5
++ LAUNCH /home/users/astar/cfar/stuananthu/LLMDiversity/results/qwen2-7b/phase7_neft_alpha5 phase7_neft_a5 --loss ce --neft_alpha 5
++ local outdir=/home/users/astar/cfar/stuananthu/LLMDiversity/results/qwen2-7b/phase7_neft_alpha5
++ shift
++ local phase=phase7_neft_a5
++ shift
++ local run_suffix=10062
++ local run_name=phase7_neft_a5_bs8x4x4_j10062
++ overrides=()
++ local overrides
++ '[' 0 -gt 0 ']'
++ '[' 0 -gt 0 ']'
++ ds_extra=()
++ local ds_extra
++ '[' -n 20062 ']'
++ ds_extra+=(--master_port "${DS_MASTER_PORT}")
++ local BASE_MODEL=/home/users/astar/cfar/stuananthu/LLMDiversity/models/Qwen2-7B
++ '[' -n last ']'
++ '[' last = last ']'
+++ sort -V
+++ tail -n1
+++ ls -1d '/home/users/astar/cfar/stuananthu/LLMDiversity/results/qwen2-7b/phase7_neft_alpha5/checkpoint-*'
+++ true
++ last_ckpt=
++ '[' -n '' ']'
++ echo 'No checkpoints found in /home/users/astar/cfar/stuananthu/LLMDiversity/results/qwen2-7b/phase7_neft_alpha5; starting fresh.'
++ deepspeed --master_port 20062 --num_gpus 4 /home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft/train.py --deepspeed /home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft/scripts/deepspeed_config_qwen.json --seed 1234 --model_name_or_path /home/users/astar/cfar/stuananthu/LLMDiversity/models/Qwen2-7B --train_tokenized_file /home/users/astar/cfar/stuananthu/LLMDiversity/datasets/ultrafeedback_tokenized_qwen2-7b/train.jsonl --test_tokenized_file /home/users/astar/cfar/stuananthu/LLMDiversity/datasets/ultrafeedback_tokenized_qwen2-7b/test.jsonl --output_dir /home/users/astar/cfar/stuananthu/LLMDiversity/results/qwen2-7b/phase7_neft_alpha5 --overwrite_output_dir True --num_train_epochs 3 --per_device_train_batch_size 8 --gradient_accumulation_steps 4 --save_strategy steps --save_steps 1000 --save_total_limit 2 --learning_rate 2e-6 --max_grad_norm 0.5 --lr_scheduler_type cosine --warmup_ratio 0.03 --logging_steps 10 --gradient_checkpointing True --evaluation_strategy no --eval_steps 0 --per_device_eval_batch_size 8 --prediction_loss_only True --eval_accumulation_steps 2 --bf16 True --use_flash_attn True --report_to wandb --run_name phase7_neft_a5_bs8x4x4_j10062 --include_tokens_per_second True --include_num_input_tokens_seen True --loss ce --neft_alpha 5
+/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+[W915 19:02:40.880800537 CUDAAllocatorConfig.h:28] Warning: expandable_segments not supported on this platform (function operator())
+[W915 19:02:40.880833415 CUDAAllocatorConfig.h:28] Warning: expandable_segments not supported on this platform (function operator())
+[W915 19:02:40.885312658 CUDAAllocatorConfig.h:28] Warning: expandable_segments not supported on this platform (function operator())
+[W915 19:02:40.891239775 CUDAAllocatorConfig.h:28] Warning: expandable_segments not supported on this platform (function operator())
+WARNING:__main__:Process rank: 0, device: cuda:0, n_gpu: 1
+INFO:__main__:Training parameters TrainingArguments(
+_n_gpu=1,
+accelerator_config={'split_batches': False, 'dispatch_batches': None, 'even_batches': True, 'use_seedable_sampler': True, 'non_blocking': False, 'gradient_accumulation_kwargs': None, 'use_configured_state': False},
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.95,
+adam_epsilon=1e-08,
+auto_find_batch_size=False,
+average_tokens_across_devices=False,
+batch_eval_metrics=False,
+bf16=True,
+bf16_full_eval=False,
+data_seed=None,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_persistent_workers=False,
+dataloader_pin_memory=True,
+dataloader_prefetch_factor=None,
+ddp_backend=None,
+ddp_broadcast_buffers=None,
+ddp_bucket_cap_mb=None,
+ddp_find_unused_parameters=None,
+ddp_timeout=1800,
+debug=[],
+deepspeed=/home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft/scripts/deepspeed_config_qwen.json,
+disable_tqdm=False,
+do_eval=False,
+do_predict=False,
+do_train=False,
+eval_accumulation_steps=2,
+eval_delay=0,
+eval_do_concat_batches=True,
+eval_on_start=False,
+eval_steps=0,
+eval_strategy=no,
+eval_use_gather_object=False,
+evaluation_strategy=no,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+fsdp=[],
+fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 'xla_fsdp_grad_ckpt': False},
+fsdp_min_num_params=0,
+fsdp_transformer_layer_cls_to_wrap=None,
+full_determinism=False,
+gem_beta=0.7,
+gem_h=linear,
+gradient_accumulation_steps=4,
+gradient_checkpointing=True,
+gradient_checkpointing_kwargs=None,
+greater_is_better=None,
+group_by_length=False,
+half_precision_backend=auto,
+hub_always_push=False,
+hub_model_id=None,
+hub_private_repo=None,
+hub_strategy=every_save,
+hub_token=<HUB_TOKEN>,
+ignore_data_skip=False,
+include_for_metrics=[],
+include_inputs_for_metrics=False,
+include_num_input_tokens_seen=True,
+include_tokens_per_second=True,
+jit_mode_eval=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=2e-06,
+length_column_name=length,
+load_best_model_at_end=False,
+local_rank=0,
+log_level=passive,
+log_level_replica=warning,
+log_on_each_node=True,
+logging_dir=/home/users/astar/cfar/stuananthu/LLMDiversity/results/qwen2-7b/phase7_neft_alpha5/runs/Sep15_19-02-40_G54Y574,
+logging_first_step=False,
+logging_nan_inf_filter=True,
+logging_steps=10,
+logging_strategy=steps,
+loss=ce,
+lr_scheduler_kwargs={},
+lr_scheduler_type=cosine,
+max_grad_norm=0.5,
+max_steps=-1,
+metric_for_best_model=None,
+mp_parameters=,
+neft_alpha=5.0,
+neftune_noise_alpha=None,
+no_cuda=False,
+ns_alpha=0.5,
+ns_bottom_p=0.9,
+ns_temperature=1.0,
+ns_top_k=10,
+ns_type=top_k,
+num_train_epochs=3.0,
+optim=adamw_torch,
+optim_args=None,
+optim_target_modules=None,
+output_dir=/home/users/astar/cfar/stuananthu/LLMDiversity/results/qwen2-7b/phase7_neft_alpha5,
+overwrite_output_dir=True,
+past_index=-1,
+per_device_eval_batch_size=8,
+per_device_train_batch_size=8,
+prediction_loss_only=True,
+print_entropy=False,
+push_to_hub=False,
+push_to_hub_model_id=None,
+push_to_hub_organization=None,
+push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
+ray_scope=last,
+remove_unused_columns=True,
+report_to=['wandb'],
+restore_callback_states_from_checkpoint=False,
+resume_from_checkpoint=None,
+run_name=phase7_neft_a5_bs8x4x4_j10062,
+save_on_each_node=False,
+save_only_model=False,
+save_safetensors=True,
+save_steps=1000,
+save_strategy=steps,
+save_total_limit=2,
+seed=1234,
+skip_memory_metrics=True,
+tf32=None,
+torch_compile=False,
+torch_compile_backend=None,
+torch_compile_mode=None,
+torch_empty_cache_steps=None,
+torchdynamo=None,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+use_cpu=False,
+use_ipex=False,
+use_legacy_prediction_loop=False,
+use_liger_kernel=False,
+use_mps_device=False,
+warmup_ratio=0.03,
+warmup_steps=0,
+weight_decay=0.0,
+)
+[INFO|tokenization_utils_base.py:2021] 2025-09-15 19:02:40,651 >> loading file vocab.json
+[INFO|tokenization_utils_base.py:2021] 2025-09-15 19:02:40,652 >> loading file merges.txt
+[INFO|tokenization_utils_base.py:2021] 2025-09-15 19:02:40,652 >> loading file tokenizer.json
+[INFO|tokenization_utils_base.py:2021] 2025-09-15 19:02:40,652 >> loading file added_tokens.json
+[INFO|tokenization_utils_base.py:2021] 2025-09-15 19:02:40,653 >> loading file special_tokens_map.json
+[INFO|tokenization_utils_base.py:2021] 2025-09-15 19:02:40,653 >> loading file tokenizer_config.json
+[INFO|tokenization_utils_base.py:2021] 2025-09-15 19:02:40,653 >> loading file chat_template.jinja
+[INFO|tokenization_utils_base.py:2299] 2025-09-15 19:02:40,840 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+INFO:__main__:Forcing tokenizer.padding_side = 'left' for Qwen2 + FlashAttention-2.
+[INFO|configuration_utils.py:696] 2025-09-15 19:02:40,843 >> loading configuration file /home/users/astar/cfar/stuananthu/LLMDiversity/models/Qwen2-7B/config.json
+[INFO|configuration_utils.py:770] 2025-09-15 19:02:40,846 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 3584,
+  "initializer_range": 0.02,
+  "intermediate_size": 18944,
+  "max_position_embeddings": 131072,
+  "max_window_layers": 28,
+  "model_type": "qwen2",
+  "num_attention_heads": 28,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 4,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 1000000.0,
+  "sliding_window": 131072,
+  "tie_word_embeddings": false,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "use_sliding_window": false,
+  "vocab_size": 152064
+}
+
+WARNING:__main__:Process rank: 1, device: cuda:1, n_gpu: 1
+WARNING:__main__:Process rank: 3, device: cuda:3, n_gpu: 1
+WARNING:__main__:Process rank: 2, device: cuda:2, n_gpu: 1
+[INFO|modeling_utils.py:1148] 2025-09-15 19:02:41,499 >> loading weights file /home/users/astar/cfar/stuananthu/LLMDiversity/models/Qwen2-7B/model.safetensors.index.json
+[INFO|modeling_utils.py:1222] 2025-09-15 19:02:41,500 >> Will use torch_dtype=torch.bfloat16 as defined in model's config object
+[INFO|modeling_utils.py:2241] 2025-09-15 19:02:41,500 >> Instantiating Qwen2ForCausalLM model under default dtype torch.bfloat16.
+[INFO|modeling_utils.py:3881] 2025-09-15 19:02:41,500 >> Detected DeepSpeed ZeRO-3: activating zero.init() for this model
+[WARNING|logging.py:328] 2025-09-15 19:02:41,505 >> You are attempting to use Flash Attention 2.0 with a model not initialized on GPU. Make sure to move the model to GPU after initializing it on CPU with `model.to('cuda')`.
+[INFO|configuration_utils.py:1135] 2025-09-15 19:02:41,508 >> Generate config GenerationConfig {
+  "bos_token_id": 151643,
+  "eos_token_id": 151643
+}
+
+[WARNING|logging.py:328] 2025-09-15 19:02:41,632 >> You are attempting to use Flash Attention 2.0 with a model not initialized on GPU. Make sure to move the model to GPU after initializing it on CPU with `model.to('cuda')`.
+[WARNING|logging.py:328] 2025-09-15 19:02:41,632 >> You are attempting to use Flash Attention 2.0 with a model not initialized on GPU. Make sure to move the model to GPU after initializing it on CPU with `model.to('cuda')`.
+[WARNING|logging.py:328] 2025-09-15 19:02:41,769 >> You are attempting to use Flash Attention 2.0 with a model not initialized on GPU. Make sure to move the model to GPU after initializing it on CPU with `model.to('cuda')`.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:03,  1.01s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:03,  1.01s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:03,  1.01s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:03,  1.16s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:02<00:02,  1.01s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:02<00:02,  1.01s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:02<00:02,  1.01s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:02<00:02,  1.07s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:03<00:01,  1.02s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:03<00:01,  1.02s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:03<00:01,  1.02s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:03<00:01,  1.05s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.04it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.04it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.04it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.02it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.02it/s]
+
+Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.02it/s]
+Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.03it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.01s/it]
+[INFO|modeling_utils.py:5131] 2025-09-15 19:02:47,827 >> All model checkpoint weights were used when initializing Qwen2ForCausalLM.
+
+[INFO|modeling_utils.py:5139] 2025-09-15 19:02:47,828 >> All the weights of Qwen2ForCausalLM were initialized from the model checkpoint at /home/users/astar/cfar/stuananthu/LLMDiversity/models/Qwen2-7B.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use Qwen2ForCausalLM for predictions without further training.
+[INFO|configuration_utils.py:1088] 2025-09-15 19:02:47,830 >> loading configuration file /home/users/astar/cfar/stuananthu/LLMDiversity/models/Qwen2-7B/generation_config.json
+[INFO|configuration_utils.py:1135] 2025-09-15 19:02:47,831 >> Generate config GenerationConfig {
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "max_new_tokens": 2048
+}
+
+Using custom data configuration default-255ebd157cd6afdf
+INFO:datasets.builder:Using custom data configuration default-255ebd157cd6afdf
+Loading Dataset Infos from /home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/datasets/packaged_modules/json
+INFO:datasets.info:Loading Dataset Infos from /home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/datasets/packaged_modules/json
+Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 6420 examples [00:00, 50812.04 examples/s]Generating train split: 12796 examples [00:00, 55625.99 examples/s]Generating train split: 19267 examples [00:00, 57422.31 examples/s]Generating train split: 25580 examples [00:00, 58408.11 examples/s]Generating train split: 31899 examples [00:00, 58863.82 examples/s]Generating train split: 38280 examples [00:00, 59214.97 examples/s]Generating train split: 44672 examples [00:00, 58830.38 examples/s]Generating train split: 51100 examples [00:00, 55453.57 examples/s]Generating train split: 57404 examples [00:01, 56601.32 examples/s]Generating train split: 61135 examples [00:01, 56697.28 examples/s]
+Found cached dataset json (/scratch/prj0000000224/LLMDiversity_work/cache/huggingface/datasets/json/default-255ebd157cd6afdf/0.0.0/f4e89e8750d5d5ffbef2c078bf0ddfedef29dc2faff52a6255cf513c05eb1092)
+INFO:datasets.builder:Found cached dataset json (/scratch/prj0000000224/LLMDiversity_work/cache/huggingface/datasets/json/default-255ebd157cd6afdf/0.0.0/f4e89e8750d5d5ffbef2c078bf0ddfedef29dc2faff52a6255cf513c05eb1092)
+Loading Dataset info from /scratch/prj0000000224/LLMDiversity_work/cache/huggingface/datasets/json/default-255ebd157cd6afdf/0.0.0/f4e89e8750d5d5ffbef2c078bf0ddfedef29dc2faff52a6255cf513c05eb1092
+INFO:datasets.info:Loading Dataset info from /scratch/prj0000000224/LLMDiversity_work/cache/huggingface/datasets/json/default-255ebd157cd6afdf/0.0.0/f4e89e8750d5d5ffbef2c078bf0ddfedef29dc2faff52a6255cf513c05eb1092
+Using custom data configuration default-1d2a365f6778e9c2
+INFO:datasets.builder:Using custom data configuration default-1d2a365f6778e9c2
+Loading Dataset Infos from /home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/datasets/packaged_modules/json
+INFO:datasets.info:Loading Dataset Infos from /home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/datasets/packaged_modules/json
+Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 1000 examples [00:00, 40054.85 examples/s]
+Found cached dataset json (/scratch/prj0000000224/LLMDiversity_work/cache/huggingface/datasets/json/default-1d2a365f6778e9c2/0.0.0/f4e89e8750d5d5ffbef2c078bf0ddfedef29dc2faff52a6255cf513c05eb1092)
+INFO:datasets.builder:Found cached dataset json (/scratch/prj0000000224/LLMDiversity_work/cache/huggingface/datasets/json/default-1d2a365f6778e9c2/0.0.0/f4e89e8750d5d5ffbef2c078bf0ddfedef29dc2faff52a6255cf513c05eb1092)
+Loading Dataset info from /scratch/prj0000000224/LLMDiversity_work/cache/huggingface/datasets/json/default-1d2a365f6778e9c2/0.0.0/f4e89e8750d5d5ffbef2c078bf0ddfedef29dc2faff52a6255cf513c05eb1092
+INFO:datasets.info:Loading Dataset info from /scratch/prj0000000224/LLMDiversity_work/cache/huggingface/datasets/json/default-1d2a365f6778e9c2/0.0.0/f4e89e8750d5d5ffbef2c078bf0ddfedef29dc2faff52a6255cf513c05eb1092
+INFO:__main__:Using default SFTTrainer for 'ce' loss (NEFT alpha=5.0).
+/home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft/train.py:1994: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `NeftSFTTrainer.__init__`. Use `processing_class` instead.
+  return trainer_cls(
+/home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft/train.py:1994: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `NeftSFTTrainer.__init__`. Use `processing_class` instead.
+  return trainer_cls(
+/home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft/train.py:1994: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `NeftSFTTrainer.__init__`. Use `processing_class` instead.
+  return trainer_cls(
+/home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft/train.py:1994: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `NeftSFTTrainer.__init__`. Use `processing_class` instead.
+  return trainer_cls(
+[INFO|trainer.py:756] 2025-09-15 19:03:07,934 >> Using auto half precision backend
+INFO:__main__:*** Train ***
+WARNING:accelerate.accelerator:Gradient accumulation steps mismatch: GradientAccumulationPlugin has 1, DeepSpeed config has 4. Using DeepSpeed's value.
+/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/data/data_collator.py:741: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at ../torch/csrc/utils/tensor_new.cpp:278.)
+  batch["labels"] = torch.tensor(batch["labels"], dtype=torch.int64)
+/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/data/data_collator.py:741: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at ../torch/csrc/utils/tensor_new.cpp:278.)
+  batch["labels"] = torch.tensor(batch["labels"], dtype=torch.int64)
+/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/data/data_collator.py:741: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at ../torch/csrc/utils/tensor_new.cpp:278.)
+  batch["labels"] = torch.tensor(batch["labels"], dtype=torch.int64)
+/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/data/data_collator.py:741: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at ../torch/csrc/utils/tensor_new.cpp:278.)
+  batch["labels"] = torch.tensor(batch["labels"], dtype=torch.int64)
+Using /home/users/astar/cfar/stuananthu/.cache/torch_extensions/py310_cu124 as PyTorch extensions root...Using /home/users/astar/cfar/stuananthu/.cache/torch_extensions/py310_cu124 as PyTorch extensions root...Using /home/users/astar/cfar/stuananthu/.cache/torch_extensions/py310_cu124 as PyTorch extensions root...Using /home/users/astar/cfar/stuananthu/.cache/torch_extensions/py310_cu124 as PyTorch extensions root...
+
+
+
+Detected CUDA files, patching ldflags
+Emitting ninja build file /home/users/astar/cfar/stuananthu/.cache/torch_extensions/py310_cu124/fused_adam/build.ninja...
+/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/torch/utils/cpp_extension.py:1964: UserWarning: TORCH_CUDA_ARCH_LIST is not set, all archs for visible cards are included for compilation. 
+If this is not desired, please set os.environ['TORCH_CUDA_ARCH_LIST'].
+  warnings.warn(
+Building extension module fused_adam...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+Loading extension module fused_adam...
+Loading extension module fused_adam...Loading extension module fused_adam...Loading extension module fused_adam...
+
+
+[INFO|trainer.py:2409] 2025-09-15 19:03:28,001 >> ***** Running training *****
+[INFO|trainer.py:2410] 2025-09-15 19:03:28,001 >>   Num examples = 61,135
+[INFO|trainer.py:2411] 2025-09-15 19:03:28,002 >>   Num Epochs = 3
+[INFO|trainer.py:2412] 2025-09-15 19:03:28,002 >>   Instantaneous batch size per device = 8
+[INFO|trainer.py:2415] 2025-09-15 19:03:28,002 >>   Total train batch size (w. parallel, distributed & accumulation) = 128
+[INFO|trainer.py:2416] 2025-09-15 19:03:28,003 >>   Gradient Accumulation steps = 4
+[INFO|trainer.py:2417] 2025-09-15 19:03:28,003 >>   Total optimization steps = 1,434
+[INFO|trainer.py:2418] 2025-09-15 19:03:28,004 >>   Number of trainable parameters = 7,615,616,512
+[INFO|integration_utils.py:832] 2025-09-15 19:03:28,005 >> Automatic Weights & Biases logging enabled, to disable set os.environ["WANDB_DISABLED"] = "true"
+wandb: W&B API key is configured. Use `wandb login --relogin` to force relogin
+wandb: WARNING Changes to your `wandb` environment variables will be ignored because your `wandb` session has already started. For more information on how to modify your settings with `wandb.init()` arguments, please refer to https://wandb.me/wandb-init.
+wandb: creating run
+wandb: Tracking run with wandb version 0.21.2
+wandb: Run data is saved locally in /scratch/prj0000000224/LLMDiversity_work/wandb/wandb/run-20250915_190337-neft-a5-1757934121
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run phase7_neft_a5_bs8x4x4_j10062
+wandb: ⭐️ View project at https://wandb.ai/ananthurpillai547-nanyang-technological-university-singapore/llm_hybrid_sft
+wandb: 🚀 View run at https://wandb.ai/ananthurpillai547-nanyang-technological-university-singapore/llm_hybrid_sft/runs/neft-a5-1757934121
+  0%|          | 0/1434 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft/train.py", line 2143, in <module>
+    main()
+  File "/home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft/train.py", line 2129, in main
+    train_result = trainer.train(resume_from_checkpoint=checkpoint)
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft/train.py", line 2143, in <module>
+[rank3]:     main()
+[rank3]:   File "/home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft/train.py", line 2129, in main
+[rank3]:     train_result = trainer.train(resume_from_checkpoint=checkpoint)
+[rank3]:   File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/trainer.py", line 2240, in train
+[rank3]:     return inner_training_loop(
+[rank3]:   File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/trainer.py", line 2555, in _inner_training_loop
+[rank3]:     tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+[rank3]:   File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/trainer.py", line 3745, in training_step
+[rank3]:     loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+[rank3]: TypeError: build_ce_trainer_with_optional_neft.<locals>.NeftSFTTrainer.compute_loss() got an unexpected keyword argument 'num_items_in_batch'
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft/train.py", line 2143, in <module>
+[rank1]:     main()
+[rank1]:   File "/home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft/train.py", line 2129, in main
+[rank1]:     train_result = trainer.train(resume_from_checkpoint=checkpoint)
+[rank1]:   File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/trainer.py", line 2240, in train
+[rank1]:     return inner_training_loop(
+[rank1]:   File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/trainer.py", line 2555, in _inner_training_loop
+[rank1]:     tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+[rank1]:   File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/trainer.py", line 3745, in training_step
+[rank1]:     loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+[rank1]: TypeError: build_ce_trainer_with_optional_neft.<locals>.NeftSFTTrainer.compute_loss() got an unexpected keyword argument 'num_items_in_batch'
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft/train.py", line 2143, in <module>
+[rank2]:     main()
+[rank2]:   File "/home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft/train.py", line 2129, in main
+[rank2]:     train_result = trainer.train(resume_from_checkpoint=checkpoint)
+[rank2]:   File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/trainer.py", line 2240, in train
+[rank2]:     return inner_training_loop(
+[rank2]:   File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/trainer.py", line 2555, in _inner_training_loop
+[rank2]:     tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+[rank2]:   File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/trainer.py", line 3745, in training_step
+[rank2]:     loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+[rank2]: TypeError: build_ce_trainer_with_optional_neft.<locals>.NeftSFTTrainer.compute_loss() got an unexpected keyword argument 'num_items_in_batch'
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/trainer.py", line 2555, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/trainer.py", line 3745, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+TypeError: build_ce_trainer_with_optional_neft.<locals>.NeftSFTTrainer.compute_loss() got an unexpected keyword argument 'num_items_in_batch'
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft/train.py", line 2143, in <module>
+[rank0]:     main()
+[rank0]:   File "/home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft/train.py", line 2129, in main
+[rank0]:     train_result = trainer.train(resume_from_checkpoint=checkpoint)
+[rank0]:   File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/trainer.py", line 2240, in train
+[rank0]:     return inner_training_loop(
+[rank0]:   File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/trainer.py", line 2555, in _inner_training_loop
+[rank0]:     tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+[rank0]:   File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/trainer.py", line 3745, in training_step
+[rank0]:     loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+[rank0]: TypeError: build_ce_trainer_with_optional_neft.<locals>.NeftSFTTrainer.compute_loss() got an unexpected keyword argument 'num_items_in_batch'

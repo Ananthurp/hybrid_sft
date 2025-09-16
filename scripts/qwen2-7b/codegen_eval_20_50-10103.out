@@ -1,0 +1,5 @@
+[info] Processing: codegen_phase1_ce
+[info] Truncating to top 20: /home/users/astar/cfar/stuananthu/LLMDiversity/evals_codegen/codegen_phase1_ce/evalplus-humaneval_top20.jsonl
+Wrote /home/users/astar/cfar/stuananthu/LLMDiversity/evals_codegen/codegen_phase1_ce/evalplus-humaneval_top20.jsonl with ≤20 samples per task.
+[info] Evaluating truncated file for Humaneval (B=20)
+/cm/local/apps/slurm/var/spool/job10103/slurm_script: line 56: evalplus.evaluate: command not found

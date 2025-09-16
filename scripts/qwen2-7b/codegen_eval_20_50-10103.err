@@ -1,0 +1,253 @@
++ module load miniforge/24.11.3-2
++ unset _mlshdbg
++ '[' 0 = 1 ']'
++ unset _mlre _mlIFS
++ '[' -n x ']'
++ _mlIFS=' 	
+'
++ IFS=' '
++ '[' -n '' ']'
+++ /usr/bin/tclsh /cm/local/apps/environment-modules/4.5.3/libexec/modulecmd.tcl bash load miniforge/24.11.3-2
++ eval 'LOADEDMODULES=slurm/slurm/23.02.8:default-environment:miniforge/24.11.3-2;' export 'LOADEDMODULES;
+_LMFILES_=/cm/local/modulefiles/slurm/slurm/23.02.8:/cm/shared/modulefiles/default-environment:/cm/shared/modulefiles/miniforge/24.11.3-2;' export '_LMFILES_;
+_CE_CONDA=;' export '_CE_CONDA;
+_CE_M=;' export '_CE_M;
+MODULES_LMCONFLICT=miniforge/24.11.3-2\&miniforge;' export 'MODULES_LMCONFLICT;
+MODULES_LMCONFLICT_modshare=miniforge/24.11.3-2\&miniforge:1;' export 'MODULES_LMCONFLICT_modshare;
+CONDA_EXE=/apps/miniforge/24.11.3/bin/conda;' export 'CONDA_EXE;
+CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python;' export 'CONDA_PYTHON_EXE;
+LOADEDMODULES_modshare=miniforge/24.11.3-2:1:slurm/slurm/23.02.8:1:default-environment:1;' export 'LOADEDMODULES_modshare;
+_LMFILES__modshare=/cm/shared/modulefiles/miniforge/24.11.3-2:1:/cm/local/modulefiles/slurm/slurm/23.02.8:1:/cm/shared/modulefiles/default-environment:1;' export '_LMFILES__modshare;
+PATH=/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin;' export 'PATH;
+CONDA_SHLVL=0;' export 'CONDA_SHLVL;
+PATH_modshare=/usr/bin:1:/usr/local/bin:1:/cm/shared/apps/slurm/current/bin:1:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:1:/cm/shared/apps/slurm/current/sbin:1:/bin:1:/snap/bin:1:/sbin:1:/usr/sbin:1:/apps/miniforge/24.11.3/condabin:1:/cm/local/apps/environment-modules/4.5.3/bin:1:/usr/games:1:/usr/local/sbin:1:/usr/local/games:1;' export 'PATH_modshare;
+source' '/apps/miniforge/24.11.3/etc/profile.d/conda.sh;
+test' '0;'
+++ LOADEDMODULES=slurm/slurm/23.02.8:default-environment:miniforge/24.11.3-2
+++ export LOADEDMODULES
+++ _LMFILES_=/cm/local/modulefiles/slurm/slurm/23.02.8:/cm/shared/modulefiles/default-environment:/cm/shared/modulefiles/miniforge/24.11.3-2
+++ export _LMFILES_
+++ _CE_CONDA=
+++ export _CE_CONDA
+++ _CE_M=
+++ export _CE_M
+++ MODULES_LMCONFLICT='miniforge/24.11.3-2&miniforge'
+++ export MODULES_LMCONFLICT
+++ MODULES_LMCONFLICT_modshare='miniforge/24.11.3-2&miniforge:1'
+++ export MODULES_LMCONFLICT_modshare
+++ CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
+++ export CONDA_EXE
+++ CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
+++ export CONDA_PYTHON_EXE
+++ LOADEDMODULES_modshare=miniforge/24.11.3-2:1:slurm/slurm/23.02.8:1:default-environment:1
+++ export LOADEDMODULES_modshare
+++ _LMFILES__modshare=/cm/shared/modulefiles/miniforge/24.11.3-2:1:/cm/local/modulefiles/slurm/slurm/23.02.8:1:/cm/shared/modulefiles/default-environment:1
+++ export _LMFILES__modshare
+++ PATH=/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin
+++ export PATH
+++ CONDA_SHLVL=0
+++ export CONDA_SHLVL
+++ PATH_modshare=/usr/bin:1:/usr/local/bin:1:/cm/shared/apps/slurm/current/bin:1:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:1:/cm/shared/apps/slurm/current/sbin:1:/bin:1:/snap/bin:1:/sbin:1:/usr/sbin:1:/apps/miniforge/24.11.3/condabin:1:/cm/local/apps/environment-modules/4.5.3/bin:1:/usr/games:1:/usr/local/sbin:1:/usr/local/games:1
+++ export PATH_modshare
+++ source /apps/miniforge/24.11.3/etc/profile.d/conda.sh
++++ export CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
++++ CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
++++ export _CE_M=
++++ _CE_M=
++++ export _CE_CONDA=
++++ _CE_CONDA=
++++ export CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
++++ CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
++++ '[' -z x ']'
+++ test 0
++ _mlstatus=0
++ '[' -n x ']'
++ IFS=' 	
+'
++ unset _mlre _mlv _mlrv _mlIFS
++ '[' -n '' ']'
++ unset _mlshdbg
++ return 0
+++ conda info --base
+++ local cmd=info
+++ case "$cmd" in
+++ __conda_exe info --base
+++ /apps/miniforge/24.11.3/bin/conda info --base
++ source /apps/miniforge/24.11.3/etc/profile.d/conda.sh
+++ export CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
+++ CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
+++ export _CE_M=
+++ _CE_M=
+++ export _CE_CONDA=
+++ _CE_CONDA=
+++ export CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
+++ CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
+++ '[' -z x ']'
++ conda activate infer118
++ local cmd=activate
++ case "$cmd" in
++ __conda_activate activate infer118
++ '[' -n '' ']'
++ local ask_conda
+++ PS1=
+++ __conda_exe shell.posix activate infer118
+++ /apps/miniforge/24.11.3/bin/conda shell.posix activate infer118
++ ask_conda='PS1='\''(infer118) '\''
+export PATH='\''/home/users/astar/cfar/stuananthu/.conda/envs/infer118/bin:/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin'\''
+export CONDA_PREFIX='\''/home/users/astar/cfar/stuananthu/.conda/envs/infer118'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''infer118'\''
+export CONDA_PROMPT_MODIFIER='\''(infer118) '\''
+export CONDA_EXE='\''/apps/miniforge/24.11.3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/apps/miniforge/24.11.3/bin/python'\'''
++ eval 'PS1='\''(infer118) '\''
+export PATH='\''/home/users/astar/cfar/stuananthu/.conda/envs/infer118/bin:/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin'\''
+export CONDA_PREFIX='\''/home/users/astar/cfar/stuananthu/.conda/envs/infer118'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''infer118'\''
+export CONDA_PROMPT_MODIFIER='\''(infer118) '\''
+export CONDA_EXE='\''/apps/miniforge/24.11.3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/apps/miniforge/24.11.3/bin/python'\'''
+++ PS1='(infer118) '
+++ export PATH=/home/users/astar/cfar/stuananthu/.conda/envs/infer118/bin:/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin
+++ PATH=/home/users/astar/cfar/stuananthu/.conda/envs/infer118/bin:/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin
+++ export CONDA_PREFIX=/home/users/astar/cfar/stuananthu/.conda/envs/infer118
+++ CONDA_PREFIX=/home/users/astar/cfar/stuananthu/.conda/envs/infer118
+++ export CONDA_SHLVL=1
+++ CONDA_SHLVL=1
+++ export CONDA_DEFAULT_ENV=infer118
+++ CONDA_DEFAULT_ENV=infer118
+++ export 'CONDA_PROMPT_MODIFIER=(infer118) '
+++ CONDA_PROMPT_MODIFIER='(infer118) '
+++ export CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
+++ CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
+++ export _CE_M=
+++ _CE_M=
+++ export _CE_CONDA=
+++ _CE_CONDA=
+++ export CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
+++ CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
++ __conda_hashr
++ '[' -n '' ']'
++ '[' -n '' ']'
++ hash -r
++ module load cuda/11.8.0
++ unset _mlshdbg
++ '[' 0 = 1 ']'
++ unset _mlre _mlIFS
++ '[' -n x ']'
++ _mlIFS=' 	
+'
++ IFS=' '
++ '[' -n '' ']'
+++ /usr/bin/tclsh /cm/local/apps/environment-modules/4.5.3/libexec/modulecmd.tcl bash load cuda/11.8.0
++ eval 'CPLUS_INCLUDE_PATH_modshare=/apps/cuda/11.8.0/include:1;' export 'CPLUS_INCLUDE_PATH_modshare;
+CPATH=/apps/cuda/11.8.0/include:/cm/shared/apps/slurm/current/include;' export 'CPATH;
+LD_LIBRARY_PATH=/apps/cuda/11.8.0/lib64:/cm/shared/apps/slurm/current/lib64/slurm:/cm/shared/apps/slurm/current/lib64;' export 'LD_LIBRARY_PATH;
+CUDAROOT=/apps/cuda/11.8.0;' export 'CUDAROOT;
+LIBRARY_PATH=/apps/cuda/11.8.0/lib64/stubs:/apps/cuda/11.8.0/lib64:/cm/shared/apps/slurm/current/lib64/slurm:/cm/shared/apps/slurm/current/lib64;' export 'LIBRARY_PATH;
+_LMFILES_=/cm/local/modulefiles/slurm/slurm/23.02.8:/cm/shared/modulefiles/default-environment:/cm/shared/modulefiles/miniforge/24.11.3-2:/cm/shared/modulefiles/cuda/11.8.0;' export '_LMFILES_;
+LOADEDMODULES=slurm/slurm/23.02.8:default-environment:miniforge/24.11.3-2:cuda/11.8.0;' export 'LOADEDMODULES;
+CUDAPATH=/apps/cuda/11.8.0;' export 'CUDAPATH;
+MODULES_LMCONFLICT=miniforge/24.11.3-2\&miniforge:cuda/11.8.0\&cuda;' export 'MODULES_LMCONFLICT;
+LIBRARY_PATH_modshare=/apps/cuda/11.8.0/lib64/stubs:1:/apps/cuda/11.8.0/lib64:1:/cm/shared/apps/slurm/current/lib64:1:/cm/shared/apps/slurm/current/lib64/slurm:1;' export 'LIBRARY_PATH_modshare;
+C_INCLUDE_PATH_modshare=/apps/cuda/11.8.0/include:1;' export 'C_INCLUDE_PATH_modshare;
+MODULES_LMCONFLICT_modshare=cuda/11.8.0\&cuda:1:miniforge/24.11.3-2\&miniforge:1;' export 'MODULES_LMCONFLICT_modshare;
+CPLUS_INCLUDE_PATH=/apps/cuda/11.8.0/include;' export 'CPLUS_INCLUDE_PATH;
+C_INCLUDE_PATH=/apps/cuda/11.8.0/include;' export 'C_INCLUDE_PATH;
+CPATH_modshare=/apps/cuda/11.8.0/include:1:/cm/shared/apps/slurm/current/include:1;' export 'CPATH_modshare;
+LD_LIBRARY_PATH_modshare=/apps/cuda/11.8.0/lib64:1:/cm/shared/apps/slurm/current/lib64:1:/cm/shared/apps/slurm/current/lib64/slurm:1;' export 'LD_LIBRARY_PATH_modshare;
+CUDAVERSION=11.8.0;' export 'CUDAVERSION;
+_LMFILES__modshare=/cm/shared/modulefiles/miniforge/24.11.3-2:1:/cm/shared/modulefiles/cuda/11.8.0:1:/cm/local/modulefiles/slurm/slurm/23.02.8:1:/cm/shared/modulefiles/default-environment:1;' export '_LMFILES__modshare;
+LOADEDMODULES_modshare=miniforge/24.11.3-2:1:cuda/11.8.0:1:slurm/slurm/23.02.8:1:default-environment:1;' export 'LOADEDMODULES_modshare;
+PATH=/apps/cuda/11.8.0/bin:/home/users/astar/cfar/stuananthu/.conda/envs/infer118/bin:/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin;' export 'PATH;
+PATH_modshare=/usr/bin:1:/usr/local/bin:1:/apps/cuda/11.8.0/bin:1:/cm/shared/apps/slurm/current/bin:1:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:1:/cm/shared/apps/slurm/current/sbin:1:/bin:1:/snap/bin:1:/home/users/astar/cfar/stuananthu/.conda/envs/infer118/bin:1:/sbin:1:/usr/sbin:1:/usr/games:1:/cm/local/apps/environment-modules/4.5.3/bin:1:/apps/miniforge/24.11.3/condabin:1:/usr/local/sbin:1:/usr/local/games:1;' export 'PATH_modshare;
+test' '0;'
+++ CPLUS_INCLUDE_PATH_modshare=/apps/cuda/11.8.0/include:1
+++ export CPLUS_INCLUDE_PATH_modshare
+++ CPATH=/apps/cuda/11.8.0/include:/cm/shared/apps/slurm/current/include
+++ export CPATH
+++ LD_LIBRARY_PATH=/apps/cuda/11.8.0/lib64:/cm/shared/apps/slurm/current/lib64/slurm:/cm/shared/apps/slurm/current/lib64
+++ export LD_LIBRARY_PATH
+++ CUDAROOT=/apps/cuda/11.8.0
+++ export CUDAROOT
+++ LIBRARY_PATH=/apps/cuda/11.8.0/lib64/stubs:/apps/cuda/11.8.0/lib64:/cm/shared/apps/slurm/current/lib64/slurm:/cm/shared/apps/slurm/current/lib64
+++ export LIBRARY_PATH
+++ _LMFILES_=/cm/local/modulefiles/slurm/slurm/23.02.8:/cm/shared/modulefiles/default-environment:/cm/shared/modulefiles/miniforge/24.11.3-2:/cm/shared/modulefiles/cuda/11.8.0
+++ export _LMFILES_
+++ LOADEDMODULES=slurm/slurm/23.02.8:default-environment:miniforge/24.11.3-2:cuda/11.8.0
+++ export LOADEDMODULES
+++ CUDAPATH=/apps/cuda/11.8.0
+++ export CUDAPATH
+++ MODULES_LMCONFLICT='miniforge/24.11.3-2&miniforge:cuda/11.8.0&cuda'
+++ export MODULES_LMCONFLICT
+++ LIBRARY_PATH_modshare=/apps/cuda/11.8.0/lib64/stubs:1:/apps/cuda/11.8.0/lib64:1:/cm/shared/apps/slurm/current/lib64:1:/cm/shared/apps/slurm/current/lib64/slurm:1
+++ export LIBRARY_PATH_modshare
+++ C_INCLUDE_PATH_modshare=/apps/cuda/11.8.0/include:1
+++ export C_INCLUDE_PATH_modshare
+++ MODULES_LMCONFLICT_modshare='cuda/11.8.0&cuda:1:miniforge/24.11.3-2&miniforge:1'
+++ export MODULES_LMCONFLICT_modshare
+++ CPLUS_INCLUDE_PATH=/apps/cuda/11.8.0/include
+++ export CPLUS_INCLUDE_PATH
+++ C_INCLUDE_PATH=/apps/cuda/11.8.0/include
+++ export C_INCLUDE_PATH
+++ CPATH_modshare=/apps/cuda/11.8.0/include:1:/cm/shared/apps/slurm/current/include:1
+++ export CPATH_modshare
+++ LD_LIBRARY_PATH_modshare=/apps/cuda/11.8.0/lib64:1:/cm/shared/apps/slurm/current/lib64:1:/cm/shared/apps/slurm/current/lib64/slurm:1
+++ export LD_LIBRARY_PATH_modshare
+++ CUDAVERSION=11.8.0
+++ export CUDAVERSION
+++ _LMFILES__modshare=/cm/shared/modulefiles/miniforge/24.11.3-2:1:/cm/shared/modulefiles/cuda/11.8.0:1:/cm/local/modulefiles/slurm/slurm/23.02.8:1:/cm/shared/modulefiles/default-environment:1
+++ export _LMFILES__modshare
+++ LOADEDMODULES_modshare=miniforge/24.11.3-2:1:cuda/11.8.0:1:slurm/slurm/23.02.8:1:default-environment:1
+++ export LOADEDMODULES_modshare
+++ PATH=/apps/cuda/11.8.0/bin:/home/users/astar/cfar/stuananthu/.conda/envs/infer118/bin:/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin
+++ export PATH
+++ PATH_modshare=/usr/bin:1:/usr/local/bin:1:/apps/cuda/11.8.0/bin:1:/cm/shared/apps/slurm/current/bin:1:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:1:/cm/shared/apps/slurm/current/sbin:1:/bin:1:/snap/bin:1:/home/users/astar/cfar/stuananthu/.conda/envs/infer118/bin:1:/sbin:1:/usr/sbin:1:/usr/games:1:/cm/local/apps/environment-modules/4.5.3/bin:1:/apps/miniforge/24.11.3/condabin:1:/usr/local/sbin:1:/usr/local/games:1
+++ export PATH_modshare
+++ test 0
++ _mlstatus=0
++ '[' -n x ']'
++ IFS=' 	
+'
++ unset _mlre _mlv _mlrv _mlIFS
++ '[' -n '' ']'
++ unset _mlshdbg
++ return 0
++ export CUDA_HOME=/apps/cuda/11.8.0
++ CUDA_HOME=/apps/cuda/11.8.0
++ export LOCAL_SCRATCH=/tmp/stuananthu/10103
++ LOCAL_SCRATCH=/tmp/stuananthu/10103
++ mkdir -p /tmp/stuananthu/10103
++ export HF_HOME=/tmp/stuananthu/10103/hf
++ HF_HOME=/tmp/stuananthu/10103/hf
++ export TRANSFORMERS_CACHE=/tmp/stuananthu/10103/hf/transformers
++ TRANSFORMERS_CACHE=/tmp/stuananthu/10103/hf/transformers
++ export HF_DATASETS_CACHE=/tmp/stuananthu/10103/hf/datasets
++ HF_DATASETS_CACHE=/tmp/stuananthu/10103/hf/datasets
++ export TMPDIR=/tmp/stuananthu/10103/tmp
++ TMPDIR=/tmp/stuananthu/10103/tmp
++ mkdir -p /tmp/stuananthu/10103/hf/transformers /tmp/stuananthu/10103/hf/datasets /tmp/stuananthu/10103/tmp
++ BASE=/home/users/astar/cfar/stuananthu/LLMDiversity/evals_codegen
++ RUNS=("codegen_phase1_ce" "codegen_phase2_gem_ckpt1434" "codegen_phase3_hybrid_a0.75_ckpt1434" "codegen_phase4_hybrid_a0.5_ckpt1000" "codegen_phase5_sparsemax_ckpt1434")
++ for RUN in "${RUNS[@]}"
++ OUT_DIR=/home/users/astar/cfar/stuananthu/LLMDiversity/evals_codegen/codegen_phase1_ce
++ SRC=/home/users/astar/cfar/stuananthu/LLMDiversity/evals_codegen/codegen_phase1_ce/evalplus-humaneval.jsonl
++ [[ ! -f /home/users/astar/cfar/stuananthu/LLMDiversity/evals_codegen/codegen_phase1_ce/evalplus-humaneval.jsonl ]]
++ echo '[info] Processing: codegen_phase1_ce'
++ truncate_and_eval /home/users/astar/cfar/stuananthu/LLMDiversity/evals_codegen/codegen_phase1_ce/evalplus-humaneval.jsonl
++ local src_jsonl=/home/users/astar/cfar/stuananthu/LLMDiversity/evals_codegen/codegen_phase1_ce/evalplus-humaneval.jsonl
++ local out_dir
+++ dirname /home/users/astar/cfar/stuananthu/LLMDiversity/evals_codegen/codegen_phase1_ce/evalplus-humaneval.jsonl
++ out_dir=/home/users/astar/cfar/stuananthu/LLMDiversity/evals_codegen/codegen_phase1_ce
++ for B in 20 50
++ local tgt_jsonl=/home/users/astar/cfar/stuananthu/LLMDiversity/evals_codegen/codegen_phase1_ce/evalplus-humaneval_top20.jsonl
++ echo '[info] Truncating to top 20: /home/users/astar/cfar/stuananthu/LLMDiversity/evals_codegen/codegen_phase1_ce/evalplus-humaneval_top20.jsonl'
++ python /home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft/evaluation/truncate_evalplus_jsonl.py /home/users/astar/cfar/stuananthu/LLMDiversity/evals_codegen/codegen_phase1_ce/evalplus-humaneval.jsonl /home/users/astar/cfar/stuananthu/LLMDiversity/evals_codegen/codegen_phase1_ce/evalplus-humaneval_top20.jsonl 20
++ echo '[info] Evaluating truncated file for Humaneval (B=20)'
++ tee /home/users/astar/cfar/stuananthu/LLMDiversity/evals_codegen/codegen_phase1_ce/humaneval_top20.log
++ evalplus.evaluate --dataset humaneval --samples /home/users/astar/cfar/stuananthu/LLMDiversity/evals_codegen/codegen_phase1_ce/evalplus-humaneval_top20.jsonl

@@ -1,0 +1,350 @@
++ module load miniforge/24.11.3-2
++ unset _mlshdbg
++ '[' 0 = 1 ']'
++ unset _mlre _mlIFS
++ '[' -n x ']'
++ _mlIFS=' 	
+'
++ IFS=' '
++ '[' -n '' ']'
+++ /usr/bin/tclsh /cm/local/apps/environment-modules/4.5.3/libexec/modulecmd.tcl bash load miniforge/24.11.3-2
++ eval 'LOADEDMODULES=slurm/slurm/23.02.8:default-environment:miniforge/24.11.3-2;' export 'LOADEDMODULES;
+_LMFILES_=/cm/local/modulefiles/slurm/slurm/23.02.8:/cm/shared/modulefiles/default-environment:/cm/shared/modulefiles/miniforge/24.11.3-2;' export '_LMFILES_;
+_CE_CONDA=;' export '_CE_CONDA;
+_CE_M=;' export '_CE_M;
+MODULES_LMCONFLICT=miniforge/24.11.3-2\&miniforge;' export 'MODULES_LMCONFLICT;
+MODULES_LMCONFLICT_modshare=miniforge/24.11.3-2\&miniforge:1;' export 'MODULES_LMCONFLICT_modshare;
+CONDA_EXE=/apps/miniforge/24.11.3/bin/conda;' export 'CONDA_EXE;
+CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python;' export 'CONDA_PYTHON_EXE;
+LOADEDMODULES_modshare=miniforge/24.11.3-2:1:slurm/slurm/23.02.8:1:default-environment:1;' export 'LOADEDMODULES_modshare;
+_LMFILES__modshare=/cm/shared/modulefiles/miniforge/24.11.3-2:1:/cm/local/modulefiles/slurm/slurm/23.02.8:1:/cm/shared/modulefiles/default-environment:1;' export '_LMFILES__modshare;
+PATH=/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin;' export 'PATH;
+CONDA_SHLVL=0;' export 'CONDA_SHLVL;
+PATH_modshare=/usr/bin:1:/usr/local/bin:1:/cm/shared/apps/slurm/current/bin:1:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:1:/cm/shared/apps/slurm/current/sbin:1:/bin:1:/snap/bin:1:/sbin:1:/usr/sbin:1:/apps/miniforge/24.11.3/condabin:1:/cm/local/apps/environment-modules/4.5.3/bin:1:/usr/games:1:/usr/local/sbin:1:/usr/local/games:1;' export 'PATH_modshare;
+source' '/apps/miniforge/24.11.3/etc/profile.d/conda.sh;
+test' '0;'
+++ LOADEDMODULES=slurm/slurm/23.02.8:default-environment:miniforge/24.11.3-2
+++ export LOADEDMODULES
+++ _LMFILES_=/cm/local/modulefiles/slurm/slurm/23.02.8:/cm/shared/modulefiles/default-environment:/cm/shared/modulefiles/miniforge/24.11.3-2
+++ export _LMFILES_
+++ _CE_CONDA=
+++ export _CE_CONDA
+++ _CE_M=
+++ export _CE_M
+++ MODULES_LMCONFLICT='miniforge/24.11.3-2&miniforge'
+++ export MODULES_LMCONFLICT
+++ MODULES_LMCONFLICT_modshare='miniforge/24.11.3-2&miniforge:1'
+++ export MODULES_LMCONFLICT_modshare
+++ CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
+++ export CONDA_EXE
+++ CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
+++ export CONDA_PYTHON_EXE
+++ LOADEDMODULES_modshare=miniforge/24.11.3-2:1:slurm/slurm/23.02.8:1:default-environment:1
+++ export LOADEDMODULES_modshare
+++ _LMFILES__modshare=/cm/shared/modulefiles/miniforge/24.11.3-2:1:/cm/local/modulefiles/slurm/slurm/23.02.8:1:/cm/shared/modulefiles/default-environment:1
+++ export _LMFILES__modshare
+++ PATH=/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin
+++ export PATH
+++ CONDA_SHLVL=0
+++ export CONDA_SHLVL
+++ PATH_modshare=/usr/bin:1:/usr/local/bin:1:/cm/shared/apps/slurm/current/bin:1:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:1:/cm/shared/apps/slurm/current/sbin:1:/bin:1:/snap/bin:1:/sbin:1:/usr/sbin:1:/apps/miniforge/24.11.3/condabin:1:/cm/local/apps/environment-modules/4.5.3/bin:1:/usr/games:1:/usr/local/sbin:1:/usr/local/games:1
+++ export PATH_modshare
+++ source /apps/miniforge/24.11.3/etc/profile.d/conda.sh
++++ export CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
++++ CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
++++ export _CE_M=
++++ _CE_M=
++++ export _CE_CONDA=
++++ _CE_CONDA=
++++ export CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
++++ CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
++++ '[' -z x ']'
+++ test 0
++ _mlstatus=0
++ '[' -n x ']'
++ IFS=' 	
+'
++ unset _mlre _mlv _mlrv _mlIFS
++ '[' -n '' ']'
++ unset _mlshdbg
++ return 0
+++ conda info --base
+++ local cmd=info
+++ case "$cmd" in
+++ __conda_exe info --base
+++ /apps/miniforge/24.11.3/bin/conda info --base
++ source /apps/miniforge/24.11.3/etc/profile.d/conda.sh
+++ export CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
+++ CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
+++ export _CE_M=
+++ _CE_M=
+++ export _CE_CONDA=
+++ _CE_CONDA=
+++ export CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
+++ CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
+++ '[' -z x ']'
++ conda activate hybrid_loss
++ local cmd=activate
++ case "$cmd" in
++ __conda_activate activate hybrid_loss
++ '[' -n '' ']'
++ local ask_conda
+++ PS1=
+++ __conda_exe shell.posix activate hybrid_loss
+++ /apps/miniforge/24.11.3/bin/conda shell.posix activate hybrid_loss
++ ask_conda='PS1='\''(hybrid_loss) '\''
+export PATH='\''/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/bin:/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin'\''
+export CONDA_PREFIX='\''/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''hybrid_loss'\''
+export CONDA_PROMPT_MODIFIER='\''(hybrid_loss) '\''
+export CONDA_EXE='\''/apps/miniforge/24.11.3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/apps/miniforge/24.11.3/bin/python'\'''
++ eval 'PS1='\''(hybrid_loss) '\''
+export PATH='\''/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/bin:/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin'\''
+export CONDA_PREFIX='\''/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''hybrid_loss'\''
+export CONDA_PROMPT_MODIFIER='\''(hybrid_loss) '\''
+export CONDA_EXE='\''/apps/miniforge/24.11.3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/apps/miniforge/24.11.3/bin/python'\'''
+++ PS1='(hybrid_loss) '
+++ export PATH=/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/bin:/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin
+++ PATH=/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/bin:/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin
+++ export CONDA_PREFIX=/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss
+++ CONDA_PREFIX=/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss
+++ export CONDA_SHLVL=1
+++ CONDA_SHLVL=1
+++ export CONDA_DEFAULT_ENV=hybrid_loss
+++ CONDA_DEFAULT_ENV=hybrid_loss
+++ export 'CONDA_PROMPT_MODIFIER=(hybrid_loss) '
+++ CONDA_PROMPT_MODIFIER='(hybrid_loss) '
+++ export CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
+++ CONDA_EXE=/apps/miniforge/24.11.3/bin/conda
+++ export _CE_M=
+++ _CE_M=
+++ export _CE_CONDA=
+++ _CE_CONDA=
+++ export CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
+++ CONDA_PYTHON_EXE=/apps/miniforge/24.11.3/bin/python
++ __conda_hashr
++ '[' -n '' ']'
++ '[' -n '' ']'
++ hash -r
++ module load cuda/12.4.1
++ unset _mlshdbg
++ '[' 0 = 1 ']'
++ unset _mlre _mlIFS
++ '[' -n x ']'
++ _mlIFS=' 	
+'
++ IFS=' '
++ '[' -n '' ']'
+++ /usr/bin/tclsh /cm/local/apps/environment-modules/4.5.3/libexec/modulecmd.tcl bash load cuda/12.4.1
++ eval 'CPLUS_INCLUDE_PATH_modshare=/apps/cuda/12.4.1/include:1;' export 'CPLUS_INCLUDE_PATH_modshare;
+CPATH=/apps/cuda/12.4.1/include:/cm/shared/apps/slurm/current/include;' export 'CPATH;
+LD_LIBRARY_PATH=/apps/cuda/12.4.1/lib64:/cm/shared/apps/slurm/current/lib64/slurm:/cm/shared/apps/slurm/current/lib64;' export 'LD_LIBRARY_PATH;
+CUDAROOT=/apps/cuda/12.4.1;' export 'CUDAROOT;
+LIBRARY_PATH=/apps/cuda/12.4.1/lib64/stubs:/apps/cuda/12.4.1/lib64:/cm/shared/apps/slurm/current/lib64/slurm:/cm/shared/apps/slurm/current/lib64;' export 'LIBRARY_PATH;
+_LMFILES_=/cm/local/modulefiles/slurm/slurm/23.02.8:/cm/shared/modulefiles/default-environment:/cm/shared/modulefiles/miniforge/24.11.3-2:/cm/shared/modulefiles/cuda/12.4.1;' export '_LMFILES_;
+LOADEDMODULES=slurm/slurm/23.02.8:default-environment:miniforge/24.11.3-2:cuda/12.4.1;' export 'LOADEDMODULES;
+CUDAPATH=/apps/cuda/12.4.1;' export 'CUDAPATH;
+MODULES_LMCONFLICT=miniforge/24.11.3-2\&miniforge:cuda/12.4.1\&cuda;' export 'MODULES_LMCONFLICT;
+LIBRARY_PATH_modshare=/cm/shared/apps/slurm/current/lib64:1:/apps/cuda/12.4.1/lib64/stubs:1:/apps/cuda/12.4.1/lib64:1:/cm/shared/apps/slurm/current/lib64/slurm:1;' export 'LIBRARY_PATH_modshare;
+C_INCLUDE_PATH_modshare=/apps/cuda/12.4.1/include:1;' export 'C_INCLUDE_PATH_modshare;
+MODULES_LMCONFLICT_modshare=cuda/12.4.1\&cuda:1:miniforge/24.11.3-2\&miniforge:1;' export 'MODULES_LMCONFLICT_modshare;
+CPLUS_INCLUDE_PATH=/apps/cuda/12.4.1/include;' export 'CPLUS_INCLUDE_PATH;
+C_INCLUDE_PATH=/apps/cuda/12.4.1/include;' export 'C_INCLUDE_PATH;
+CPATH_modshare=/apps/cuda/12.4.1/include:1:/cm/shared/apps/slurm/current/include:1;' export 'CPATH_modshare;
+LD_LIBRARY_PATH_modshare=/cm/shared/apps/slurm/current/lib64:1:/apps/cuda/12.4.1/lib64:1:/cm/shared/apps/slurm/current/lib64/slurm:1;' export 'LD_LIBRARY_PATH_modshare;
+CUDAVERSION=12.4.1;' export 'CUDAVERSION;
+_LMFILES__modshare=/cm/shared/modulefiles/cuda/12.4.1:1:/cm/shared/modulefiles/miniforge/24.11.3-2:1:/cm/local/modulefiles/slurm/slurm/23.02.8:1:/cm/shared/modulefiles/default-environment:1;' export '_LMFILES__modshare;
+LOADEDMODULES_modshare=cuda/12.4.1:1:miniforge/24.11.3-2:1:slurm/slurm/23.02.8:1:default-environment:1;' export 'LOADEDMODULES_modshare;
+PATH=/apps/cuda/12.4.1/bin:/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/bin:/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin;' export 'PATH;
+PATH_modshare=/usr/bin:1:/apps/cuda/12.4.1/bin:1:/usr/local/bin:1:/cm/shared/apps/slurm/current/bin:1:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:1:/cm/shared/apps/slurm/current/sbin:1:/bin:1:/snap/bin:1:/sbin:1:/usr/sbin:1:/cm/local/apps/environment-modules/4.5.3/bin:1:/apps/miniforge/24.11.3/condabin:1:/usr/games:1:/usr/local/sbin:1:/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/bin:1:/usr/local/games:1;' export 'PATH_modshare;
+test' '0;'
+++ CPLUS_INCLUDE_PATH_modshare=/apps/cuda/12.4.1/include:1
+++ export CPLUS_INCLUDE_PATH_modshare
+++ CPATH=/apps/cuda/12.4.1/include:/cm/shared/apps/slurm/current/include
+++ export CPATH
+++ LD_LIBRARY_PATH=/apps/cuda/12.4.1/lib64:/cm/shared/apps/slurm/current/lib64/slurm:/cm/shared/apps/slurm/current/lib64
+++ export LD_LIBRARY_PATH
+++ CUDAROOT=/apps/cuda/12.4.1
+++ export CUDAROOT
+++ LIBRARY_PATH=/apps/cuda/12.4.1/lib64/stubs:/apps/cuda/12.4.1/lib64:/cm/shared/apps/slurm/current/lib64/slurm:/cm/shared/apps/slurm/current/lib64
+++ export LIBRARY_PATH
+++ _LMFILES_=/cm/local/modulefiles/slurm/slurm/23.02.8:/cm/shared/modulefiles/default-environment:/cm/shared/modulefiles/miniforge/24.11.3-2:/cm/shared/modulefiles/cuda/12.4.1
+++ export _LMFILES_
+++ LOADEDMODULES=slurm/slurm/23.02.8:default-environment:miniforge/24.11.3-2:cuda/12.4.1
+++ export LOADEDMODULES
+++ CUDAPATH=/apps/cuda/12.4.1
+++ export CUDAPATH
+++ MODULES_LMCONFLICT='miniforge/24.11.3-2&miniforge:cuda/12.4.1&cuda'
+++ export MODULES_LMCONFLICT
+++ LIBRARY_PATH_modshare=/cm/shared/apps/slurm/current/lib64:1:/apps/cuda/12.4.1/lib64/stubs:1:/apps/cuda/12.4.1/lib64:1:/cm/shared/apps/slurm/current/lib64/slurm:1
+++ export LIBRARY_PATH_modshare
+++ C_INCLUDE_PATH_modshare=/apps/cuda/12.4.1/include:1
+++ export C_INCLUDE_PATH_modshare
+++ MODULES_LMCONFLICT_modshare='cuda/12.4.1&cuda:1:miniforge/24.11.3-2&miniforge:1'
+++ export MODULES_LMCONFLICT_modshare
+++ CPLUS_INCLUDE_PATH=/apps/cuda/12.4.1/include
+++ export CPLUS_INCLUDE_PATH
+++ C_INCLUDE_PATH=/apps/cuda/12.4.1/include
+++ export C_INCLUDE_PATH
+++ CPATH_modshare=/apps/cuda/12.4.1/include:1:/cm/shared/apps/slurm/current/include:1
+++ export CPATH_modshare
+++ LD_LIBRARY_PATH_modshare=/cm/shared/apps/slurm/current/lib64:1:/apps/cuda/12.4.1/lib64:1:/cm/shared/apps/slurm/current/lib64/slurm:1
+++ export LD_LIBRARY_PATH_modshare
+++ CUDAVERSION=12.4.1
+++ export CUDAVERSION
+++ _LMFILES__modshare=/cm/shared/modulefiles/cuda/12.4.1:1:/cm/shared/modulefiles/miniforge/24.11.3-2:1:/cm/local/modulefiles/slurm/slurm/23.02.8:1:/cm/shared/modulefiles/default-environment:1
+++ export _LMFILES__modshare
+++ LOADEDMODULES_modshare=cuda/12.4.1:1:miniforge/24.11.3-2:1:slurm/slurm/23.02.8:1:default-environment:1
+++ export LOADEDMODULES_modshare
+++ PATH=/apps/cuda/12.4.1/bin:/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/bin:/apps/miniforge/24.11.3/condabin:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin
+++ export PATH
+++ PATH_modshare=/usr/bin:1:/apps/cuda/12.4.1/bin:1:/usr/local/bin:1:/cm/shared/apps/slurm/current/bin:1:/home/users/astar/cfar/stuananthu/.vscode-server/cli/servers/Stable-18e3a1ec544e6907be1e944a94c496e302073435/server/bin/remote-cli:1:/cm/shared/apps/slurm/current/sbin:1:/bin:1:/snap/bin:1:/sbin:1:/usr/sbin:1:/cm/local/apps/environment-modules/4.5.3/bin:1:/apps/miniforge/24.11.3/condabin:1:/usr/games:1:/usr/local/sbin:1:/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/bin:1:/usr/local/games:1
+++ export PATH_modshare
+++ test 0
++ _mlstatus=0
++ '[' -n x ']'
++ IFS=' 	
+'
++ unset _mlre _mlv _mlrv _mlIFS
++ '[' -n '' ']'
++ unset _mlshdbg
++ return 0
++ export CUDA_HOME=/apps/cuda/12.4.1
++ CUDA_HOME=/apps/cuda/12.4.1
++ export PRJ=prj0000000224
++ PRJ=prj0000000224
++ export SCRATCH=/scratch/prj0000000224
++ SCRATCH=/scratch/prj0000000224
++ export HF_HOME=/scratch/prj0000000224/LLMDiversity_work/cache/huggingface
++ HF_HOME=/scratch/prj0000000224/LLMDiversity_work/cache/huggingface
++ export TRANSFORMERS_CACHE=/scratch/prj0000000224/LLMDiversity_work/cache/huggingface/transformers
++ TRANSFORMERS_CACHE=/scratch/prj0000000224/LLMDiversity_work/cache/huggingface/transformers
++ export HF_DATASETS_CACHE=/scratch/prj0000000224/LLMDiversity_work/cache/huggingface/datasets
++ HF_DATASETS_CACHE=/scratch/prj0000000224/LLMDiversity_work/cache/huggingface/datasets
++ export TMPDIR=/scratch/prj0000000224/tmp/stuananthu
++ TMPDIR=/scratch/prj0000000224/tmp/stuananthu
++ mkdir -p /scratch/prj0000000224/LLMDiversity_work/cache/huggingface/transformers /scratch/prj0000000224/LLMDiversity_work/cache/huggingface/datasets /scratch/prj0000000224/tmp/stuananthu
++ CACHE_ROOT=/scratch/prj0000000224/LLMDiversity_work/cache/huggingface/datasets
++ echo '[preflight] clearing cached JSON datasets under: /scratch/prj0000000224/LLMDiversity_work/cache/huggingface/datasets/json'
++ rm -rf /scratch/prj0000000224/LLMDiversity_work/cache/huggingface/datasets/json
++ export PYTHONUNBUFFERED=1
++ PYTHONUNBUFFERED=1
++ export HF_DATASETS_TRUST_REMOTE_CODE=1
++ HF_DATASETS_TRUST_REMOTE_CODE=1
++ export TOKENIZERS_PARALLELISM=false
++ TOKENIZERS_PARALLELISM=false
++ export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
++ PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
++ MODEL_DIR=/home/users/astar/cfar/stuananthu/LLMDiversity/models/Qwen2-7B
++ RUN_NAME=qwen2-7b_base_pretrained_l40_full_vllm33
++ OUT_DIR=/scratch/prj0000000224/LLMDiversity_work/evals/qwen2-7b/pretrained_base/output_l40_full_vllm33
++ USE_VLLM=True
++ N_RESP=32
++ BATCH_SIZE=8
++ RM_BATCH_SIZE=2
++ MAX_SIZE=
++ BASE_TOKENIZER_DIR=/home/users/astar/cfar/stuananthu/LLMDiversity/models/Qwen2-7B
++ BASELINE_JSON=/home/users/astar/cfar/stuananthu/LLMDiversity/assets/gpt4_alpacaeval_responses.json
++ POEM_MAX=300
++ STORY_MAX=300
++ POEM_N=8
++ STORY_N=8
++ GEN_TOK_SHORT=256
++ mkdir -p /scratch/prj0000000224/LLMDiversity_work/evals/qwen2-7b/pretrained_base/output_l40_full_vllm33
++ EVAL_DIR_ALP=/scratch/prj0000000224/LLMDiversity_work/evals/qwen2-7b/pretrained_base/output_l40_full_vllm33/evaluation_chat_alpaca
++ EVAL_DIR_POEM=/scratch/prj0000000224/LLMDiversity_work/evals/qwen2-7b/pretrained_base/output_l40_full_vllm33/evaluation_poem
++ EVAL_DIR_STORY=/scratch/prj0000000224/LLMDiversity_work/evals/qwen2-7b/pretrained_base/output_l40_full_vllm33/evaluation_story
++ mkdir -p /scratch/prj0000000224/LLMDiversity_work/evals/qwen2-7b/pretrained_base/output_l40_full_vllm33/evaluation_chat_alpaca /scratch/prj0000000224/LLMDiversity_work/evals/qwen2-7b/pretrained_base/output_l40_full_vllm33/evaluation_poem /scratch/prj0000000224/LLMDiversity_work/evals/qwen2-7b/pretrained_base/output_l40_full_vllm33/evaluation_story
++ rm -f /scratch/prj0000000224/LLMDiversity_work/evals/qwen2-7b/pretrained_base/output_l40_full_vllm33/evaluation_chat_alpaca/responses.json /scratch/prj0000000224/LLMDiversity_work/evals/qwen2-7b/pretrained_base/output_l40_full_vllm33/evaluation_poem/responses.json /scratch/prj0000000224/LLMDiversity_work/evals/qwen2-7b/pretrained_base/output_l40_full_vllm33/evaluation_story/responses.json
+++ hostname
++ export MASTER_ADDR=A484652X3B00163
++ MASTER_ADDR=A484652X3B00163
++ export MASTER_PORT=16580
++ MASTER_PORT=16580
++ GEN_EXTRA=()
++ [[ -n '' ]]
++ python /home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft/evaluation/generate_response.py --model_name_or_path /home/users/astar/cfar/stuananthu/LLMDiversity/models/Qwen2-7B --tokenizer_path /home/users/astar/cfar/stuananthu/LLMDiversity/models/Qwen2-7B --dataset_path tatsu-lab/alpaca_eval --split eval --n 32 --batch_size 8 --use_vllm True --max_new_tokens 1024 --save_path /scratch/prj0000000224/LLMDiversity_work/evals/qwen2-7b/pretrained_base/output_l40_full_vllm33/evaluation_chat_alpaca/responses.json --remove_old
+/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+You are attempting to use Flash Attention 2.0 with a model not initialized on GPU. Make sure to move the model to GPU after initializing it on CPU with `model.to('cuda')`.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:01,  1.52it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:01<00:01,  1.44it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:02<00:00,  1.37it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.49it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.47it/s]
+  0%|          | 0/101 [00:00<?, ?it/s]  1%|          | 1/101 [05:50<9:44:27, 350.67s/it]  2%|▏         | 2/101 [11:41<9:38:24, 350.55s/it]  3%|▎         | 3/101 [17:30<9:31:55, 350.15s/it]  4%|▍         | 4/101 [23:20<9:25:38, 349.88s/it]  5%|▍         | 5/101 [29:09<9:19:30, 349.69s/it]  6%|▌         | 6/101 [35:01<9:14:43, 350.35s/it]  7%|▋         | 7/101 [40:52<9:09:05, 350.48s/it]  8%|▊         | 8/101 [46:42<9:03:17, 350.52s/it]  9%|▉         | 9/101 [52:33<8:57:33, 350.58s/it] 10%|▉         | 10/101 [58:25<8:52:16, 350.95s/it] 11%|█         | 11/101 [1:04:17<8:46:54, 351.27s/it] 12%|█▏        | 12/101 [1:10:09<8:41:36, 351.64s/it] 13%|█▎        | 13/101 [1:16:01<8:36:01, 351.83s/it] 14%|█▍        | 14/101 [1:21:54<8:30:21, 351.97s/it] 15%|█▍        | 15/101 [1:27:46<8:24:47, 352.18s/it] 16%|█▌        | 16/101 [1:33:39<8:18:57, 352.20s/it] 17%|█▋        | 17/101 [1:39:30<8:12:55, 352.09s/it] 18%|█▊        | 18/101 [1:45:28<8:09:09, 353.61s/it] 19%|█▉        | 19/101 [1:51:26<8:05:15, 355.07s/it] 20%|█▉        | 20/101 [1:57:26<8:01:10, 356.42s/it] 21%|██        | 21/101 [2:03:19<7:54:02, 355.53s/it] 22%|██▏       | 22/101 [2:09:13<7:47:40, 355.20s/it] 23%|██▎       | 23/101 [2:15:07<7:40:59, 354.61s/it] 24%|██▍       | 24/101 [2:21:16<7:40:47, 359.06s/it] 25%|██▍       | 25/101 [2:27:09<7:32:17, 357.07s/it] 26%|██▌       | 26/101 [2:33:07<7:26:49, 357.46s/it] 27%|██▋       | 27/101 [2:39:02<7:19:51, 356.64s/it] 28%|██▊       | 28/101 [2:44:59<7:14:04, 356.78s/it] 29%|██▊       | 29/101 [2:50:55<7:08:01, 356.69s/it] 30%|██▉       | 30/101 [2:56:55<7:03:14, 357.66s/it] 31%|███       | 31/101 [3:02:48<6:55:41, 356.30s/it] 32%|███▏      | 32/101 [3:08:49<6:51:08, 357.51s/it] 33%|███▎      | 33/101 [3:14:43<6:44:04, 356.54s/it] 34%|███▎      | 34/101 [3:20:44<6:39:36, 357.86s/it] 35%|███▍      | 35/101 [3:26:46<6:35:08, 359.22s/it] 36%|███▌      | 36/101 [3:32:43<6:28:21, 358.49s/it] 37%|███▋      | 37/101 [3:38:36<6:20:33, 356.77s/it] 38%|███▊      | 38/101 [3:44:29<6:13:38, 355.84s/it] 39%|███▊      | 39/101 [3:50:26<6:07:47, 355.93s/it] 40%|███▉      | 40/101 [3:56:21<6:01:34, 355.65s/it] 41%|████      | 41/101 [4:02:20<5:56:44, 356.74s/it] 42%|████▏     | 42/101 [4:08:17<5:51:00, 356.95s/it] 43%|████▎     | 43/101 [4:14:43<5:53:24, 365.60s/it] 44%|████▎     | 44/101 [4:20:39<5:44:31, 362.65s/it] 45%|████▍     | 45/101 [4:26:33<5:36:02, 360.04s/it] 46%|████▌     | 46/101 [4:32:28<5:28:49, 358.73s/it] 47%|████▋     | 47/101 [4:38:24<5:22:04, 357.87s/it] 48%|████▊     | 48/101 [4:44:22<5:15:58, 357.71s/it] 49%|████▊     | 49/101 [4:50:16<5:09:06, 356.66s/it] 50%|████▉     | 50/101 [4:56:13<5:03:13, 356.74s/it] 50%|█████     | 51/101 [5:02:05<4:56:13, 355.48s/it] 51%|█████▏    | 52/101 [5:08:00<4:50:00, 355.11s/it] 52%|█████▏    | 53/101 [5:14:08<4:47:13, 359.03s/it] 53%|█████▎    | 54/101 [5:20:02<4:40:08, 357.63s/it] 54%|█████▍    | 55/101 [5:26:03<4:34:49, 358.47s/it] 55%|█████▌    | 56/101 [5:31:56<4:27:44, 356.98s/it] 56%|█████▋    | 57/101 [5:37:51<4:21:23, 356.44s/it] 57%|█████▋    | 58/101 [5:43:45<4:14:52, 355.63s/it] 58%|█████▊    | 59/101 [5:49:40<4:08:50, 355.48s/it] 59%|█████▉    | 60/101 [5:55:42<4:04:15, 357.45s/it] 60%|██████    | 61/101 [6:01:38<3:57:58, 356.97s/it] 61%|██████▏   | 62/101 [6:07:36<3:52:10, 357.18s/it] 62%|██████▏   | 63/101 [6:13:32<3:46:01, 356.89s/it] 63%|██████▎   | 64/101 [6:19:28<3:39:52, 356.54s/it] 64%|██████▍   | 65/101 [6:25:21<3:33:24, 355.68s/it] 65%|██████▌   | 66/101 [6:31:31<3:29:50, 359.74s/it] 66%|██████▋   | 67/101 [6:37:41<3:25:39, 362.94s/it] 67%|██████▋   | 68/101 [6:43:39<3:18:44, 361.34s/it] 68%|██████▊   | 69/101 [6:49:38<3:12:25, 360.80s/it] 69%|██████▉   | 70/101 [6:55:59<3:09:31, 366.82s/it] 70%|███████   | 71/101 [7:02:09<3:03:50, 367.69s/it] 71%|███████▏  | 72/101 [7:08:29<2:59:33, 371.51s/it] 72%|███████▏  | 73/101 [7:14:32<2:52:08, 368.89s/it] 73%|███████▎  | 74/101 [7:20:28<2:44:14, 364.98s/it] 74%|███████▍  | 75/101 [7:26:22<2:36:49, 361.89s/it] 75%|███████▌  | 76/101 [7:32:27<2:31:11, 362.85s/it] 76%|███████▌  | 77/101 [7:38:22<2:24:11, 360.49s/it] 77%|███████▋  | 78/101 [7:44:18<2:17:33, 358.87s/it] 78%|███████▊  | 79/101 [7:50:19<2:11:50, 359.56s/it] 79%|███████▉  | 80/101 [7:56:20<2:06:02, 360.12s/it] 80%|████████  | 81/101 [8:02:17<1:59:40, 359.03s/it] 81%|████████  | 82/101 [8:08:30<1:55:04, 363.40s/it] 82%|████████▏ | 83/101 [8:14:27<1:48:22, 361.26s/it] 83%|████████▎ | 84/101 [8:20:29<1:42:29, 361.71s/it] 84%|████████▍ | 85/101 [8:26:35<1:36:44, 362.79s/it] 85%|████████▌ | 86/101 [8:32:45<1:31:17, 365.16s/it] 86%|████████▌ | 87/101 [8:38:43<1:24:39, 362.79s/it] 87%|████████▋ | 88/101 [8:44:44<1:18:31, 362.44s/it] 88%|████████▊ | 89/101 [8:50:44<1:12:19, 361.62s/it] 89%|████████▉ | 90/101 [8:56:39<1:05:57, 359.77s/it] 90%|█████████ | 91/101 [9:02:38<59:54, 359.42s/it]   91%|█████████ | 92/101 [9:08:31<53:37, 357.53s/it] 92%|█████████▏| 93/101 [9:14:24<47:29, 356.13s/it] 93%|█████████▎| 94/101 [9:20:17<41:26, 355.23s/it] 94%|█████████▍| 95/101 [9:26:10<35:27, 354.66s/it] 95%|█████████▌| 96/101 [9:32:04<29:32, 354.48s/it] 96%|█████████▌| 97/101 [9:37:59<23:37, 354.41s/it] 97%|█████████▋| 98/101 [9:43:52<17:41, 353.96s/it] 98%|█████████▊| 99/101 [9:49:45<11:47, 353.89s/it] 99%|█████████▉| 100/101 [9:55:40<05:54, 354.05s/it]100%|██████████| 101/101 [10:01:18<00:00, 349.46s/it]100%|██████████| 101/101 [10:01:18<00:00, 357.22s/it]
++ rm -f /scratch/prj0000000224/LLMDiversity_work/evals/qwen2-7b/pretrained_base/output_l40_full_vllm33/evaluation_chat_alpaca/rewards.json /scratch/prj0000000224/LLMDiversity_work/evals/qwen2-7b/pretrained_base/output_l40_full_vllm33/evaluation_chat_alpaca/reward_summary.json
++ python /home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft/evaluation/evaluation_reward.py --model_name_or_path sfairXC/FsfairX-LLaMA3-RM-v0.1 --tokenizer_path sfairXC/FsfairX-LLaMA3-RM-v0.1 --data_path /scratch/prj0000000224/LLMDiversity_work/evals/qwen2-7b/pretrained_base/output_l40_full_vllm33/evaluation_chat_alpaca/responses.json --batch_size 2 --save_path /scratch/prj0000000224/LLMDiversity_work/evals/qwen2-7b/pretrained_base/output_l40_full_vllm33/evaluation_chat_alpaca/rewards.json --summary_path /scratch/prj0000000224/LLMDiversity_work/evals/qwen2-7b/pretrained_base/output_l40_full_vllm33/evaluation_chat_alpaca/reward_summary.json --baseline_json /home/users/astar/cfar/stuananthu/LLMDiversity/assets/gpt4_alpacaeval_responses.json
+/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/huggingface_hub/file_download.py:801: UserWarning: Not enough free disk space to download the file. The expected file size is: 4915.92 MB. The target location /scratch/prj0000000224/LLMDiversity_work/cache/huggingface/transformers/models--sfairXC--FsfairX-LLaMA3-RM-v0.1/blobs only has 1079.89 MB free disk space.
+  warnings.warn(
+/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/huggingface_hub/file_download.py:801: UserWarning: Not enough free disk space to download the file. The expected file size is: 4976.71 MB. The target location /scratch/prj0000000224/LLMDiversity_work/cache/huggingface/transformers/models--sfairXC--FsfairX-LLaMA3-RM-v0.1/blobs only has 1079.89 MB free disk space.
+  warnings.warn(
+/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/huggingface_hub/file_download.py:801: UserWarning: Not enough free disk space to download the file. The expected file size is: 4999.80 MB. The target location /scratch/prj0000000224/LLMDiversity_work/cache/huggingface/transformers/models--sfairXC--FsfairX-LLaMA3-RM-v0.1/blobs only has 1079.89 MB free disk space.
+  warnings.warn(
+Fetching 4 files:   0%|          | 0/4 [00:17<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1723, in _download_to_tmp_and_move
+    xet_get(
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 629, in xet_get
+    download_files(
+RuntimeError: Data processing error: CAS service error : IO Error: No space left on device (os error 28)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft/evaluation/evaluation_reward.py", line 1292, in <module>
+    main()
+  File "/home/users/astar/cfar/stuananthu/LLMDiversity/hybrid_sft/evaluation/evaluation_reward.py", line 1147, in main
+    model = AutoModelForSequenceClassification.from_pretrained(
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 571, in from_pretrained
+    return model_class.from_pretrained(
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/modeling_utils.py", line 309, in _wrapper
+    return func(*args, **kwargs)
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/modeling_utils.py", line 4422, in from_pretrained
+    checkpoint_files, sharded_metadata = _get_resolved_checkpoint_files(
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/modeling_utils.py", line 1179, in _get_resolved_checkpoint_files
+    checkpoint_files, sharded_metadata = get_checkpoint_shard_files(
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/utils/hub.py", line 1110, in get_checkpoint_shard_files
+    cached_filenames = cached_files(
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/utils/hub.py", line 557, in cached_files
+    raise e
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/transformers/utils/hub.py", line 485, in cached_files
+    snapshot_download(
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/huggingface_hub/_snapshot_download.py", line 332, in snapshot_download
+    thread_map(
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/tqdm/contrib/concurrent.py", line 69, in thread_map
+    return _executor_map(ThreadPoolExecutor, fn, *iterables, **tqdm_kwargs)
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/tqdm/contrib/concurrent.py", line 51, in _executor_map
+    return list(tqdm_class(ex.map(fn, *iterables, chunksize=chunksize), **kwargs))
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/tqdm/std.py", line 1181, in __iter__
+    for obj in iterable:
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/concurrent/futures/_base.py", line 621, in result_iterator
+    yield _result_or_cancel(fs.pop())
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/concurrent/futures/_base.py", line 319, in _result_or_cancel
+    return fut.result(timeout)
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/concurrent/futures/_base.py", line 458, in result
+    return self.__get_result()
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/huggingface_hub/_snapshot_download.py", line 306, in _inner_hf_hub_download
+    return hf_hub_download(
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1010, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1171, in _hf_hub_download_to_cache_dir
+    _download_to_tmp_and_move(
+  File "/home/users/astar/cfar/stuananthu/.conda/envs/hybrid_loss/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1709, in _download_to_tmp_and_move
+    with incomplete_path.open("ab") as f:
+OSError: [Errno 28] No space left on device

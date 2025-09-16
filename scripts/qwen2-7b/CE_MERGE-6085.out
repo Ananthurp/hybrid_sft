@@ -1,0 +1,6 @@
+[2025-09-01 19:52:30,271] [WARNING] [real_accelerator.py:209:get_accelerator] Setting accelerator to CPU. If you have GPU or other accelerator, we were unable to detect it.
+[2025-09-01 19:52:30,333] [INFO] [real_accelerator.py:254:get_accelerator] Setting ds_accelerator to cpu (auto detect)
+Processing zero checkpoint '/home/users/astar/cfar/stuananthu/LLMDiversity/results/qwen2-7b/phase1_ce/checkpoint-1434/global_step1434'
+Detected checkpoint of type zero stage 3, world_size: 4
+Parsing checkpoint created by deepspeed==0.17.0
+Reconstructed Trainable fp32 state dict with 339 params 7615616512 elements

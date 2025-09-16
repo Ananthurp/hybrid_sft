@@ -1,0 +1,4 @@
+# Register a new task called "mmlu_lukaemon" by reusing the built-in MMLU task
+# and switching its dataset to lukaemon/mmlu.
+task: mmlu
+dataset_path: lukaemon/mmlu

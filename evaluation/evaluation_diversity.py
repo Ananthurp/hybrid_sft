@@ -1,783 +1,651 @@
-# #################
-# # This code is modified from https://github.com/facebookresearch/rlfh-gen-div
-# #################
-# import os
-# from dataclasses import dataclass, field
-# import json
-# from pprint import pprint
+# # #!/usr/bin/env python3
+# # # Simplified GEM-style diversity evaluation on raw answers
+# # # Metrics: Distinct-n (avg over n=1..3), Self-BLEU, Sentence-BERT diversity
 
-# import torch
+# import os
+# import json
+# from dataclasses import dataclass, field
+# from pprint import pprint
+# from typing import List, Optional
+
 # import numpy as np
-# import sentence_transformers # type: ignore
 # from tqdm import tqdm
 
-# # from sklearn.metrics.pairwise import cosine_similarity
-# from transformers import set_seed, HfArgumentParser, AutoTokenizer
+# # Optional CUDA acceleration for sentence-transformers
+# import torch
 
-# from nltk.util import ngrams # type: ignore
-# from nltk import word_tokenize # type: ignore
-# from collections import Counter
+# # BLEU
+# import sacrebleu
 
-# import sacrebleu # type: ignore
+# # Tokenization (robust fallback if NLTK data isn't installed)
+# try:
+#     from nltk import word_tokenize as _nltk_word_tokenize  # requires punkt
+#     _HAVE_NLTK = True
+# except Exception:
+#     _HAVE_NLTK = False
+
+# # Sentence-BERT
+# try:
+#     import sentence_transformers
+# except Exception as e:
+#     sentence_transformers = None
 
 # @dataclass
 # class AllArguments:
-#     response_path: str = field(
-#         default="./results/responses", metadata={"help": "Response path (json file)."}
-#     )
+#     # Path to responses.json created by generate_response.py
+#     response_path: str = field(default="responses.json")
 
-#     tokenizer_path: str = field(default=None)
-#     detokenizer_path: str = field(default=None)
+#     # Optional: we don't actually need chat tokenizer here; kept for parity with older scripts
+#     tokenizer_path: Optional[str] = field(default=None)
+#     detokenizer_path: Optional[str] = field(default=None)
+
+#     # Optional: write a JSON summary next to logs
+#     out_path: Optional[str] = field(default=None)
+
+
+# # ---------------------- helpers ----------------------
+# def word_tokenize_safe(text: str) -> List[str]:
+#     """Tokenize with NLTK if available; otherwise fall back to simple whitespace split."""
+#     if not isinstance(text, str):
+#         return []
+#     text = text.strip()
+#     if not text:
+#         return []
+#     if _HAVE_NLTK:
+#         try:
+#             return _nltk_word_tokenize(text)
+#         except Exception:
+#             pass
+#     # simple fallback
+#     return text.split()
+
+
+# def build_answer_matrix(data: list) -> List[List[str]]:
+#     """
+#     Build a rectangular matrix of answers:
+#       - Let P = number of prompts with at least 1 answer list
+#       - Let K = min number of answers among those prompts
+#     Returns a list-of-lists with shape [K][P], i.e.,
+#       answers_by_sample[j][i] = j-th answer for prompt i
+#     This mirrors GEM's layout (sample-major), enabling pairwise comparisons across samples.
+#     """
+#     per_prompt: List[List[str]] = []
+#     for x in data:
+#         ans = None
+#         # Primary format produced by generate_response.py
+#         if isinstance(x.get("answer"), list) and x["answer"]:
+#             ans = [a for a in x["answer"] if isinstance(a, str) and a.strip()]
+#         # Fallback: single-string fields (won't give diversity across n>1 but keeps code robust)
+#         elif isinstance(x.get("output"), str) and x["output"].strip():
+#             ans = [x["output"].strip()]
+
+#         if ans:
+#             per_prompt.append(ans)
+
+#     if not per_prompt:
+#         raise ValueError("No usable answers found in response file.")
+
+#     # Choose a common K across prompts
+#     K = min(len(a) for a in per_prompt)
+#     if K < 2:
+#         # You can still compute distinct/self-BLEU per prompt if K==1, but pairwise SentBERT needs >=2.
+#         # We'll allow K==1 and handle SentBERT gracefully.
+#         pass
+
+#     # Trim to rectangular [num_prompts x K]
+#     per_prompt = [a[:K] for a in per_prompt]
+
+#     # Re-layout to sample-major [K][num_prompts]
+#     answers_by_sample: List[List[str]] = [[] for _ in range(K)]
+#     for i in range(len(per_prompt)):
+#         for j in range(K):
+#             answers_by_sample[j].append(per_prompt[i][j])
+
+#     return answers_by_sample  # shape [K][P]
+
+
+# # ---------------------- metrics ----------------------
+# class AveragedNgramDiversityMetric:
+#     """Average distinct-n over n in [n_min, n_max], averaged across prompts."""
+
+#     def __init__(self, n_min: int = 1, n_max: int = 3):
+#         self.n_min = n_min
+#         self.n_max = n_max
+
+#     def _distinct_n(self, responses: List[str], n: int) -> float:
+#         all_ngrams = []
+#         for resp in responses:
+#             toks = word_tokenize_safe(resp)
+#             if len(toks) < n:
+#                 continue
+#             ngrams = [tuple(toks[k:k+n]) for k in range(len(toks) - n + 1)]
+#             all_ngrams.extend(ngrams)
+#         if not all_ngrams:
+#             return 0.0
+#         return len(set(all_ngrams)) / float(len(all_ngrams))
+
+#     def __call__(self, by_sample: List[List[str]]) -> float:
+#         """
+#         by_sample: [K][P]
+#           K = responses per prompt (min across prompts)
+#           P = number of prompts
+#         For each prompt i, we gather all K responses at i: [by_sample[j][i] for j in range(K)].
+#         """
+#         if not by_sample:
+#             return 0.0
+#         K, P = len(by_sample), len(by_sample[0])
+#         scores = []
+#         for i in range(P):
+#             texts_i = [by_sample[j][i] for j in range(K)]
+#             for n in range(self.n_min, self.n_max + 1):
+#                 scores.append(self._distinct_n(texts_i, n))
+#         return float(np.mean(scores)) if scores else 0.0
+
+
+# class SelfBLEUMetric:
+#     """Average Self-BLEU across prompts (lower BLEU => higher diversity)."""
+
+#     def __call__(self, by_sample: List[List[str]]) -> float:
+#         if not by_sample:
+#             return 0.0
+#         K, P = len(by_sample), len(by_sample[0])
+#         bleu_scores = []
+#         for i in range(P):
+#             texts = [by_sample[j][i] for j in range(K)]
+#             if len(texts) < 2:
+#                 continue
+#             # Average leave-one-out BLEU at this prompt
+#             per_i = []
+#             for h in range(len(texts)):
+#                 hyp = [texts[h]]
+#                 refs = [texts[:h] + texts[h+1:]]  # sacrebleu expects list of reference sets
+#                 try:
+#                     score = sacrebleu.corpus_bleu(hyp, refs).score
+#                 except Exception:
+#                     score = 0.0
+#                 per_i.append(score)
+#             if per_i:
+#                 bleu_scores.append(np.mean(per_i))
+#         return float(np.mean(bleu_scores)) if bleu_scores else 0.0
 
 
 # class SentBertSimilarity:
-#     def __init__(self):
+#     """Pairwise cosine similarity via Sentence-BERT; runs on GPU if available."""
 
-#         self.model_name = "bert-large-nli-stsb-mean-tokens"  # FIXME - hard coded
-#         self.model = sentence_transformers.SentenceTransformer(self.model_name)
+#     def __init__(self, model_name: str = "bert-large-nli-stsb-mean-tokens", batch_size: int = 512):
+#         if sentence_transformers is None:
+#             raise RuntimeError(
+#                 "sentence-transformers is not installed. Please install it "
+#                 "(e.g., pip install sentence-transformers) to compute SentBERT diversity."
+#             )
+#         self.model = sentence_transformers.SentenceTransformer(model_name)
+#         self.batch_size = batch_size
 #         if torch.cuda.is_available():
 #             self.model.to(torch.device("cuda"))
 
-#     # @functools.cache
-#     def embed(self, sentence):
-#         return self.model.encode(sentence)
-
-#     # @functools.cache
-#     def sent_bert_cosine_similarity(self, resps_1, resps_2):
-#         embeds_1 = self.model.encode(
-#             resps_1, batch_size=1024, convert_to_tensor=True, show_progress_bar=False
-#         )
-#         embeds_2 = self.model.encode(
-#             resps_2, batch_size=1024, convert_to_tensor=True, show_progress_bar=False
-#         )
-
+#     def __call__(self, a: List[str], b: List[str]) -> np.ndarray:
+#         # a and b are lists with equal length (number of prompts P)
+#         emb_a = self.model.encode(a, batch_size=self.batch_size, convert_to_tensor=True, show_progress_bar=False)
+#         emb_b = self.model.encode(b, batch_size=self.batch_size, convert_to_tensor=True, show_progress_bar=False)
 #         if torch.cuda.is_available():
-#             embeds_1 = embeds_1.to(torch.device("cuda"))
-#             embeds_2 = embeds_2.to(torch.device("cuda"))
-
-#         dot_product = (embeds_1 * embeds_2).sum(dim=1)
-
-#         # Calculate cosine similarity
-#         cosine_similarity = dot_product / (embeds_1.norm(dim=1) * embeds_2.norm(dim=1))
-
-#         return cosine_similarity.detach().cpu().numpy()
-
-#     def __call__(self, resp_a, resp_b):
-#         return self.sent_bert_cosine_similarity(resp_a, resp_b)
+#             emb_a = emb_a.to(torch.device("cuda"))
+#             emb_b = emb_b.to(torch.device("cuda"))
+#         # cosine similarity per row
+#         dot = (emb_a * emb_b).sum(dim=1)
+#         sim = dot / (emb_a.norm(dim=1) * emb_b.norm(dim=1) + 1e-12)
+#         return sim.detach().cpu().numpy()
 
 
 # class SentBertDiversity:
 #     """
-#     Implements the diversity to similarity reduction specified on section 5 in the paper
-#     (https://arxiv.org/pdf/2004.02990.pdf)
-#     for any similarity metric.
-
-#     config:
-#         shared with the original similarity metric.
-
-#     usage:
-#         metric = Similarity2DiversityMetric(config, SimilarityMetricClassName)
-#         metric(response_set)
-
-#     inheritance guidelines:
-#         implement __init__ only
-
-#     inheritance example:
-#         see CosineSimilarity2Diversity
+#     Diversity = 1 - mean cosine similarity, averaged over all pairs of samples (i<j) and prompts.
+#     Input is sample-major [K][P]; compares rows pairwise as in GEM.
 #     """
 
-#     def __init__(self):
-#         self.similarity_metric = SentBertSimilarity()
+#     def __init__(self, model_name: str = "bert-large-nli-stsb-mean-tokens"):
+#         self.sim = SentBertSimilarity(model_name=model_name)
 
-#     def __call__(self, response_set):
-#         similarity_list = []
-#         for i in tqdm(range(len(response_set))):
+#     def __call__(self, by_sample: List[List[str]]) -> float:
+#         if not by_sample or len(by_sample) < 2:
+#             # Not enough samples to compute pairwise similarity
+#             return 0.0
+#         K = len(by_sample)
+#         sims = []
+#         for i in range(K):
 #             for j in range(i):
-#                 similarity_list.append(
-#                     self.similarity_metric(response_set[i], response_set[j])
-#                 )
-#         diversity_score = 1 - np.mean(similarity_list)
-#         return diversity_score
+#                 s = self.sim(by_sample[i], by_sample[j])  # vector over prompts
+#                 sims.append(s)
+#         if not sims:
+#             return 0.0
+#         mean_sim = float(np.mean(np.concatenate([s.reshape(-1) for s in sims], axis=0)))
+#         return 1.0 - mean_sim
 
 
-# class AveragedNgramDiversityMetric:
-#     """
-#     Calculates the mean values of an n-gram based diversity metric in range n in [n_min, n_max].
-
-#     config:
-#         shared with the original n-gram metric.
-#         n_min(int) > 0 - Specify the lowest n-gram value to be averaged
-#         n_max(int) > 0 - Specify the highest n-gram value to be averaged
-
-#     usage:
-#         metric = AveragedNgramDiversityMetric(config, NgramMetricClassName)
-#         metric(response_set)
-
-#     inheritance guidelines:
-#         implement __init__ only
-
-#     inheritance example:
-#         see AveragedDistinctNgrams
-#     """
-
-#     def __init__(self, n_min, n_max):
-#         # add n field
-#         self.n_min = n_min
-#         self.n_max = n_max
-
-#     def __call__(self, response_set):
-#         ngrams_results = []
-#         num_set = len(response_set)
-#         for i in range(len(response_set[0])):
-#             for n in range(self.n_min, self.n_max + 1):
-#                 result = self.calculate_distinct_n(
-#                     [response_set[j][i] for j in range(num_set)], n
-#                 )
-#                 ngrams_results.append(result)
-#         return np.mean(ngrams_results)
-
-#     def calculate_distinct_n(self, responses, n):
-#         all_ngrams = []
-#         for response in responses:
-#             tokens = word_tokenize(response)
-#             response_ngrams = list(ngrams(tokens, n))
-#             all_ngrams.extend(response_ngrams)
-#         unique_ngrams = len(set(all_ngrams))
-#         total_ngrams = len(all_ngrams)
-
-#         return unique_ngrams / total_ngrams if total_ngrams > 0 else 0
-
-
-# class SelfBLEUMetric:
-#     def __call__(self, response_set):
-#         """Calculate the average Self-BLEU score for a list of texts."""
-#         bleu_scores = []
-#         k = len(response_set)
-#         for i in range(len(response_set[0])):
-#             texts = [response_set[j][i] for j in range(k)]
-#             bleu_scores.append(self.calculate_bleu_score(texts))
-
-#         return np.mean(bleu_scores)
-
-#     def calculate_bleu_score(self, texts):
-#         bleu_scores = []
-#         for i in range(len(texts)):
-#             # Treat the current text as the hypothesis
-#             hypothesis = texts[i]
-#             # Treat all other texts as references
-#             references = texts[:i] + texts[i + 1 :]
-
-#             if references:  # Ensure there are references to compare against
-#                 bleu_score = sacrebleu.corpus_bleu([hypothesis], [references])
-#                 bleu_scores.append(bleu_score.score)
-
-#         # Compute the average BLEU score
-#         average_bleu = sum(bleu_scores) / len(bleu_scores) if bleu_scores else 0
-#         return average_bleu
-
-
+# # ---------------------- main ----------------------
 # def main():
+#     from transformers import HfArgumentParser
 #     parser = HfArgumentParser((AllArguments,))
 #     (args,) = parser.parse_args_into_dataclasses()
 #     pprint(args.__dict__)
 
-#     if os.path.exists(args.response_path.replace(".json", "-cleaned.json")):
-#         args.response_path = args.response_path.replace(".json", "-cleaned.json")
+#     # Load responses.json
+#     data = json.load(open(args.response_path, "r", encoding="utf-8"))
 
-#     if args.response_path.endswith("-cleaned.json"):
-#         response_set = json.load(open(args.response_path, "r"))
-#     else:
-#         data = json.load(open(args.response_path, "r"))
+#     # Build K x P matrix of raw answers (sample-major)
+#     by_sample = build_answer_matrix(data)  # [K][P]
+#     K, P = len(by_sample), (len(by_sample[0]) if by_sample else 0)
+#     print(f"[info] Using {P} prompts with K={K} responses per prompt.")
 
-#         tokenizer = AutoTokenizer.from_pretrained(args.tokenizer_path)
-#         if args.detokenizer_path is not None:
-#             detokenizer = AutoTokenizer.from_pretrained(args.detokenizer_path)
-#         else:
-#             detokenizer = None
-
-#         response_set = []
-#         for i in tqdm(range(len(data))):
-#             n = len(data[i]["answer"])
-#             if len(response_set) == 0:
-#                 response_set = [[] for _ in range(n)]
-#             else:
-#                 assert len(response_set) == n
-#             for j in range(n):
-#                 x = data[i]
-#                 if detokenizer:
-#                     prompt_str = (
-#                         detokenizer.decode(
-#                             detokenizer.encode(x["prompt"]), skip_special_tokens=True
-#                         )
-#                         .replace("user\n\n", "")
-#                         .replace("assistant\n\n", "")
-#                     )
-#                 else:
-#                     prompt_str = x["prompt"]
-#                 if detokenizer:
-#                     # ans_str = detokenizer.decode(
-#                     #     detokenizer.encode(data[i]["answer"][j]), skip_special_tokens=True
-#                     # )
-#                     ans_str = data[i]["answer"][j].replace("<|eot_id|>", "")
-#                 else:
-#                     ans_str = data[i]["answer"][j]
-#                 chat = [
-#                     {
-#                         "role": "user",
-#                         "content": prompt_str,
-#                     },
-#                     {"role": "assistant", "content": ans_str},
-#                 ]
-#                 res = tokenizer.apply_chat_template(chat, tokenize=False)
-#                 response_set[j].append(res)
-#         json.dump(
-#             response_set,
-#             open(args.response_path.replace(".json", "-cleaned.json"), "w"),
-#             indent=2,
-#         )
-
-#         response_set = json.load(
-#             open(args.response_path.replace(".json", "-cleaned.json"), "r")
-#         )
-#         print("Finished Data Preparation.")
-
-#     evaluation_results = {
-#         "sentbert_diversity_score": None,
-#         "bleu_diversity_score": None,
-#         "averaged_ngram_diversity_score": None,
-#     }
-
-#     print("Calculating N-gram diversity score...")
-#     metric = AveragedNgramDiversityMetric(n_min=1, n_max=3)
-#     diversity_score = metric(response_set)
-#     evaluation_results["averaged_ngram_diversity_score"] = np.round(
-#         diversity_score * 100, 2
-#     )
-#     print("N-gram diversity score: {}".format(diversity_score))
-
-#     print("Calculating BLEU similarity score...")
-#     metric = SelfBLEUMetric()
-#     similarity_score = metric(response_set)
-#     evaluation_results["bleu_diversity_score"] = np.round(100 - similarity_score, 2)
-#     print("BLEU similarity score: {}".format(100 - similarity_score))
-
-#     print("Calculating Bert diversity score...")
-#     metric = SentBertDiversity()
-#     diversity_score = metric(response_set)
-#     evaluation_results["sentbert_diversity_score"] = np.round(diversity_score * 100, 2)
-#     print("Bert diversity score: {}".format(diversity_score))
-
-#     pprint(evaluation_results)
-
-
-# if __name__ == "__main__":
-#     main()
-
-
-
-# #################
-# # This code is modified from https://github.com/facebookresearch/rlfh-gen-div
-# #################
-# import os
-# import json
-# from dataclasses import dataclass, field
-# from pprint import pprint
-# from typing import List
-
-# import numpy as np
-# import torch
-# import sacrebleu  # type: ignore
-# import sentence_transformers  # type: ignore
-# from tqdm import tqdm
-
-# from transformers import HfArgumentParser, AutoTokenizer
-
-# from nltk.util import ngrams  # type: ignore
-# from nltk import word_tokenize  # type: ignore
-# from collections import Counter
-
-
-# @dataclass
-# class AllArguments:
-#     response_path: str = field(
-#         default="./results/responses.json",
-#         metadata={"help": "Response path (json file)."},
-#     )
-#     tokenizer_path: str = field(default=None)
-#     detokenizer_path: str = field(default=None)
-
-
-# def _safe_tokenize(text: str) -> List[str]:
-#     try:
-#         return word_tokenize(text)
-#     except LookupError:
-#         # Fallback if NLTK punkt is not available
-#         return text.split()
-
-
-# class SentBertSimilarity:
-#     def __init__(self):
-#         self.model_name = "bert-large-nli-stsb-mean-tokens"  # follow repo
-#         device = "cuda" if torch.cuda.is_available() else "cpu"
-#         self.model = sentence_transformers.SentenceTransformer(
-#             self.model_name, device=device
-#         )
-
-#     def sent_bert_cosine_similarity(self, resps_1, resps_2):
-#         embeds_1 = self.model.encode(
-#             resps_1, batch_size=1024, convert_to_tensor=True, show_progress_bar=False
-#         )
-#         embeds_2 = self.model.encode(
-#             resps_2, batch_size=1024, convert_to_tensor=True, show_progress_bar=False
-#         )
-#         # cosine on normalized tensors
-#         embeds_1 = torch.nn.functional.normalize(embeds_1, dim=1)
-#         embeds_2 = torch.nn.functional.normalize(embeds_2, dim=1)
-#         cosine = (embeds_1 * embeds_2).sum(dim=1)
-#         return cosine.detach().cpu().numpy()
-
-#     def __call__(self, resp_a, resp_b):
-#         return self.sent_bert_cosine_similarity(resp_a, resp_b)
-
-
-# class SentBertDiversity:
-#     """
-#     1 - average pairwise SBERT cosine across the N samples (averaged over prompts).
-#     Follows the reduction described in (Ghazvininejad et al., 2020) Section 5.
-#     """
-
-#     def __init__(self):
-#         self.similarity_metric = SentBertSimilarity()
-
-#     def __call__(self, response_set):
-#         similarity_list = []
-#         # response_set is a list of length N (samples),
-#         # each entry is a list of strings over prompts.
-#         for i in tqdm(range(len(response_set))):
-#             for j in range(i):
-#                 similarity_list.append(
-#                     self.similarity_metric(response_set[i], response_set[j])
-#                 )
-#         # similarity_list is a list of arrays (per-prompt similarities)
-#         diversity_score = 1 - np.mean(similarity_list) if similarity_list else 0.0
-#         return diversity_score
-
-
-# class AveragedNgramDiversityMetric:
-#     """
-#     Mean of Distinct-n across n in [n_min, n_max], averaged over prompts.
-#     """
-
-#     def __init__(self, n_min: int, n_max: int):
-#         self.n_min = n_min
-#         self.n_max = n_max
-
-#     def __call__(self, response_set):
-#         ngrams_results = []
-#         num_set = len(response_set)          # N (samples)
-#         num_prompts = len(response_set[0])   # M (prompts)
-#         for i in range(num_prompts):
-#             # collect N responses for prompt i
-#             per_prompt = [response_set[j][i] for j in range(num_set)]
-#             for n in range(self.n_min, self.n_max + 1):
-#                 ngrams_results.append(self.calculate_distinct_n(per_prompt, n))
-#         return float(np.mean(ngrams_results)) if ngrams_results else 0.0
-
-#     def calculate_distinct_n(self, responses, n):
-#         all_ngrams = []
-#         for response in responses:
-#             tokens = _safe_tokenize(response)
-#             response_ngrams = list(ngrams(tokens, n)) if len(tokens) >= n else []
-#             all_ngrams.extend(response_ngrams)
-#         unique_ngrams = len(set(all_ngrams))
-#         total_ngrams = len(all_ngrams)
-#         return unique_ngrams / total_ngrams if total_ngrams > 0 else 0.0
-
-
-# class SelfBLEUMetric:
-#     """Average Self-BLEU over the N responses per prompt, then averaged over prompts."""
-
-#     def __call__(self, response_set):
-#         bleu_scores = []
-#         k = len(response_set)               # N samples
-#         num_prompts = len(response_set[0])  # M prompts
-#         for i in range(num_prompts):
-#             texts = [response_set[j][i] for j in range(k)]
-#             bleu_scores.append(self.calculate_bleu_score(texts))
-#         return float(np.mean(bleu_scores)) if bleu_scores else 0.0
-
-#     def calculate_bleu_score(self, texts):
-#         scores = []
-#         for i in range(len(texts)):
-#             hyp = [texts[i]]
-#             refs = [texts[:i] + texts[i + 1 :]]  # sacrebleu expects list of ref lists
-#             if refs[0]:  # there are references
-#                 scores.append(sacrebleu.corpus_bleu(hyp, refs).score)
-#         return sum(scores) / len(scores) if scores else 0.0
-
-
-# def main():
-#     parser = HfArgumentParser((AllArguments,))
-#     (args,) = parser.parse_args_into_dataclasses()
-#     pprint(vars(args))
-
-#     # If we've already cleaned once, reuse it
-#     cleaned_path = args.response_path.replace(".json", "-cleaned.json")
-#     if os.path.exists(cleaned_path):
-#         args.response_path = cleaned_path
-
-#     if args.response_path.endswith("-cleaned.json"):
-#         response_set = json.load(open(args.response_path, "r"))
-#     else:
-#         data = json.load(open(args.response_path, "r"))
-
-#         tokenizer = AutoTokenizer.from_pretrained(args.tokenizer_path)
-#         detok = AutoTokenizer.from_pretrained(args.detokenizer_path) if args.detokenizer_path else None
-
-#         # Build response_set as a list of N lists, each length M prompts.
-#         response_set = []
-#         for i in tqdm(range(len(data))):
-#             # Number of responses per prompt; accept 'answers' or 'answer'
-#             if "answers" in data[i]:
-#                 ans_list = data[i]["answers"]
-#             else:
-#                 ans_list = data[i]["answer"]
-#             n = len(ans_list)
-
-#             if len(response_set) == 0:
-#                 response_set = [[] for _ in range(n)]
-#             else:
-#                 assert len(response_set) == n, "All items must have same N"
-
-#             # choose prompt field
-#             x = data[i]
-#             if detok:
-#                 prompt_str = detok.decode(detok.encode(x["prompt"]), skip_special_tokens=True)
-#                 prompt_str = prompt_str.replace("user\n\n", "").replace("assistant\n\n", "")
-#             else:
-#                 prompt_str = x["prompt"]
-
-#             for j in range(n):
-#                 if detok:
-#                     ans_str = detok.decode(detok.encode(ans_list[j]), skip_special_tokens=True)
-#                 else:
-#                     ans_str = ans_list[j]
-#                 ans_str = ans_str.replace("<|eot_id|>", "")
-
-#                 chat = [
-#                     {"role": "user", "content": prompt_str},
-#                     {"role": "assistant", "content": ans_str},
-#                 ]
-#                 # match repo behavior: compute metrics on chat-templated strings
-#                 res = tokenizer.apply_chat_template(chat, tokenize=False)
-#                 response_set[j].append(res)
-
-#         json.dump(response_set, open(cleaned_path, "w"), indent=2, ensure_ascii=False)
-#         print("Finished Data Preparation.")
-#         response_set = json.load(open(cleaned_path, "r"))
-
-#     evaluation_results = {
+#     results = {
 #         "averaged_ngram_diversity_score": None,
 #         "bleu_diversity_score": None,
 #         "sentbert_diversity_score": None,
+#         "num_prompts": P,
+#         "num_responses_per_prompt": K,
 #     }
 
+#     # Distinct-n averaged (n=1..3)
 #     print("Calculating N-gram diversity score...")
 #     ngram_metric = AveragedNgramDiversityMetric(n_min=1, n_max=3)
-#     ngram_div = ngram_metric(response_set)
-#     evaluation_results["averaged_ngram_diversity_score"] = round(ngram_div * 100, 2)
-#     print(f"N-gram diversity score: {ngram_div}")
+#     ngram_div = ngram_metric(by_sample)
+#     results["averaged_ngram_diversity_score"] = round(ngram_div * 100.0, 2)
+#     print(f"N-gram diversity score: {ngram_div:.6f}")
 
-#     print("Calculating BLEU similarity score...")
-#     bleu_metric = SelfBLEUMetric()
-#     bleu_sim = bleu_metric(response_set)
-#     evaluation_results["bleu_diversity_score"] = round(100 - bleu_sim, 2)
-#     print(f"BLEU diversity score: {100 - bleu_sim}")
+#     # Self-BLEU (lower = less similarity); we report diversity = 100 - BLEU
+#     print("Calculating Self-BLEU similarity score...")
+#     sb_metric = SelfBLEUMetric()
+#     self_bleu = sb_metric(by_sample)
+#     results["bleu_diversity_score"] = round(100.0 - self_bleu, 2)
+#     print(f"Self-BLEU similarity (diversity = 100 - score): {self_bleu:.6f}")
 
-#     print("Calculating Bert diversity score...")
-#     sentbert_metric = SentBertDiversity()
-#     sbert_div = sentbert_metric(response_set)
-#     evaluation_results["sentbert_diversity_score"] = round(sbert_div * 100, 2)
-#     print(f"Bert diversity score: {sbert_div}")
+#     # SentBERT diversity (optional if sentence-transformers installed)
+#     try:
+#         print("Calculating Sentence-BERT diversity score...")
+#         sb_div_metric = SentBertDiversity()
+#         sb_div = sb_div_metric(by_sample)
+#         results["sentbert_diversity_score"] = round(sb_div * 100.0, 2)
+#         print(f"SentBERT diversity score: {sb_div:.6f}")
+#     except RuntimeError as e:
+#         print(f"[warn] {e}")
+#         results["sentbert_diversity_score"] = None
 
-#     pprint(evaluation_results)
+#     pprint(results)
+
+#     # Optional: save summary JSON
+#     if args.out_path:
+#         os.makedirs(os.path.dirname(args.out_path), exist_ok=True)
+#         with open(args.out_path, "w", encoding="utf-8") as f:
+#             json.dump(results, f, indent=2)
+#         print(f"[ok] wrote diversity summary to {args.out_path}")
 
 
 # if __name__ == "__main__":
 #     main()
 
 
+#!/usr/bin/env python3
+# Simplified GEM-style diversity evaluation.
+# Metrics: Distinct-n (avg over n=1..3), Self-BLEU (lower -> more diverse, we report 100-SelfBLEU),
+#          Sentence-BERT diversity (1 - mean cosine sim across sample pairs).
+#
+# Behavior aligned with GEM:
+# - Build a [K][P] "response_set" of chat-templated strings (prompt+answer) via apply_chat_template.
+# - Cache to <responses-cleaned.json> and reuse if present.
 
-#################
-# This code is modified from https://github.com/facebookresearch/rlfh-gen-div
-#################
 import os
-from dataclasses import dataclass, field
 import json
+from dataclasses import dataclass, field
 from pprint import pprint
+from typing import List, Optional
 
-import torch
 import numpy as np
-import sentence_transformers
 from tqdm import tqdm
 
-# from sklearn.metrics.pairwise import cosine_similarity
-from transformers import set_seed, HfArgumentParser, AutoTokenizer
+# Optional CUDA acceleration for sentence-transformers
+import torch
 
-from nltk.util import ngrams
-from nltk import word_tokenize
-from collections import Counter
-
+# BLEU
 import sacrebleu
+
+# Tokenization (robust fallback if NLTK data isn't installed)
+try:
+    from nltk import word_tokenize as _nltk_word_tokenize  # requires punkt
+    _HAVE_NLTK = True
+except Exception:
+    _HAVE_NLTK = False
+
+# Sentence-BERT
+try:
+    import sentence_transformers
+except Exception:
+    sentence_transformers = None
+
 
 @dataclass
 class AllArguments:
-    response_path: str = field(
-        default="./results/responses", metadata={"help": "Response path (json file)."}
-    )
+    # Path to responses.json created by generate_response.py
+    response_path: str = field(default="responses.json")
 
-    tokenizer_path: str = field(default=None)
-    detokenizer_path: str = field(default=None)
+    # Tokenizers (used only during "cleaning" to reproduce GEM inputs)
+    tokenizer_path: Optional[str] = field(default=None)
+    detokenizer_path: Optional[str] = field(default=None)
+
+    # Optional: write a JSON summary next to logs
+    out_path: Optional[str] = field(default=None)
+
+
+# ---------------------- helpers ----------------------
+def word_tokenize_safe(text: str) -> List[str]:
+    """Tokenize with NLTK if available; otherwise fall back to simple whitespace split."""
+    if not isinstance(text, str):
+        return []
+    text = text.strip()
+    if not text:
+        return []
+    if _HAVE_NLTK:
+        try:
+            return _nltk_word_tokenize(text)
+        except Exception:
+            pass
+    # simple fallback
+    return text.split()
+
+
+def _maybe_build_cleaned_response_set(resp_path: str,
+                                      tokenizer_path: Optional[str],
+                                      detok_path: Optional[str]) -> List[List[str]]:
+    """
+    GEM-style data prep:
+      - If <resp_path> has a sibling <resp_path.replace('.json', '-cleaned.json')>, load and return it.
+      - Else: load responses.json (list of items with {prompt/instruction, answer:list or output}),
+              reconstruct chat-templated strings with apply_chat_template, lay them out as [K][P],
+              dump -cleaned.json, and return it.
+    """
+    cleaned_path = resp_path.replace(".json", "-cleaned.json")
+    if os.path.exists(cleaned_path):
+        return json.load(open(cleaned_path, "r", encoding="utf-8"))
+
+    data = json.load(open(resp_path, "r", encoding="utf-8"))
+
+    # We only need tokenizer(s) here to reproduce the same text GEM evaluates.
+    from transformers import AutoTokenizer
+    if tokenizer_path is None:
+        raise ValueError("--tokenizer_path is required to build the cleaned response set like GEM.")
+    tok = AutoTokenizer.from_pretrained(tokenizer_path)
+    detok = AutoTokenizer.from_pretrained(detok_path) if detok_path else None
+
+    response_set: List[List[str]] = []
+    for i in tqdm(range(len(data)), desc="Preparing cleaned response_set"):
+        x = data[i]
+        # Determine number of answers for this prompt
+        if isinstance(x.get("answer"), list) and x["answer"]:
+            n = len(x["answer"])
+        elif isinstance(x.get("output"), str) and x["output"].strip():
+            n = 1
+        else:
+            # skip items without usable answers
+            continue
+
+        # Initialize rows [K] on the first usable item
+        if not response_set:
+            response_set = [[] for _ in range(n)]
+        else:
+            # GEM assumes same K across prompts; if not, we trim later to min K across prompts.
+            # Here we enforce equality to match GEM behavior as closely as possible.
+            assert len(response_set) == n, (
+                f"Found different number of answers across prompts: "
+                f"expected {len(response_set)} but got {n} at item {i}."
+            )
+
+        # Build prompt string (optionally detokenize to strip specials)
+        if detok:
+            raw_prompt = (x.get("prompt") or x.get("instruction") or "").strip()
+            prompt_str = detok.decode(detok.encode(raw_prompt), skip_special_tokens=True)
+            prompt_str = prompt_str.replace("user\n\n", "").replace("assistant\n\n", "")
+        else:
+            prompt_str = (x.get("prompt") or x.get("instruction") or "").strip()
+
+        # Answers list
+        if n == 1:
+            answers = [x["output"].strip()]
+        else:
+            answers = [a for a in x["answer"] if isinstance(a, str)]
+
+        # Compose chat-templated strings (prompt+answer) like GEM
+        for j in range(n):
+            ans_str = answers[j]
+            # Align with GEM's light cleanup on certain templates
+            ans_str = ans_str.replace("<|eot_id|>", "")
+            chat = [
+                {"role": "user", "content": prompt_str},
+                {"role": "assistant", "content": ans_str},
+            ]
+            res = tok.apply_chat_template(chat, tokenize=False)
+            response_set[j].append(res)
+
+    # Persist for reuse
+    with open(cleaned_path, "w", encoding="utf-8") as f:
+        json.dump(response_set, f, indent=2)
+    return response_set
+
+
+def build_answer_matrix_raw_answers(data: list) -> List[List[str]]:
+    """
+    (Alternative) Build a rectangular matrix of RAW answers only:
+      answers_by_sample[j][i] = j-th answer for prompt i
+    Kept for reference; we now prefer GEM-style cleaned set above.
+    """
+    per_prompt: List[List[str]] = []
+    for x in data:
+        ans = None
+        if isinstance(x.get("answer"), list) and x["answer"]:
+            ans = [a for a in x["answer"] if isinstance(a, str) and a.strip()]
+        elif isinstance(x.get("output"), str) and x["output"].strip():
+            ans = [x["output"].strip()]
+        if ans:
+            per_prompt.append(ans)
+
+    if not per_prompt:
+        raise ValueError("No usable answers found in response file.")
+
+    K = min(len(a) for a in per_prompt)
+    per_prompt = [a[:K] for a in per_prompt]
+
+    answers_by_sample: List[List[str]] = [[] for _ in range(K)]
+    for i in range(len(per_prompt)):
+        for j in range(K):
+            answers_by_sample[j].append(per_prompt[i][j])
+
+    return answers_by_sample  # [K][P]
+
+
+# ---------------------- metrics ----------------------
+class AveragedNgramDiversityMetric:
+    """Average distinct-n over n in [n_min, n_max], averaged across prompts."""
+
+    def __init__(self, n_min: int = 1, n_max: int = 3):
+        self.n_min = n_min
+        self.n_max = n_max
+
+    def _distinct_n(self, responses: List[str], n: int) -> float:
+        all_ngrams = []
+        for resp in responses:
+            toks = word_tokenize_safe(resp)
+            if len(toks) < n:
+                continue
+            ngrams = [tuple(toks[k:k+n]) for k in range(len(toks) - n + 1)]
+            all_ngrams.extend(ngrams)
+        if not all_ngrams:
+            return 0.0
+        return len(set(all_ngrams)) / float(len(all_ngrams))
+
+    def __call__(self, by_sample: List[List[str]]) -> float:
+        """
+        by_sample: [K][P]
+          K = responses per prompt
+          P = number of prompts
+        For each prompt i, gather all K responses at i: [by_sample[j][i] for j in range(K)].
+        """
+        if not by_sample:
+            return 0.0
+        K, P = len(by_sample), len(by_sample[0])
+        scores = []
+        for i in range(P):
+            texts_i = [by_sample[j][i] for j in range(K)]
+            for n in range(self.n_min, self.n_max + 1):
+                scores.append(self._distinct_n(texts_i, n))
+        return float(np.mean(scores)) if scores else 0.0
+
+
+class SelfBLEUMetric:
+    """Average Self-BLEU across prompts (lower BLEU => higher diversity)."""
+
+    def __call__(self, by_sample: List[List[str]]) -> float:
+        if not by_sample:
+            return 0.0
+        K, P = len(by_sample), len(by_sample[0])
+        bleu_scores = []
+        for i in range(P):
+            texts = [by_sample[j][i] for j in range(K)]
+            if len(texts) < 2:
+                continue
+            # Average leave-one-out BLEU at this prompt
+            per_i = []
+            for h in range(len(texts)):
+                hypothesis = [texts[h]]
+                references = texts[:h] + texts[h+1:]
+                # FIX: sacrebleu expects ref streams as list of corpora, each aligned with sys_stream
+                # Single hypothesis -> each reference must be a list of length 1
+                ref_streams = [[r] for r in references]
+                try:
+                    score = sacrebleu.corpus_bleu(hypothesis, ref_streams).score
+                except Exception:
+                    score = 0.0
+                per_i.append(score)
+            if per_i:
+                bleu_scores.append(np.mean(per_i))
+        return float(np.mean(bleu_scores)) if bleu_scores else 0.0
 
 
 class SentBertSimilarity:
-    def __init__(self):
+    """Pairwise cosine similarity via Sentence-BERT; runs on GPU if available."""
 
-        self.model_name = "bert-large-nli-stsb-mean-tokens"  # FIXME - hard coded
-        self.model = sentence_transformers.SentenceTransformer(self.model_name)
+    def __init__(self, model_name: str = "bert-large-nli-stsb-mean-tokens", batch_size: int = 512):
+        if sentence_transformers is None:
+            raise RuntimeError(
+                "sentence-transformers is not installed. Please install it "
+                "(e.g., pip install sentence-transformers) to compute SentBERT diversity."
+            )
+        self.model = sentence_transformers.SentenceTransformer(model_name)
+        self.batch_size = batch_size
         if torch.cuda.is_available():
             self.model.to(torch.device("cuda"))
 
-    # @functools.cache
-    def embed(self, sentence):
-        return self.model.encode(sentence)
-
-    # @functools.cache
-    def sent_bert_cosine_similarity(self, resps_1, resps_2):
-        embeds_1 = self.model.encode(
-            resps_1, batch_size=1024, convert_to_tensor=True, show_progress_bar=False
-        )
-        embeds_2 = self.model.encode(
-            resps_2, batch_size=1024, convert_to_tensor=True, show_progress_bar=False
-        )
-
+    def __call__(self, a: List[str], b: List[str]) -> np.ndarray:
+        # a and b are lists with equal length (number of prompts P)
+        emb_a = self.model.encode(a, batch_size=self.batch_size, convert_to_tensor=True, show_progress_bar=False)
+        emb_b = self.model.encode(b, batch_size=self.batch_size, convert_to_tensor=True, show_progress_bar=False)
         if torch.cuda.is_available():
-            embeds_1 = embeds_1.to(torch.device("cuda"))
-            embeds_2 = embeds_2.to(torch.device("cuda"))
-
-        dot_product = (embeds_1 * embeds_2).sum(dim=1)
-
-        # Calculate cosine similarity
-        cosine_similarity = dot_product / (embeds_1.norm(dim=1) * embeds_2.norm(dim=1))
-
-        return cosine_similarity.detach().cpu().numpy()
-
-    def __call__(self, resp_a, resp_b):
-        return self.sent_bert_cosine_similarity(resp_a, resp_b)
+            emb_a = emb_a.to(torch.device("cuda"))
+            emb_b = emb_b.to(torch.device("cuda"))
+        # cosine similarity per row
+        dot = (emb_a * emb_b).sum(dim=1)
+        sim = dot / (emb_a.norm(dim=1) * emb_b.norm(dim=1) + 1e-12)
+        return sim.detach().cpu().numpy()
 
 
 class SentBertDiversity:
     """
-    Implements the diversity to similarity reduction specified on section 5 in the paper
-    (https://arxiv.org/pdf/2004.02990.pdf)
-    for any similarity metric.
-
-    config:
-        shared with the original similarity metric.
-
-    usage:
-        metric = Similarity2DiversityMetric(config, SimilarityMetricClassName)
-        metric(response_set)
-
-    inheritance guidelines:
-        implement __init__ only
-
-    inheritance example:
-        see CosineSimilarity2Diversity
+    Diversity = 1 - mean cosine similarity, averaged over all pairs of samples (i<j) and prompts.
+    Input is sample-major [K][P]; compares rows pairwise as in GEM.
     """
 
-    def __init__(self):
-        self.similarity_metric = SentBertSimilarity()
+    def __init__(self, model_name: str = "bert-large-nli-stsb-mean-tokens"):
+        self.sim = SentBertSimilarity(model_name=model_name)
 
-    def __call__(self, response_set):
-        similarity_list = []
-        for i in tqdm(range(len(response_set))):
+    def __call__(self, by_sample: List[List[str]]) -> float:
+        if not by_sample or len(by_sample) < 2:
+            # Not enough samples to compute pairwise similarity
+            return 0.0
+        K = len(by_sample)
+        sims = []
+        for i in range(K):
             for j in range(i):
-                similarity_list.append(
-                    self.similarity_metric(response_set[i], response_set[j])
-                )
-        diversity_score = 1 - np.mean(similarity_list)
-        return diversity_score
+                s = self.sim(by_sample[i], by_sample[j])  # vector over prompts
+                sims.append(s)
+        if not sims:
+            return 0.0
+        mean_sim = float(np.mean(np.concatenate([s.reshape(-1) for s in sims], axis=0)))
+        return 1.0 - mean_sim
 
 
-class AveragedNgramDiversityMetric:
-    """
-    Calculates the mean values of an n-gram based diversity metric in range n in [n_min, n_max].
-
-    config:
-        shared with the original n-gram metric.
-        n_min(int) > 0 - Specify the lowest n-gram value to be averaged
-        n_max(int) > 0 - Specify the highest n-gram value to be averaged
-
-    usage:
-        metric = AveragedNgramDiversityMetric(config, NgramMetricClassName)
-        metric(response_set)
-
-    inheritance guidelines:
-        implement __init__ only
-
-    inheritance example:
-        see AveragedDistinctNgrams
-    """
-
-    def __init__(self, n_min, n_max):
-        # add n field
-        self.n_min = n_min
-        self.n_max = n_max
-
-    def __call__(self, response_set):
-        ngrams_results = []
-        num_set = len(response_set)
-        for i in range(len(response_set[0])):
-            for n in range(self.n_min, self.n_max + 1):
-                result = self.calculate_distinct_n(
-                    [response_set[j][i] for j in range(num_set)], n
-                )
-                ngrams_results.append(result)
-        return np.mean(ngrams_results)
-
-    def calculate_distinct_n(self, responses, n):
-        all_ngrams = []
-        for response in responses:
-            tokens = word_tokenize(response)
-            response_ngrams = list(ngrams(tokens, n))
-            all_ngrams.extend(response_ngrams)
-        unique_ngrams = len(set(all_ngrams))
-        total_ngrams = len(all_ngrams)
-
-        return unique_ngrams / total_ngrams if total_ngrams > 0 else 0
-
-
-class SelfBLEUMetric:
-    def __call__(self, response_set):
-        """Calculate the average Self-BLEU score for a list of texts."""
-        bleu_scores = []
-        k = len(response_set)
-        for i in range(len(response_set[0])):
-            texts = [response_set[j][i] for j in range(k)]
-            bleu_scores.append(self.calculate_bleu_score(texts))
-
-        return np.mean(bleu_scores)
-
-    def calculate_bleu_score(self, texts):
-        bleu_scores = []
-        for i in range(len(texts)):
-            # Treat the current text as the hypothesis
-            hypothesis = texts[i]
-            # Treat all other texts as references
-            references = texts[:i] + texts[i + 1 :]
-
-            if references:  # Ensure there are references to compare against
-                bleu_score = sacrebleu.corpus_bleu([hypothesis], [references])
-                bleu_scores.append(bleu_score.score)
-
-        # Compute the average BLEU score
-        average_bleu = sum(bleu_scores) / len(bleu_scores) if bleu_scores else 0
-        return average_bleu
-
-
+# ---------------------- main ----------------------
 def main():
+    from transformers import HfArgumentParser
     parser = HfArgumentParser((AllArguments,))
     (args,) = parser.parse_args_into_dataclasses()
     pprint(args.__dict__)
 
-    if os.path.exists(args.response_path.replace(".json", "-cleaned.json")):
-        args.response_path = args.response_path.replace(".json", "-cleaned.json")
-
-    if args.response_path.endswith("-cleaned.json"):
-        response_set = json.load(open(args.response_path, "r"))
-    else:
-        data = json.load(open(args.response_path, "r"))
-
-        tokenizer = AutoTokenizer.from_pretrained(args.tokenizer_path)
-        if args.detokenizer_path is not None:
-            detokenizer = AutoTokenizer.from_pretrained(args.detokenizer_path)
-        else:
-            detokenizer = None
-
-        response_set = []
-        for i in tqdm(range(len(data))):
-            n = len(data[i]["answer"])
-            if len(response_set) == 0:
-                response_set = [[] for _ in range(n)]
-            else:
-                assert len(response_set) == n
-            for j in range(n):
-                x = data[i]
-                if detokenizer:
-                    prompt_str = (
-                        detokenizer.decode(
-                            detokenizer.encode(x["prompt"]), skip_special_tokens=True
-                        )
-                        .replace("user\n\n", "")
-                        .replace("assistant\n\n", "")
-                    )
-                else:
-                    prompt_str = x["prompt"]
-                if detokenizer:
-                    # ans_str = detokenizer.decode(
-                    #     detokenizer.encode(data[i]["answer"][j]), skip_special_tokens=True
-                    # )
-                    ans_str = data[i]["answer"][j].replace("<|eot_id|>", "")
-                else:
-                    ans_str = data[i]["answer"][j]
-                chat = [
-                    {
-                        "role": "user",
-                        "content": prompt_str,
-                    },
-                    {"role": "assistant", "content": ans_str},
-                ]
-                res = tokenizer.apply_chat_template(chat, tokenize=False)
-                response_set[j].append(res)
-        json.dump(
-            response_set,
-            open(args.response_path.replace(".json", "-cleaned.json"), "w"),
-            indent=2,
+    # GEM-style: prefer the "-cleaned.json" cache if present; else build it
+    try:
+        by_sample = _maybe_build_cleaned_response_set(
+            resp_path=args.response_path,
+            tokenizer_path=args.tokenizer_path,
+            detok_path=args.detokenizer_path,
         )
+    except ValueError as e:
+        # If user really wants raw-answer diversity and didn't provide tokenizer_path,
+        # fall back to raw answers (will NOT match GEM exactly).
+        print(f"[warn] {e} Falling back to raw answers only.")
+        data = json.load(open(args.response_path, "r", encoding="utf-8"))
+        by_sample = build_answer_matrix_raw_answers(data)
 
-        response_set = json.load(
-            open(args.response_path.replace(".json", "-cleaned.json"), "r")
-        )
-        print("Finished Data Preparation.")
+    # [K][P]
+    K = len(by_sample)
+    P = len(by_sample[0]) if K > 0 else 0
+    print(f"[info] Using {P} prompts with K={K} responses per prompt.")
 
-    evaluation_results = {
-        "sentbert_diversity_score": None,
-        "bleu_diversity_score": None,
+    results = {
         "averaged_ngram_diversity_score": None,
+        "bleu_diversity_score": None,
+        "sentbert_diversity_score": None,
+        "num_prompts": P,
+        "num_responses_per_prompt": K,
     }
 
+    # Distinct-n averaged (n=1..3)
     print("Calculating N-gram diversity score...")
-    metric = AveragedNgramDiversityMetric(n_min=1, n_max=3)
-    diversity_score = metric(response_set)
-    evaluation_results["averaged_ngram_diversity_score"] = np.round(
-        diversity_score * 100, 2
-    )
-    print("N-gram diversity score: {}".format(diversity_score))
+    ngram_metric = AveragedNgramDiversityMetric(n_min=1, n_max=3)
+    ngram_div = ngram_metric(by_sample)
+    results["averaged_ngram_diversity_score"] = round(ngram_div * 100.0, 2)
+    print(f"N-gram diversity score: {ngram_div:.6f}")
 
-    print("Calculating BLEU similarity score...")
-    metric = SelfBLEUMetric()
-    similarity_score = metric(response_set)
-    evaluation_results["bleu_diversity_score"] = np.round(100 - similarity_score, 2)
-    print("BLEU similarity score: {}".format(100 - similarity_score))
+    # Self-BLEU (lower = less similarity); we report diversity = 100 - BLEU
+    print("Calculating Self-BLEU similarity score...")
+    sb_metric = SelfBLEUMetric()
+    self_bleu = sb_metric(by_sample)
+    results["bleu_diversity_score"] = round(100.0 - self_bleu, 2)
+    print(f"Self-BLEU similarity (diversity = 100 - score): {self_bleu:.6f}")
 
-    print("Calculating Bert diversity score...")
-    metric = SentBertDiversity()
-    diversity_score = metric(response_set)
-    evaluation_results["sentbert_diversity_score"] = np.round(diversity_score * 100, 2)
-    print("Bert diversity score: {}".format(diversity_score))
+    # SentBERT diversity (optional if sentence-transformers installed)
+    try:
+        print("Calculating Sentence-BERT diversity score...")
+        sb_div_metric = SentBertDiversity()
+        sb_div = sb_div_metric(by_sample)
+        results["sentbert_diversity_score"] = round(sb_div * 100.0, 2)
+        print(f"SentBERT diversity score: {sb_div:.6f}")
+    except RuntimeError as e:
+        print(f"[warn] {e}")
+        results["sentbert_diversity_score"] = None
 
-    pprint(evaluation_results)
+    pprint(results)
+
+    # Optional: save summary JSON
+    if args.out_path:
+        os.makedirs(os.path.dirname(args.out_path), exist_ok=True)
+        with open(args.out_path, "w", encoding="utf-8") as f:
+            json.dump(results, f, indent=2)
+        print(f"[ok] wrote diversity summary to {args.out_path}")
 
 
 if __name__ == "__main__":
