@@ -229,6 +229,7 @@ export TORCH_DISTRIBUTED_DEBUG=DETAIL
 : "${RUN_SPARSEMAX:=0}"
 : "${RUN_CE_WD:=0}"
 : "${RUN_NEFT:=0}"
+: "${RUN_NEFT_OFFICIAL:=0}"
 
 # HF throughput metrics
 INCLUDE_TOKENS_FLAGS=(--include_tokens_per_second True --include_num_input_tokens_seen True)
@@ -358,6 +359,15 @@ if [ "$RUN_NEFT" -eq 1 ]; then
   LAUNCH "$OUT_NEFT" phase7_neft_a5 \
     --loss ce \
     --neft_alpha 5
+fi
+
+if [ "$RUN_NEFT_OFFICIAL" -eq 1 ]; then
+  OUT_NEFT8="$OUT_ROOT/phase8_neft_official"
+  mkdir -p "$OUT_NEFT8"
+  LAUNCH "$OUT_NEFT8" phase8_neft_official \
+    --loss ce \
+    --neft_alpha 5 \
+    --neft_impl official
 fi
 
 echo "Selected phase(s) finished."
